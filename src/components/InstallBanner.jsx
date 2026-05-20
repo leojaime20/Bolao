@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 
-const VISIT_KEY = 'wc26-visit-count';
-const DISMISS_KEY = 'wc26-install-dismissed';
+const VISIT_KEY = 'Copa-Yantai-visit-count';
+const DISMISS_KEY = 'Copa-Yantai-install-dismissed';
 const MIN_VISITS = 2;
 const DISMISS_DAYS = 7;
 const SHOW_DELAY = 3000;

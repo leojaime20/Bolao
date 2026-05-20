@@ -12,7 +12,7 @@ function formatDate(date, kickoff, offsetHours = -1) {
 }
 
 function buildEvent({ title, date, kickoff, duration = 120 }) {
-  const uid = `wc26-${date}-${kickoff.replace(':', '')}@mundial2026`;
+  const uid = `Copa-Yantai-${date}-${kickoff.replace(':', '')}@mundial2026`;
   const dtStart = formatDate(date, kickoff, -1);
   const end = new Date(
     Date.UTC(

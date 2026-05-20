@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-const STORAGE_KEY = 'wc26-favorites';
+const STORAGE_KEY = 'Copa-Yantai-favorites';
 
 function readFavorites() {
   try {

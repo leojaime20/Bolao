@@ -2,7 +2,7 @@
 
 Mobile-first web app for the FIFA World Cup 2026 (USA, Canada & Mexico). Browse the full tournament schedule, follow your favourite teams, run a betting pool with friends, and track live scores.
 
-**[Open the app →](https://martinsmdnuno.github.io/wc26/)** &nbsp;·&nbsp; **[View the landing page →](https://martinsmdnuno.github.io/wc26/landing.html)**
+**[Open the app →](https://leojaime20.github.io/Bolao/)** &nbsp;·&nbsp; **[View the landing page →](https://leojaime20.github.io/Bolao/landing.html)**
 
 <p align="center">
   <img src="designs/calend_rio_main_screen/screen.png" alt="Schedule" width="22%" />
@@ -38,8 +38,8 @@ Mobile-first web app for the FIFA World Cup 2026 (USA, Canada & Mexico). Browse 
 
 ```bash
 # Clone
-git clone https://github.com/martinsmdnuno/wc26.git
-cd wc26
+git clone https://github.com/leojaime20/Bolao.git
+cd Bolao
 
 # Install
 npm install

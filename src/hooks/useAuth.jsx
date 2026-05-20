@@ -311,7 +311,7 @@ export function AuthProvider({ children }) {
     await signOut(auth);
     setUser(null);
     setProfile(null);
-    try { localStorage.removeItem('wc26-active-pool'); } catch {}
+    try { localStorage.removeItem('Copa-Yantai-active-pool'); } catch {}
     await signInAnonymously(auth);
   }, []);
 

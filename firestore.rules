@@ -2,7 +2,7 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     function isAdmin() {
-      return request.auth != null && request.auth.uid == 'UKfTa82FSHaj72HsyjB4oGzL9Rg1';
+      return request.auth != null && request.auth.uid == '1gcD31Rz0waqXKo7YoMYbr3VTQ03';
     }
 
     // Users: self read/write, admin can read/delete all

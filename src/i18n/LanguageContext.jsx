@@ -3,7 +3,7 @@ import { translations } from './translations';
 
 const LanguageContext = createContext();
 
-const STORAGE_KEY = 'wc26-lang';
+const STORAGE_KEY = 'Copa-Yantai-lang';
 
 function getInitialLang() {
   try {

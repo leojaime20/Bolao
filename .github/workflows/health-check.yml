@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check app is accessible
-        run: curl -f https://martinsmdnuno.github.io/wc26/
+        run: curl -f https://leojaime20.github.io/Bolao/

@@ -19,11 +19,11 @@ import { useAuth } from './useAuth';
 
 const PoolContext = createContext(null);
 
-const ACTIVE_POOL_KEY = 'wc26-active-pool';
+const ACTIVE_POOL_KEY = 'Copa-Yantai-active-pool';
 
 function generateInviteCode() {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let code = 'WC26-';
+  let code = 'Copa-Yantai-';
   for (let i = 0; i < 4; i++) {
     code += chars.charAt(Math.floor(Math.random() * chars.length));
   }
