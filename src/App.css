@@ -6,27 +6,28 @@
 }
 
 .app-header {
-  background: var(--green-dark);
-  padding: 10px 20px;
+  background: #000;
+  padding: 0;
   position: sticky;
   top: 0;
   z-index: 100;
+  overflow: hidden;
 }
 
 .app-header__content {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
   position: relative;
+  min-height: 96px;
 }
 
 .lang-switcher {
   position: absolute;
-  right: 0;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 127, 63, 0.88);
   border: none;
   border-radius: 6px;
   font-size: 18px;
@@ -42,7 +43,7 @@
 }
 
 .lang-switcher:active {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(0, 92, 169, 0.92);
 }
 
 .app-header__logo {
@@ -52,22 +53,12 @@
   object-fit: cover;
 }
 
-.app-header__title {
-  font-size: 18px;
-  letter-spacing: 3px;
-  margin: 0;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.app-header__mundial {
-  color: var(--white);
-  font-weight: 500;
-}
-
-.app-header__year {
-  color: var(--gold);
-  font-weight: 700;
+.app-header__banner {
+  display: block;
+  width: 100%;
+  height: clamp(82px, 18vw, 126px);
+  object-fit: cover;
+  object-position: center;
 }
 
 .app-main {

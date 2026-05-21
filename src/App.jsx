@@ -15,10 +15,10 @@ import AuthScreen from './components/AuthScreen';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import InstallBanner from './components/InstallBanner';
 import { useFavorites } from './hooks/useFavorites';
-import { useLanguage } from './i18n/LanguageContext';
 import { useAuth } from './hooks/useAuth';
 import Admin from './pages/Admin';
 import logo from './assets/logo.png';
+import headerBanner from './assets/header-banner.jpg';
 import './App.css';
 
 const ADMIN_UID = import.meta.env.VITE_ADMIN_UID;
@@ -29,7 +29,6 @@ export default function App() {
   const [teamIso, setTeamIso] = useState(null);
   const prevPageRef = useRef('schedule');
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
-  const { t } = useLanguage();
   const { user, profile, loading } = useAuth();
   const isAdmin = user?.uid && user.uid === ADMIN_UID;
 
@@ -98,11 +97,7 @@ export default function App() {
       <header className="app-header">
         <div className="app-header__content">
           {profile?.nickname && <HamburgerMenu onNavigate={navigate} />}
-          <img src={logo} alt="Mundial 2026" className="app-header__logo" />
-          <h1 className="app-header__title">
-            <span className="app-header__mundial">{t('appTitle')}</span>{' '}
-            <span className="app-header__year">{t('appYear')}</span>
-          </h1>
+          <img src={headerBanner} alt="Copa do Mundo 2026 PBCN" className="app-header__banner" />
           <LanguageSwitcher />
         </div>
         {profile?.nickname && (
