@@ -121,7 +121,9 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  padding: 6px 16px;
+  flex: 1;
+  min-width: 0;
+  padding: 6px 4px;
   min-height: 44px;
   position: relative;
   color: var(--gray);
@@ -141,10 +143,14 @@
 }
 
 .bottom-nav__label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .bottom-nav__tab--active .bottom-nav__label {
@@ -1323,6 +1329,44 @@
 .bets__no-pool-desc {
   font-size: 14px;
   color: var(--gray);
+}
+
+/* ===== LIBERTADORES TEST ===== */
+.libertadores__intro {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px 0;
+}
+
+.libertadores__intro h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0 0 4px;
+}
+
+.libertadores__intro p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.libertadores__admin {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px 0;
+  flex-wrap: wrap;
+}
+
+.libertadores__sync-message {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--green-dark);
 }
 
 /* ===== POOL SELECTOR ===== */

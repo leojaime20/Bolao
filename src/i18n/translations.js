@@ -8,6 +8,7 @@ export const translations = {
     navSchedule: 'Calendário',
     navMyMatches: 'Os Meus Jogos',
     navTeams: 'Equipas',
+    navLibertadores: 'Teste',
 
     // Match card
     nextMatch: 'Próximo Jogo',
@@ -139,6 +140,13 @@ export const translations = {
     player: 'Jogador',
     you: 'tu',
     leaderboardEmpty: 'Ainda não há apostas no teu grupo.',
+    libertadoresTitle: 'Teste Libertadores',
+    libertadoresDesc: 'Campeonato real para testar palpites, resultados e ranking antes do Mundial.',
+    libertadoresLoadError: 'Erro ao carregar jogos da Libertadores.',
+    libertadoresSync: 'Sincronizar resultados',
+    libertadoresSyncDone: '{count} jogos finalizados sincronizados.',
+    libertadoresSyncError: 'Erro ao sincronizar resultados.',
+    refresh: 'Atualizar',
 
     // Auth
     authSubtitle: 'Entra para guardar as tuas apostas em todos os dispositivos.',
@@ -287,6 +295,7 @@ export const translations = {
     navSchedule: 'Schedule',
     navMyMatches: 'My Matches',
     navTeams: 'Teams',
+    navLibertadores: 'Test',
 
     // Match card
     nextMatch: 'Next Match',
@@ -418,6 +427,13 @@ export const translations = {
     player: 'Player',
     you: 'you',
     leaderboardEmpty: 'No bets in your group yet.',
+    libertadoresTitle: 'Libertadores Test',
+    libertadoresDesc: 'A real competition for testing bets, results, and rankings before the World Cup.',
+    libertadoresLoadError: 'Error loading Libertadores matches.',
+    libertadoresSync: 'Sync results',
+    libertadoresSyncDone: '{count} finished matches synced.',
+    libertadoresSyncError: 'Error syncing results.',
+    refresh: 'Refresh',
 
     // Auth
     authSubtitle: 'Sign in to keep your bets across all your devices.',

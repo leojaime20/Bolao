@@ -3,9 +3,10 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useAuth } from '../hooks/useAuth';
 import { usePools } from '../hooks/usePools';
+import { poolSubcollection } from '../hooks/useBets';
 import { useLanguage } from '../i18n/LanguageContext';
 
-export default function Leaderboard() {
+export default function Leaderboard({ competitionId = null }) {
   const { user } = useAuth();
   const { activePoolId } = usePools();
   const { t } = useLanguage();
@@ -16,7 +17,7 @@ export default function Leaderboard() {
     if (!activePoolId) return;
     let cancelled = false;
     (async () => {
-      const snap = await getDocs(collection(db, 'pools', activePoolId, 'leaderboard'));
+      const snap = await getDocs(poolSubcollection(activePoolId, competitionId, 'leaderboard'));
       if (cancelled) return;
       const list = snap.docs
         .map((d) => ({ uid: d.id, ...d.data() }))
@@ -29,7 +30,7 @@ export default function Leaderboard() {
       setLoading(false);
     })();
     return () => { cancelled = true; };
-  }, [activePoolId]);
+  }, [activePoolId, competitionId]);
 
   if (loading) {
     return <div className="leaderboard__loading">{t('loading')}</div>;

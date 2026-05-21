@@ -5,6 +5,11 @@ async function apiFetch(path) {
   const res = await fetch(`${API_BASE}${path}`, {
     headers: { 'X-Auth-Token': API_KEY },
   });
+  const requestsLeft = Number(res.headers.get('x-requests-available-minute'));
+  const resetIn = res.headers.get('x-requestcounter-reset');
+  if (Number.isFinite(requestsLeft) && requestsLeft <= 2) {
+    console.warn(`football-data.org throttle: ${requestsLeft} requests left this minute; reset in ${resetIn || '?'}s`);
+  }
   if (!res.ok) throw new Error(`football-data.org ${res.status}`);
   return res.json();
 }
@@ -12,6 +17,15 @@ async function apiFetch(path) {
 export async function getWorldCupMatches(matchday) {
   const params = matchday ? `?matchday=${matchday}` : '';
   return apiFetch(`/competitions/WC/matches${params}`);
+}
+
+export async function getCompetitionMatches(code, { dateFrom, dateTo, status } = {}) {
+  const params = new URLSearchParams();
+  if (dateFrom) params.set('dateFrom', dateFrom);
+  if (dateTo) params.set('dateTo', dateTo);
+  if (status) params.set('status', status);
+  const query = params.toString();
+  return apiFetch(`/competitions/${code}/matches${query ? `?${query}` : ''}`);
 }
 
 export async function getTodayMatches() {

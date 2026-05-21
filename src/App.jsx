@@ -7,6 +7,7 @@ import Missing from './pages/Missing';
 import Bets from './pages/Bets';
 import Rules from './pages/Rules';
 import TeamProfile from './pages/TeamProfile';
+import LibertadoresTest from './pages/LibertadoresTest';
 import HamburgerMenu from './components/HamburgerMenu';
 import PoolSelector from './components/PoolSelector';
 import PoolManager from './components/PoolManager';
@@ -128,6 +129,7 @@ export default function App() {
                 />
               )}
               {page === 'bets' && <Bets onTeamClick={navigateToTeam} />}
+              {page === 'libertadores' && <LibertadoresTest />}
               {page === 'team' && (
                 <TeamProfile
                   iso={teamIso}

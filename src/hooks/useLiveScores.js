@@ -3,6 +3,7 @@ import { doc, setDoc, getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 import { usePools } from './usePools';
 import { getTodayMatches, mapApiStatus, extractScore } from '../utils/footballApi';
+import { poolSubcollection } from './useBets';
 
 const POLL_INTERVAL = 60_000;
 
@@ -58,15 +59,18 @@ export function useLiveScores() {
   return { liveData, hasLive, refetch: fetchScores };
 }
 
-export function useCachedScores() {
+export function useCachedScores(competitionId = null) {
   const { activePoolId } = usePools();
   const [scores, setScores] = useState({});
 
   useEffect(() => {
-    if (!activePoolId) return;
+    if (!activePoolId) {
+      setScores({});
+      return;
+    }
     let cancelled = false;
     (async () => {
-      const snap = await getDocs(collection(db, 'pools', activePoolId, 'matches'));
+      const snap = await getDocs(poolSubcollection(activePoolId, competitionId, 'matches'));
       if (cancelled) return;
       const map = {};
       snap.docs.forEach((d) => {
@@ -75,7 +79,7 @@ export function useCachedScores() {
       setScores(map);
     })();
     return () => { cancelled = true; };
-  }, [activePoolId]);
+  }, [activePoolId, competitionId]);
 
   return scores;
 }

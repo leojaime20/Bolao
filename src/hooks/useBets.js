@@ -17,8 +17,20 @@ import { usePools } from './usePools';
 import { calculatePoints } from '../utils/scoring';
 import { logError } from '../utils/logError';
 
-export function useBets() {
-  const { user } = useAuth();
+function poolSubcollection(poolId, competitionId, name) {
+  return competitionId
+    ? collection(db, 'pools', poolId, 'competitions', competitionId, name)
+    : collection(db, 'pools', poolId, name);
+}
+
+function poolSubdoc(poolId, competitionId, name, docId) {
+  return competitionId
+    ? doc(db, 'pools', poolId, 'competitions', competitionId, name, docId)
+    : doc(db, 'pools', poolId, name, docId);
+}
+
+export function useBets(competitionId = null) {
+  const { user, profile } = useAuth();
   const { activePoolId } = usePools();
 
   const saveBet = useCallback(
@@ -31,7 +43,7 @@ export function useBets() {
         throw new Error('NO_POOL');
       }
       const docId = `${user.uid}_${matchId}`;
-      const ref = doc(db, 'pools', activePoolId, 'bets', docId);
+      const ref = poolSubdoc(activePoolId, competitionId, 'bets', docId);
       const existing = await getDoc(ref);
 
       const data = {
@@ -49,6 +61,19 @@ export function useBets() {
 
       await setDoc(ref, data, { merge: true });
 
+      const lbRef = poolSubdoc(activePoolId, competitionId, 'leaderboard', user.uid);
+      const lbSnap = await getDoc(lbRef);
+      if (!lbSnap.exists()) {
+        await setDoc(lbRef, {
+          nickname: profile?.nickname || '',
+          totalPoints: 0,
+          exactResultsCount: 0,
+          correctOutcomeCount: 0,
+        });
+      } else if (profile?.nickname && lbSnap.data().nickname !== profile.nickname) {
+        await setDoc(lbRef, { nickname: profile.nickname }, { merge: true });
+      }
+
       // Analytics: track bet submission
       try {
         await addDoc(collection(db, 'analytics'), {
@@ -56,34 +81,35 @@ export function useBets() {
           userId: user.uid,
           matchId,
           poolId: activePoolId,
+          competitionId: competitionId || 'worldcup-2026',
           submittedAt: serverTimestamp(),
         });
       } catch {}
     },
-    [user, activePoolId]
+    [user, profile, activePoolId, competitionId]
   );
 
   const getMyBets = useCallback(async () => {
     if (!user || !activePoolId) return [];
     const q = query(
-      collection(db, 'pools', activePoolId, 'bets'),
+      poolSubcollection(activePoolId, competitionId, 'bets'),
       where('userId', '==', user.uid)
     );
     const snap = await getDocs(q);
     return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-  }, [user, activePoolId]);
+  }, [user, activePoolId, competitionId]);
 
   const getMatchBets = useCallback(
     async (matchId) => {
       if (!activePoolId) return [];
       const q = query(
-        collection(db, 'pools', activePoolId, 'bets'),
+        poolSubcollection(activePoolId, competitionId, 'bets'),
         where('matchId', '==', matchId)
       );
       const snap = await getDocs(q);
       return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
     },
-    [activePoolId]
+    [activePoolId, competitionId]
   );
 
   const scoreMatch = useCallback(
@@ -102,7 +128,7 @@ export function useBets() {
         );
         if (!result) continue;
 
-        const betRef = doc(db, 'pools', activePoolId, 'bets', bet.id);
+        const betRef = poolSubdoc(activePoolId, competitionId, 'bets', bet.id);
         batch.update(betRef, { pointsAwarded: result.points });
 
         if (!leaderboardUpdates[bet.userId]) {
@@ -116,7 +142,7 @@ export function useBets() {
       await batch.commit();
 
       for (const [uid, delta] of Object.entries(leaderboardUpdates)) {
-        const lbRef = doc(db, 'pools', activePoolId, 'leaderboard', uid);
+        const lbRef = poolSubdoc(activePoolId, competitionId, 'leaderboard', uid);
         const lbSnap = await getDoc(lbRef);
         if (lbSnap.exists()) {
           const current = lbSnap.data();
@@ -129,13 +155,13 @@ export function useBets() {
         }
       }
     },
-    [activePoolId, getMatchBets]
+    [activePoolId, competitionId, getMatchBets]
   );
 
   return { saveBet, getMyBets, getMatchBets, scoreMatch };
 }
 
-export function useMyBetsMap() {
+export function useMyBetsMap(competitionId = null) {
   const { user } = useAuth();
   const { activePoolId } = usePools();
   const [betsMap, setBetsMap] = useState({});
@@ -146,10 +172,11 @@ export function useMyBetsMap() {
       setLoading(false);
       return;
     }
+    setLoading(true);
     let cancelled = false;
     (async () => {
       const q = query(
-        collection(db, 'pools', activePoolId, 'bets'),
+        poolSubcollection(activePoolId, competitionId, 'bets'),
         where('userId', '==', user.uid)
       );
       const snap = await getDocs(q);
@@ -163,7 +190,9 @@ export function useMyBetsMap() {
       setLoading(false);
     })();
     return () => { cancelled = true; };
-  }, [user, activePoolId]);
+  }, [user, activePoolId, competitionId]);
 
   return { betsMap, setBetsMap, loading };
 }
+
+export { poolSubcollection, poolSubdoc };

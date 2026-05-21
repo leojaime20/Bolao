@@ -8,6 +8,7 @@ export default function BottomNav({ active, onNavigate, favoriteCount }) {
     { id: 'schedule', label: t('navSchedule'), icon: '🏆' },
     { id: 'teams', label: t('navTeams'), icon: '🌍' },
     { id: 'bets', label: t('navBets'), icon: '🎯' },
+    { id: 'libertadores', label: t('navLibertadores'), icon: '🧪' },
     { id: 'my-matches', label: t('navMyMatches'), icon: '⭐' },
   ];
 
