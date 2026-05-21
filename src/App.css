@@ -1008,13 +1008,13 @@
 }
 
 .rules__point-badge--5 {
-  background: rgba(0, 166, 81, 0.12);
+  background: rgba(0, 127, 63, 0.12);
   color: var(--green-dark);
 }
 
 .rules__point-badge--3 {
-  background: rgba(201, 168, 76, 0.15);
-  color: #8B7226;
+  background: rgba(255, 198, 50, 0.22);
+  color: var(--blue-dark);
 }
 
 .rules__point-badge--1 {
@@ -2024,13 +2024,13 @@
 }
 
 .bet-card__points--5 {
-  background: rgba(0, 166, 81, 0.12);
+  background: rgba(0, 127, 63, 0.12);
   color: var(--green-dark);
 }
 
 .bet-card__points--3 {
-  background: rgba(201, 168, 76, 0.15);
-  color: #8B7226;
+  background: rgba(255, 198, 50, 0.22);
+  color: var(--blue-dark);
 }
 
 .bet-card__points--1 {
@@ -2887,13 +2887,13 @@
 }
 
 .admin__badge--finished {
-  background: rgba(0, 99, 65, 0.1);
+  background: rgba(0, 127, 63, 0.1);
   color: var(--green-dark);
 }
 
 .admin__badge--pending {
-  background: rgba(255, 183, 0, 0.15);
-  color: #B8860B;
+  background: rgba(255, 198, 50, 0.18);
+  color: var(--blue-dark);
 }
 
 .admin__badge--error {

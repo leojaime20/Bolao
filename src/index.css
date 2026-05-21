@@ -2,13 +2,15 @@
 
 :root {
   --white: #FFFFFF;
-  --off-white: #F5F3EE;
-  --green-dark: #006341;
-  --green-mid: #00A651;
-  --gold: #C9A84C;
-  --gold-light: #E8C97A;
-  --dark: #1A1A1A;
-  --gray: #6B7280;
+  --off-white: #F5F8F3;
+  --green-dark: #007F3F;
+  --green-mid: #00A859;
+  --gold: #FFC632;
+  --gold-light: #FFE27A;
+  --blue: #005CA9;
+  --blue-dark: #003F73;
+  --dark: #10231A;
+  --gray: #65756E;
 
   font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 16px;
