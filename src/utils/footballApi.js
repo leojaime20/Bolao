@@ -2,15 +2,29 @@ const API_BASE = 'https://api.football-data.org/v4';
 const API_KEY = import.meta.env.VITE_FOOTBALL_DATA_API_KEY;
 
 async function apiFetch(path) {
-  const res = await fetch(`${API_BASE}${path}`, {
-    headers: { 'X-Auth-Token': API_KEY },
-  });
+  if (!API_KEY) {
+    throw new Error('football-data.org API key is missing');
+  }
+
+  let res;
+  try {
+    res = await fetch(`${API_BASE}${path}`, {
+      headers: { 'X-Auth-Token': API_KEY },
+    });
+  } catch (err) {
+    throw new Error(`football-data.org request failed: ${err.message}`);
+  }
+
   const requestsLeft = Number(res.headers.get('x-requests-available-minute'));
   const resetIn = res.headers.get('x-requestcounter-reset');
   if (Number.isFinite(requestsLeft) && requestsLeft <= 2) {
     console.warn(`football-data.org throttle: ${requestsLeft} requests left this minute; reset in ${resetIn || '?'}s`);
   }
-  if (!res.ok) throw new Error(`football-data.org ${res.status}`);
+  if (!res.ok) {
+    const body = await res.text().catch(() => '');
+    const detail = body ? `: ${body.slice(0, 180)}` : '';
+    throw new Error(`football-data.org ${res.status}${detail}`);
+  }
   return res.json();
 }
 

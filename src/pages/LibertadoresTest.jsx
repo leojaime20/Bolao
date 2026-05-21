@@ -12,6 +12,7 @@ import {
 import BetCard from '../components/BetCard';
 import Leaderboard from '../components/Leaderboard';
 import PoolManager from '../components/PoolManager';
+import { getLibertadoresFallbackMatches } from '../data/libertadoresFallback';
 import { db } from '../firebase';
 import { useAuth } from '../hooks/useAuth';
 import { poolSubcollection, poolSubdoc, useBets, useMyBetsMap } from '../hooks/useBets';
@@ -171,10 +172,17 @@ export default function LibertadoresTest() {
         dateFrom: dateOffset(-LOOKBACK_DAYS),
         dateTo: dateOffset(LOOKAHEAD_DAYS),
       });
-      setMatches((data.matches || []).map(normalizeApiMatch));
+      const apiMatches = (data.matches || []).map(normalizeApiMatch);
+      if (apiMatches.length === 0) {
+        setMatches(getLibertadoresFallbackMatches());
+        setLoadError(t('libertadoresFallbackEmpty'));
+      } else {
+        setMatches(apiMatches);
+      }
     } catch (err) {
       console.error('Libertadores load failed:', err);
-      setLoadError(t('libertadoresLoadError'));
+      setMatches(getLibertadoresFallbackMatches());
+      setLoadError(t('libertadoresFallbackError'));
     }
     setLoadingMatches(false);
   }, [t]);
@@ -272,13 +280,14 @@ export default function LibertadoresTest() {
         <Leaderboard competitionId={COMPETITION_ID} />
       ) : loadingMatches || loading ? (
         <div className="bets__loading">{t('loading')}</div>
-      ) : loadError ? (
-        <div className="bets__no-pool">
-          <span className="bets__no-pool-icon">⚠️</span>
-          <h2 className="bets__no-pool-title">{loadError}</h2>
-        </div>
       ) : (
         <div className="bets__list">
+          {loadError && (
+            <div className="libertadores__notice">
+              <span>⚠️</span>
+              <span>{loadError}</span>
+            </div>
+          )}
           {Object.entries(matchesByDate).map(([date, dateMatches]) => {
             const d = new Date(date + 'T00:00:00');
             const label = d.toLocaleDateString(t('dateLocale'), {
