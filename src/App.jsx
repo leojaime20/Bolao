@@ -19,6 +19,7 @@ import { useAuth } from './hooks/useAuth';
 import Admin from './pages/Admin';
 import logo from './assets/logo.png';
 import headerBanner from './assets/header-banner.jpg';
+import splashIntro from './assets/splash-intro.jpg';
 import './App.css';
 
 const ADMIN_UID = import.meta.env.VITE_ADMIN_UID;
@@ -27,6 +28,7 @@ export default function App() {
   const [page, setPage] = useState('schedule');
   const [animClass, setAnimClass] = useState('page-enter-done');
   const [teamIso, setTeamIso] = useState(null);
+  const [showSplash, setShowSplash] = useState(true);
   const prevPageRef = useRef('schedule');
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
   const { user, profile, loading } = useAuth();
@@ -81,6 +83,14 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHash);
   }, [isAdmin]);
 
+  useEffect(() => {
+    if (loading) return undefined;
+    const timer = window.setTimeout(() => {
+      setShowSplash(false);
+    }, 3000);
+    return () => window.clearTimeout(timer);
+  }, [loading]);
+
   if (loading) {
     return (
       <div className="app">
@@ -94,6 +104,17 @@ export default function App() {
 
   return (
     <div className="app">
+      {showSplash && (
+        <div className="splash-intro" aria-label="Abertura Copa-Yantai">
+          <div className="splash-intro__glow" />
+          <img
+            src={splashIntro}
+            alt="Nao vou reclamar durante a Copa"
+            className="splash-intro__image"
+          />
+        </div>
+      )}
+
       <header className="app-header">
         <div className="app-header__content">
           {profile?.nickname && <HamburgerMenu onNavigate={navigate} />}

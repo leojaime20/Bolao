@@ -61,6 +61,59 @@
   object-position: center;
 }
 
+.splash-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 198, 50, 0.28), transparent 34%),
+    linear-gradient(135deg, rgba(0, 127, 63, 0.96), rgba(0, 92, 169, 0.94));
+  animation: splashFade 3s ease forwards;
+  overflow: hidden;
+}
+
+.splash-intro::before,
+.splash-intro::after {
+  content: '';
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 198, 50, 0.34);
+  animation: splashRing 1.8s ease-out infinite;
+}
+
+.splash-intro::after {
+  width: 320px;
+  height: 320px;
+  animation-delay: 0.32s;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.splash-intro__glow {
+  position: absolute;
+  width: min(72vw, 380px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(255, 198, 50, 0.2);
+  filter: blur(34px);
+  animation: splashGlow 3s ease forwards;
+}
+
+.splash-intro__image {
+  position: relative;
+  width: min(84vw, 420px);
+  max-height: 76dvh;
+  object-fit: contain;
+  border-radius: 24px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+  animation: splashPop 3s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+
 .app-main {
   flex: 1;
   padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
@@ -84,6 +137,60 @@
 .page-enter-done {
   opacity: 1;
   transform: translateX(0);
+}
+
+@keyframes splashFade {
+  0%,
+  78% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes splashPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.82) rotate(-3deg);
+  }
+  18% {
+    opacity: 1;
+    transform: scale(1.04) rotate(1deg);
+  }
+  38%,
+  72% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.08) rotate(1deg);
+  }
+}
+
+@keyframes splashRing {
+  0% {
+    opacity: 0.74;
+    transform: scale(0.72);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.72);
+  }
+}
+
+@keyframes splashGlow {
+  0%,
+  100% {
+    transform: scale(0.86);
+  }
+  35%,
+  76% {
+    transform: scale(1.08);
+  }
 }
 
 /* ===== BOTTOM NAV ===== */
