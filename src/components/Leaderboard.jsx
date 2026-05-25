@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebase';
+import { getDocs } from 'firebase/firestore';
 import { useAuth } from '../hooks/useAuth';
 import { usePools } from '../hooks/usePools';
 import { poolSubcollection } from '../hooks/useBets';
@@ -52,8 +51,9 @@ export default function Leaderboard({ competitionId = null }) {
       <div className="leaderboard__header">
         <span className="leaderboard__col leaderboard__col--pos">#</span>
         <span className="leaderboard__col leaderboard__col--name">{t('player')}</span>
-        <span className="leaderboard__col leaderboard__col--exact">🎯</span>
-        <span className="leaderboard__col leaderboard__col--pts">{t('pts')}</span>
+        <span className="leaderboard__col leaderboard__col--score">Jogos</span>
+        <span className="leaderboard__col leaderboard__col--score">Bonus</span>
+        <span className="leaderboard__col leaderboard__col--pts">Total</span>
       </div>
 
       {entries.map((entry, i) => {
@@ -71,8 +71,11 @@ export default function Leaderboard({ competitionId = null }) {
               {entry.nickname}
               {isMe && <span className="leaderboard__me-badge">{t('you')}</span>}
             </span>
-            <span className="leaderboard__col leaderboard__col--exact">
-              {entry.exactResultsCount || 0}
+            <span className="leaderboard__col leaderboard__col--score">
+              {entry.matchPoints ?? entry.totalPoints ?? 0}
+            </span>
+            <span className="leaderboard__col leaderboard__col--score">
+              {entry.bonusPoints || 0}
             </span>
             <span className="leaderboard__col leaderboard__col--pts">
               {entry.totalPoints || 0}

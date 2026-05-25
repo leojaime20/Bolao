@@ -56,7 +56,7 @@ export function useBets(competitionId = null) {
 
       if (!existing.exists()) {
         data.createdAt = serverTimestamp();
-        data.pointsAwarded = null;
+        if (!competitionId) data.pointsAwarded = null;
       }
 
       await setDoc(ref, data, { merge: true });
@@ -64,12 +64,15 @@ export function useBets(competitionId = null) {
       const lbRef = poolSubdoc(activePoolId, competitionId, 'leaderboard', user.uid);
       const lbSnap = await getDoc(lbRef);
       if (!lbSnap.exists()) {
-        await setDoc(lbRef, {
+        const initialLeaderboard = {
           nickname: profile?.nickname || '',
           totalPoints: 0,
+          matchPoints: 0,
+          bonusPoints: 0,
           exactResultsCount: 0,
           correctOutcomeCount: 0,
-        });
+        };
+        await setDoc(lbRef, initialLeaderboard);
       } else if (profile?.nickname && lbSnap.data().nickname !== profile.nickname) {
         await setDoc(lbRef, { nickname: profile.nickname }, { merge: true });
       }
@@ -84,7 +87,9 @@ export function useBets(competitionId = null) {
           competitionId: competitionId || 'worldcup-2026',
           submittedAt: serverTimestamp(),
         });
-      } catch {}
+      } catch {
+        // Analytics failures must not prevent a saved prediction.
+      }
     },
     [user, profile, activePoolId, competitionId]
   );
@@ -169,10 +174,10 @@ export function useMyBetsMap(competitionId = null) {
 
   useEffect(() => {
     if (!user || !activePoolId) {
-      setLoading(false);
+      queueMicrotask(() => setLoading(false));
       return;
     }
-    setLoading(true);
+    queueMicrotask(() => setLoading(true));
     let cancelled = false;
     (async () => {
       const q = query(

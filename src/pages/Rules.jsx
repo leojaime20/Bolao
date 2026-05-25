@@ -20,6 +20,16 @@ export default function Rules() {
       </section>
 
       <section className="rules__section">
+        <h3 className="rules__section-title">{t('rulesPodium')}</h3>
+        <ul className="rules__list">
+          <li>{t('rulesPodiumHow')}</li>
+          <li>{t('rulesPodiumExact')}</li>
+          <li>{t('rulesPodiumPartial')}</li>
+          <li>{t('rulesPodiumPerfect')}</li>
+        </ul>
+      </section>
+
+      <section className="rules__section">
         <h3 className="rules__section-title">{t('rulesScoring')}</h3>
         <div className="rules__points">
           <div className="rules__point-row">

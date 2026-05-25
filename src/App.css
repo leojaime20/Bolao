@@ -2734,6 +2734,13 @@
   color: var(--gray);
 }
 
+.leaderboard__col--score {
+  width: 46px;
+  justify-content: flex-end;
+  font-size: 12px;
+  color: var(--gray);
+}
+
 .leaderboard__col--pts {
   width: 48px;
   justify-content: flex-end;
@@ -3018,6 +3025,173 @@
   color: var(--gray);
 }
 
+.podium {
+  margin: 12px 16px;
+  padding: 16px;
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07);
+}
+
+.podium__heading h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  color: var(--dark);
+  margin: 0 0 6px;
+}
+
+.podium__heading p,
+.podium__notice {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.45;
+  margin: 0 0 14px;
+}
+
+.podium__status {
+  padding: 8px 10px;
+  margin-bottom: 14px;
+  border-radius: 6px;
+  background: rgba(0, 127, 63, 0.1);
+  color: var(--green-dark);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.podium__status--locked {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--gray);
+}
+
+.podium__fields {
+  display: grid;
+  gap: 12px;
+}
+
+.podium__field span {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  color: var(--dark);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.podium__field strong {
+  color: var(--green-dark);
+}
+
+.podium__field select,
+.competition-admin__selects select {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px;
+  border: 1px solid rgba(16, 35, 26, 0.16);
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--dark);
+  font-size: 14px;
+}
+
+.podium__save {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 16px;
+  border-radius: 6px;
+  background: var(--green-dark);
+  color: var(--white);
+  font-weight: 700;
+}
+
+.podium__message,
+.podium__points {
+  margin: 12px 0 0;
+  color: var(--green-dark);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.competition-admin__title,
+.competition-admin__row,
+.competition-admin__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.competition-admin__title {
+  margin-bottom: 16px;
+}
+
+.competition-admin__title h3 {
+  margin: 0;
+}
+
+.competition-admin__message {
+  padding: 10px 12px;
+  margin: 0 0 14px;
+  border-radius: 6px;
+  background: rgba(255, 198, 50, 0.2);
+  color: var(--dark);
+  font-size: 13px;
+}
+
+.competition-admin__card {
+  margin-bottom: 14px;
+  padding: 14px;
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06);
+}
+
+.competition-admin__row h4 {
+  margin: 0 0 4px;
+  color: var(--dark);
+  font-size: 15px;
+}
+
+.competition-admin__row p {
+  margin: 0;
+  color: var(--gray);
+  font-size: 12px;
+}
+
+.competition-admin__meta {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding-top: 12px;
+  color: var(--gray);
+  font-size: 12px;
+}
+
+.competition-admin__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.competition-admin__podium {
+  padding-top: 14px;
+  margin-top: 14px;
+  border-top: 1px solid rgba(16, 35, 26, 0.08);
+}
+
+.competition-admin__podium h5 {
+  margin: 14px 0 8px;
+  color: var(--dark);
+  font-size: 13px;
+}
+
+.competition-admin__selects {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(112px, 1fr)) auto;
+  align-items: end;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--gray);
+}
+
 @media (max-width: 600px) {
   .admin {
     flex-direction: column;
@@ -3044,5 +3218,13 @@
   }
   .admin__cards {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .competition-admin__row,
+  .competition-admin__title {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .competition-admin__selects {
+    grid-template-columns: 1fr;
   }
 }

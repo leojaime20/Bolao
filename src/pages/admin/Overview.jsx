@@ -18,9 +18,10 @@ export default function Overview() {
 
   const fetchMetrics = useCallback(async () => {
     try {
-      const [usersSnap, poolsSnap, logsSnap] = await Promise.all([
+      const [usersSnap, poolsSnap, competitionsSnap, logsSnap] = await Promise.all([
         getCountFromServer(collection(db, 'users')),
         getDocs(collection(db, 'pools')),
+        getDocs(collection(db, 'competitions')),
         getCountFromServer(query(
           collection(db, 'adminLogs'),
           where('resolved', '==', false)
@@ -28,20 +29,28 @@ export default function Overview() {
       ]);
 
       const pools = poolsSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
+      const competitionIds = competitionsSnap.docs.map((d) => d.id);
       let totalBets = 0;
       let bets24h = 0;
       const now = Timestamp.now();
       const oneDayAgo = new Timestamp(now.seconds - 86400, 0);
 
       for (const pool of pools) {
-        const betsSnap = await getDocs(collection(db, 'pools', pool.id, 'bets'));
-        totalBets += betsSnap.size;
-        betsSnap.docs.forEach((d) => {
-          const data = d.data();
-          if (data.updatedAt && data.updatedAt > oneDayAgo) {
-            bets24h++;
-          }
-        });
+        const snapshots = await Promise.all([
+          getDocs(collection(db, 'pools', pool.id, 'bets')),
+          ...competitionIds.map((competitionId) => getDocs(
+            collection(db, 'pools', pool.id, 'competitions', competitionId, 'bets')
+          )),
+        ]);
+        for (const betsSnap of snapshots) {
+          totalBets += betsSnap.size;
+          betsSnap.docs.forEach((d) => {
+            const data = d.data();
+            if (data.updatedAt && data.updatedAt > oneDayAgo) {
+              bets24h++;
+            }
+          });
+        }
       }
 
       setMetrics({

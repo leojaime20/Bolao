@@ -18,8 +18,8 @@ Mobile-first web app for the FIFA World Cup 2026 (USA, Canada & Mexico). Browse 
 - **Favourites** — Star teams to filter their matches in "My Matches"
 - **Calendar export** — Add single or bulk matches to your device calendar (ICS)
 - **Betting pool** — Predict match scores and compete with friends in a private group
-- **Leaderboard** — Live ranking with points (5 exact / 3 outcome / 1 partial / 0 miss)
-- **Live scores** — Automatic results via football-data.org API
+- **Leaderboard** — Ranking with match points and pre-tournament podium bonus
+- **Results sync** — football-data.org imported securely through Firebase Functions
 - **Bilingual** — Full Portuguese (PT) and English (EN) support
 
 ## Tech stack
@@ -31,7 +31,7 @@ Mobile-first web app for the FIFA World Cup 2026 (USA, Canada & Mexico). Browse 
 | Styling | Vanilla CSS with custom properties |
 | Auth | Firebase Anonymous Auth |
 | Database | Cloud Firestore |
-| Live scores | football-data.org API |
+| Live scores | football-data.org API through Firebase Functions |
 | Deploy | GitHub Pages (GitHub Actions) |
 
 ## Getting started
@@ -61,7 +61,8 @@ npm run dev
 | `VITE_FIREBASE_STORAGE_BUCKET` | Firebase storage bucket |
 | `VITE_FIREBASE_MESSAGING_SENDER_ID` | Firebase messaging sender ID |
 | `VITE_FIREBASE_APP_ID` | Firebase app ID |
-| `VITE_FOOTBALL_DATA_API_KEY` | football-data.org API key (free tier) |
+The football-data.org token is not a frontend variable. Configure it as a Firebase Functions
+secret named `FOOTBALL_DATA_API_KEY`.
 
 ## Project structure
 
@@ -84,7 +85,7 @@ src/
 │   ├── useAuth.jsx        # Firebase anonymous auth + profile
 │   ├── useBets.js         # Bet CRUD + scoring
 │   ├── useFavorites.js    # localStorage favourites
-│   └── useLiveScores.js   # football-data.org polling
+│   └── useCompetition.js  # Competition config and imported matches
 ├── i18n/
 │   ├── LanguageContext.jsx
 │   └── translations.js   # PT-PT & EN-GB translations
@@ -97,7 +98,6 @@ src/
 │   └── Teams.jsx          # Team directory
 ├── utils/
 │   ├── calendar.js        # ICS file generation
-│   ├── footballApi.js     # football-data.org wrapper
 │   └── scoring.js         # Points calculation (5/3/1/0)
 ├── firebase.js            # Firebase config & init
 ├── App.jsx
@@ -116,6 +116,64 @@ src/
 | **0** | Nothing correct | Predicted 0-0, result 2-1 |
 
 Tiebreak: total points > exact results > correct outcomes.
+
+### Podium bonus
+
+Before the World Cup starts, players can predict champion, runner-up, and third place.
+Exact positions award 10, 6, and 4 points. A team in the podium but in the wrong predicted
+position awards half of that predicted position's points, rounded up. All three exact
+positions add 3 points, for a maximum of 23.
+
+## Firebase production setup
+
+The production data flow is:
+
+```text
+football-data.org -> Cloud Functions -> Firestore -> Web app
+```
+
+Matches are shared across every pool:
+
+```text
+competitions/{competitionId}/matches/{matchId}
+```
+
+Bets and rankings remain private to each pool:
+
+```text
+pools/{poolId}/competitions/{competitionId}/bets/{userId_matchId}
+pools/{poolId}/competitions/{competitionId}/leaderboard/{userId}
+pools/{poolId}/competitions/{competitionId}/podiumPredictions/{userId}
+```
+
+Setup steps:
+
+```bash
+# Install backend dependencies
+cd functions
+npm install
+cd ..
+
+# Store the API token outside the web bundle
+firebase functions:secrets:set FOOTBALL_DATA_API_KEY
+
+# Deploy backend and Firestore access rules
+firebase deploy --only functions,firestore:rules
+```
+
+After deploy, sign in as the configured admin, open `Admin > Competicoes`, and click
+`Configurar padroes`. This creates:
+
+```text
+competitions/libertadores-test
+competitions/worldcup-2026
+```
+
+Click `Sincronizar agora` to import real fixtures/results and recalculate rankings. The
+scheduled Function repeats synchronization for enabled competitions every 30 minutes.
+For the World Cup podium bonus, synchronization adjusts its locking deadline to the first
+kickoff returned by the API, then freezes the admin setting when that kickoff is reached.
+Scheduled Functions require a Firebase billing-enabled project.
 
 ## Screens
 

@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 
 function getFlagUrl(iso) {
@@ -16,7 +16,9 @@ export default function BetCard({ match, bet, onSave, matchScore, onTeamClick })
 
   const isFinished = matchScore?.status === 'finished';
   const isLive = matchScore?.status === 'live';
-  const isLocked = isFinished || isLive;
+  const kickoffAt = match.kickoffAt?.toDate ? match.kickoffAt.toDate() : null;
+  const isStarted = kickoffAt ? new Date() >= kickoffAt : false;
+  const isLocked = isFinished || isLive || isStarted;
 
   const [scoreA, setScoreA] = useState(bet?.predictedScoreA ?? '');
   const [scoreB, setScoreB] = useState(bet?.predictedScoreB ?? '');
@@ -26,43 +28,43 @@ export default function BetCard({ match, bet, onSave, matchScore, onTeamClick })
   const debounceRef = useRef(null);
 
   const dateStr = (() => {
-    const d = new Date(match.date + 'T00:00:00');
-    return d.toLocaleDateString(t('dateLocale'), {
+    const date = kickoffAt || new Date(match.date + 'T00:00:00');
+    return date.toLocaleDateString(t('dateLocale'), {
       weekday: 'short',
       day: 'numeric',
       month: 'short',
     });
   })();
+  const kickoffStr = kickoffAt
+    ? kickoffAt.toLocaleTimeString(t('dateLocale'), { hour: '2-digit', minute: '2-digit' })
+    : match.kickoff_bst;
 
-  const handleChange = useCallback(
-    (side, value) => {
-      const num = value === '' ? '' : Math.max(0, parseInt(value) || 0);
-      const newA = side === 'home' ? num : scoreA;
-      const newB = side === 'away' ? num : scoreB;
-      if (side === 'home') setScoreA(num);
-      else setScoreB(num);
+  const handleChange = (side, value) => {
+    const num = value === '' ? '' : Math.max(0, parseInt(value) || 0);
+    const newA = side === 'home' ? num : scoreA;
+    const newB = side === 'away' ? num : scoreB;
+    if (side === 'home') setScoreA(num);
+    else setScoreB(num);
 
-      clearTimeout(debounceRef.current);
-      if (newA !== '' && newB !== '') {
-        debounceRef.current = setTimeout(async () => {
-          setSaving(true);
-          setSaved(false);
-          setSaveError(false);
-          try {
-            await onSave(match.id, Number(newA), Number(newB));
-            setSaved(true);
-            setTimeout(() => setSaved(false), 2000);
-          } catch (err) {
-            console.error('Failed to save bet:', err);
-            setSaveError(true);
-            setTimeout(() => setSaveError(false), 4000);
-          }
-          setSaving(false);
-        }, 800);
-      }
-    },
-    [scoreA, scoreB, match.id, onSave]
-  );
+    clearTimeout(debounceRef.current);
+    if (newA !== '' && newB !== '') {
+      debounceRef.current = setTimeout(async () => {
+        setSaving(true);
+        setSaved(false);
+        setSaveError(false);
+        try {
+          await onSave(match.id, Number(newA), Number(newB));
+          setSaved(true);
+          setTimeout(() => setSaved(false), 2000);
+        } catch (err) {
+          console.error('Failed to save bet:', err);
+          setSaveError(true);
+          setTimeout(() => setSaveError(false), 4000);
+        }
+        setSaving(false);
+      }, 800);
+    }
+  };
 
   return (
     <div className={`bet-card ${isLive ? 'bet-card--live' : ''} ${isFinished ? 'bet-card--finished' : ''}`}>
@@ -74,7 +76,7 @@ export default function BetCard({ match, bet, onSave, matchScore, onTeamClick })
       )}
 
       <div className="bet-card__date">
-        {dateStr} &middot; {match.kickoff_bst}
+        {dateStr} &middot; {kickoffStr}
         {isLive && <span className="bet-card__live-badge">{t('live')}</span>}
         {saving && <span className="bet-card__status">{t('saving')}</span>}
         {saved && <span className="bet-card__status bet-card__status--saved">✓</span>}

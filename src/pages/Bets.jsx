@@ -1,39 +1,31 @@
 import { useState, useMemo } from 'react';
-import schedule from '../data/schedule.json';
-import PhaseFilter from '../components/PhaseFilter';
 import BetCard from '../components/BetCard';
 import Leaderboard from '../components/Leaderboard';
+import PodiumPrediction from '../components/PodiumPrediction';
 import PoolManager from '../components/PoolManager';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useBets, useMyBetsMap } from '../hooks/useBets';
+import { useCompetition } from '../hooks/useCompetition';
 import { usePools } from '../hooks/usePools';
-import { useCachedScores } from '../hooks/useLiveScores';
+
+const COMPETITION_ID = 'worldcup-2026';
 
 export default function Bets({ onTeamClick }) {
-  const [activePhase, setActivePhase] = useState('group');
   const [view, setView] = useState('bet');
   const { t } = useLanguage();
   const { activePoolId, activePool } = usePools();
-  const { saveBet } = useBets();
-  const { betsMap, setBetsMap, loading } = useMyBetsMap();
-  const cachedScores = useCachedScores();
-
-  const translatedPhases = useMemo(
-    () => schedule.phases.map((p) => ({ ...p, name: t(`phase.${p.id}`) })),
-    [t]
-  );
-
-  const phase = schedule.phases.find((p) => p.id === activePhase);
+  const { competition, matches, loading: loadingMatches } = useCompetition(COMPETITION_ID);
+  const { saveBet } = useBets(COMPETITION_ID);
+  const { betsMap, setBetsMap, loading } = useMyBetsMap(COMPETITION_ID);
 
   const matchesByDate = useMemo(() => {
-    if (!phase) return {};
     const grouped = {};
-    for (const match of phase.matches) {
+    for (const match of matches) {
       if (!grouped[match.date]) grouped[match.date] = [];
       grouped[match.date].push(match);
     }
     return grouped;
-  }, [phase]);
+  }, [matches]);
 
   const handleSave = async (matchId, scoreA, scoreB) => {
     await saveBet(matchId, scoreA, scoreB);
@@ -74,6 +66,12 @@ export default function Bets({ onTeamClick }) {
           🎯 {t('betTab')}
         </button>
         <button
+          className={`teams__view-chip ${view === 'podium' ? 'teams__view-chip--active' : ''}`}
+          onClick={() => setView('podium')}
+        >
+          🏆 Podio
+        </button>
+        <button
           className={`teams__view-chip ${view === 'ranking' ? 'teams__view-chip--active' : ''}`}
           onClick={() => setView('ranking')}
         >
@@ -82,17 +80,19 @@ export default function Bets({ onTeamClick }) {
       </div>
 
       {view === 'ranking' ? (
-        <Leaderboard />
+        <Leaderboard competitionId={COMPETITION_ID} />
+      ) : view === 'podium' ? (
+        <PodiumPrediction competitionId={COMPETITION_ID} competition={competition} />
       ) : (
         <>
-          <PhaseFilter
-            phases={translatedPhases}
-            active={activePhase}
-            onSelect={setActivePhase}
-          />
-
-          {loading ? (
+          {loading || loadingMatches ? (
             <div className="bets__loading">{t('loading')}</div>
+          ) : matches.length === 0 ? (
+            <div className="bets__no-pool">
+              <span className="bets__no-pool-icon">⚽</span>
+              <h2 className="bets__no-pool-title">Jogos aguardando importacao</h2>
+              <p className="bets__no-pool-desc">O administrador deve sincronizar a Copa no portal admin.</p>
+            </div>
           ) : (
             <div className="bets__list">
               {Object.entries(matchesByDate).map(([date, matches]) => {
@@ -111,7 +111,11 @@ export default function Bets({ onTeamClick }) {
                         key={match.id}
                         match={match}
                         bet={betsMap[match.id]}
-                        matchScore={cachedScores[String(match.id)]}
+                        matchScore={{
+                          status: match.status,
+                          scoreHome: match.scoreHome,
+                          scoreAway: match.scoreAway,
+                        }}
                         onSave={handleSave}
                         onTeamClick={onTeamClick}
                       />
