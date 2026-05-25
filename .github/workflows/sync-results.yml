@@ -1,0 +1,35 @@
+name: Atualizar resultados
+
+on:
+  workflow_dispatch:
+    inputs:
+      competition_id:
+        description: "ID da competicao (all, libertadores-test ou worldcup-2026)"
+        required: true
+        default: "libertadores-test"
+        type: choice
+        options:
+          - libertadores-test
+          - worldcup-2026
+          - all
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    name: Importar jogos e recalcular ranking
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run test:scoring
+      - name: Sincronizar Firestore
+        run: node scripts/sync-results.mjs "${{ inputs.competition_id }}"
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}

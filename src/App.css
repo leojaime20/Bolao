@@ -2898,10 +2898,14 @@
 }
 
 .admin__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
+  text-decoration: none;
   transition: transform 0.2s;
 }
 
@@ -3135,6 +3139,11 @@
   background: rgba(255, 198, 50, 0.2);
   color: var(--dark);
   font-size: 13px;
+}
+
+.competition-admin__message a {
+  color: var(--green-dark);
+  font-weight: 700;
 }
 
 .competition-admin__card {

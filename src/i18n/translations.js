@@ -142,9 +142,6 @@ export const translations = {
     leaderboardEmpty: 'Ainda não há apostas no teu grupo.',
     libertadoresTitle: 'Teste Libertadores',
     libertadoresDesc: 'Campeonato real para testar palpites, resultados e ranking antes do Mundial.',
-    libertadoresSync: 'Sincronizar resultados',
-    libertadoresSyncDone: '{count} jogos finalizados sincronizados.',
-    libertadoresSyncError: 'Erro ao sincronizar resultados.',
     refresh: 'Atualizar',
 
     // Auth
@@ -433,9 +430,6 @@ export const translations = {
     leaderboardEmpty: 'No bets in your group yet.',
     libertadoresTitle: 'Libertadores Test',
     libertadoresDesc: 'A real competition for testing bets, results, and rankings before the World Cup.',
-    libertadoresSync: 'Sync results',
-    libertadoresSyncDone: '{count} finished matches synced.',
-    libertadoresSyncError: 'Error syncing results.',
     refresh: 'Refresh',
 
     // Auth

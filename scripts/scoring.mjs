@@ -1,4 +1,4 @@
-function calculateMatchPoints(predictedA, predictedB, actualA, actualB) {
+export function calculateMatchPoints(predictedA, predictedB, actualA, actualB) {
   if (actualA == null || actualB == null) return null;
   if (predictedA === actualA && predictedB === actualB) return { points: 5, type: 'exact' };
   if (Math.sign(predictedA - predictedB) === Math.sign(actualA - actualB)) {
@@ -8,7 +8,7 @@ function calculateMatchPoints(predictedA, predictedB, actualA, actualB) {
   return { points: 0, type: 'miss' };
 }
 
-function calculatePodiumPoints(prediction, podium) {
+export function calculatePodiumPoints(prediction, podium) {
   const slots = [
     { key: 'champion', points: 10 },
     { key: 'runnerUp', points: 6 },
@@ -28,8 +28,5 @@ function calculatePodiumPoints(prediction, podium) {
     }
   }
 
-  if (exactCount === 3) points += 3;
-  return points;
+  return exactCount === 3 ? points + 3 : points;
 }
-
-module.exports = { calculateMatchPoints, calculatePodiumPoints };

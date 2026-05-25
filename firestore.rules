@@ -19,6 +19,23 @@ service cloud.firestore {
         && request.time < competitionMatch(competitionId, matchId).kickoffAt;
     }
 
+    function podiumPredictionIsOpen(competitionId) {
+      return exists(/databases/$(database)/documents/competitions/$(competitionId))
+        && get(/databases/$(database)/documents/competitions/$(competitionId)).data.podiumPredictionEnabled == true
+        && request.time < get(/databases/$(database)/documents/competitions/$(competitionId)).data.podiumPredictionDeadline;
+    }
+
+    function validPodiumPrediction(uid) {
+      return request.auth.uid == uid
+        && request.resource.data.userId == uid
+        && request.resource.data.champion is string
+        && request.resource.data.runnerUp is string
+        && request.resource.data.thirdPlace is string
+        && request.resource.data.champion != request.resource.data.runnerUp
+        && request.resource.data.champion != request.resource.data.thirdPlace
+        && request.resource.data.runnerUp != request.resource.data.thirdPlace;
+    }
+
     // Users: self read/write, admin can read/delete all
     match /users/{userId} {
       allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
@@ -117,7 +134,20 @@ service cloud.firestore {
 
         match /podiumPredictions/{uid} {
           allow read: if isPoolMember(poolId) || isAdmin();
-          allow write: if false;
+          allow create: if isPoolMember(poolId)
+            && podiumPredictionIsOpen(competitionId)
+            && validPodiumPrediction(uid)
+            && request.resource.data.keys().hasOnly([
+              'userId', 'champion', 'runnerUp', 'thirdPlace', 'submittedAt'
+            ]);
+          allow update: if isPoolMember(poolId)
+            && resource.data.userId == request.auth.uid
+            && podiumPredictionIsOpen(competitionId)
+            && validPodiumPrediction(uid)
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+              'champion', 'runnerUp', 'thirdPlace', 'submittedAt'
+            ]);
+          allow delete: if isAdmin();
         }
       }
     }
@@ -130,9 +160,7 @@ service cloud.firestore {
         && (
           !request.resource.data.diff(resource.data).affectedKeys().hasAny([
             'podiumPredictionEnabled',
-            'podiumPredictionDeadline',
-            'podiumPredictionFinalEnabled',
-            'podiumPredictionLocked'
+            'podiumPredictionDeadline'
           ])
           || resource.data.podiumPredictionDeadline == null
           || request.time < resource.data.podiumPredictionDeadline

@@ -1,16 +1,14 @@
 import { useMemo, useState } from 'react';
-import { httpsCallable } from 'firebase/functions';
 import BetCard from '../components/BetCard';
 import Leaderboard from '../components/Leaderboard';
 import PoolManager from '../components/PoolManager';
-import { functions } from '../firebase';
-import { useAuth } from '../hooks/useAuth';
 import { useBets, useMyBetsMap } from '../hooks/useBets';
 import { useCompetition } from '../hooks/useCompetition';
 import { usePools } from '../hooks/usePools';
 import { useLanguage } from '../i18n/LanguageContext';
 
 const COMPETITION_ID = 'libertadores-test';
+const ACTIONS_URL = 'https://github.com/leojaime20/Bolao/actions/workflows/sync-results.yml';
 
 function groupByDate(matches) {
   return matches.reduce((acc, match) => {
@@ -22,15 +20,11 @@ function groupByDate(matches) {
 
 export default function LibertadoresTest() {
   const [view, setView] = useState('bet');
-  const [syncing, setSyncing] = useState(false);
-  const [syncMessage, setSyncMessage] = useState('');
   const { t } = useLanguage();
-  const { user } = useAuth();
   const { activePoolId, activePool } = usePools();
   const { competition, matches, loading: loadingMatches, error } = useCompetition(COMPETITION_ID);
   const { saveBet } = useBets(COMPETITION_ID);
   const { betsMap, setBetsMap, loading } = useMyBetsMap(COMPETITION_ID);
-  const isAdmin = user?.uid && user.uid === import.meta.env.VITE_ADMIN_UID;
   const matchesByDate = useMemo(() => groupByDate(matches), [matches]);
 
   const handleSave = async (matchId, scoreA, scoreB) => {
@@ -39,20 +33,6 @@ export default function LibertadoresTest() {
       ...prev,
       [String(matchId)]: { ...prev[String(matchId)], predictedScoreA: scoreA, predictedScoreB: scoreB },
     }));
-  };
-
-  const handleSync = async () => {
-    setSyncing(true);
-    setSyncMessage('');
-    try {
-      const syncCompetitionNow = httpsCallable(functions, 'syncCompetitionNow');
-      const result = await syncCompetitionNow({ competitionId: COMPETITION_ID });
-      setSyncMessage(`${result.data.importedMatches} jogos importados. ${result.data.scoredBets} palpites pontuados.`);
-    } catch (err) {
-      console.error('Competition sync failed:', err);
-      setSyncMessage('Nao foi possivel sincronizar. Verifique se as Functions foram publicadas e o secret foi configurado.');
-    }
-    setSyncing(false);
   };
 
   if (!activePoolId) {
@@ -78,18 +58,15 @@ export default function LibertadoresTest() {
       <div className="libertadores__intro">
         <div>
           <h2>{competition?.name || t('libertadoresTitle')}</h2>
-          <p>Jogos reais importados para o Firebase. Palpites e ranking ficam salvos no pool.</p>
+          <p>Jogos reais importados para o Firebase pelo processo manual de atualizacao.</p>
         </div>
       </div>
 
-      {isAdmin && (
-        <div className="libertadores__admin">
-          <button className="admin__btn admin__btn--primary" onClick={handleSync} disabled={syncing}>
-            {syncing ? t('saving') : 'Sincronizar API agora'}
-          </button>
-          {syncMessage && <span className="libertadores__sync-message">{syncMessage}</span>}
-        </div>
-      )}
+      <div className="libertadores__admin">
+        <a className="admin__btn admin__btn--primary" href={ACTIONS_URL} target="_blank" rel="noreferrer">
+          Atualizar resultados no GitHub
+        </a>
+      </div>
 
       <div className="bets__view-toggle">
         <button

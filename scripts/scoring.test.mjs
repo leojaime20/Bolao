@@ -1,5 +1,5 @@
-const assert = require('node:assert/strict');
-const { calculateMatchPoints, calculatePodiumPoints } = require('./scoring');
+import assert from 'node:assert/strict';
+import { calculateMatchPoints, calculatePodiumPoints } from './scoring.mjs';
 
 assert.deepEqual(calculateMatchPoints(2, 1, 2, 1), { points: 5, type: 'exact' });
 assert.deepEqual(calculateMatchPoints(1, 0, 2, 0), { points: 3, type: 'outcome' });

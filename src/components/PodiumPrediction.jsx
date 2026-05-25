@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
-import { httpsCallable } from 'firebase/functions';
-import { db, functions } from '../firebase';
+import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 import schedule from '../data/schedule.json';
 import { useAuth } from '../hooks/useAuth';
 import { usePools } from '../hooks/usePools';
@@ -11,7 +10,7 @@ const EMPTY = { champion: '', runnerUp: '', thirdPlace: '' };
 
 export default function PodiumPrediction({ competitionId, competition }) {
   const { t } = useLanguage();
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const { activePoolId } = usePools();
   const [prediction, setPrediction] = useState(EMPTY);
   const [savedPrediction, setSavedPrediction] = useState(null);
@@ -65,8 +64,23 @@ export default function PodiumPrediction({ competitionId, competition }) {
     setSaving(true);
     setMessage('');
     try {
-      const savePrediction = httpsCallable(functions, 'savePodiumPrediction');
-      await savePrediction({ poolId: activePoolId, competitionId, ...prediction });
+      await setDoc(
+        doc(db, 'pools', activePoolId, 'competitions', competitionId, 'podiumPredictions', user.uid),
+        { userId: user.uid, ...prediction, submittedAt: serverTimestamp() },
+        { merge: true }
+      );
+      const leaderboardRef = doc(db, 'pools', activePoolId, 'competitions', competitionId, 'leaderboard', user.uid);
+      const leaderboard = await getDoc(leaderboardRef);
+      if (!leaderboard.exists()) {
+        await setDoc(leaderboardRef, {
+          nickname: profile?.nickname || '',
+          matchPoints: 0,
+          bonusPoints: 0,
+          totalPoints: 0,
+          exactResultsCount: 0,
+          correctOutcomeCount: 0,
+        });
+      }
       setSavedPrediction({ ...prediction, bonusPoints: null });
       setMessage('Palpite do podio salvo.');
     } catch (err) {

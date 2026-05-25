@@ -3,14 +3,16 @@ import {
   Timestamp,
   collection,
   doc,
+  getDoc,
   onSnapshot,
+  serverTimestamp,
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
-import { httpsCallable } from 'firebase/functions';
-import { db, functions } from '../../firebase';
+import { db } from '../../firebase';
 import schedule from '../../data/schedule.json';
 
+const ACTIONS_URL = 'https://github.com/leojaime20/Bolao/actions/workflows/sync-results.yml';
 const DEFAULT_COMPETITIONS = [
   {
     id: 'libertadores-test',
@@ -34,8 +36,6 @@ const DEFAULT_COMPETITIONS = [
     syncEnabled: true,
     isTest: false,
     podiumPredictionEnabled: true,
-    podiumPredictionLocked: false,
-    podiumPredictionFinalEnabled: null,
     podiumPredictionDeadline: Timestamp.fromDate(new Date('2026-06-11T19:00:00Z')),
     sortOrder: 2,
   },
@@ -65,26 +65,15 @@ export default function CompetitionsAdmin() {
     try {
       for (const competition of DEFAULT_COMPETITIONS) {
         const { id, ...data } = competition;
-        await setDoc(doc(db, 'competitions', id), data, { merge: true });
+        const reference = doc(db, 'competitions', id);
+        if (!(await getDoc(reference)).exists()) {
+          await setDoc(reference, data);
+        }
       }
-      setMessage('Competicoes configuradas no Firestore.');
+      setMessage('Competicoes verificadas no Firestore. Configuracoes existentes foram preservadas.');
     } catch (err) {
       console.error(err);
       setMessage('Falha ao configurar competicoes. Publique as regras do Firestore primeiro.');
-    }
-    setWorking('');
-  };
-
-  const handleSync = async (competitionId) => {
-    setWorking(`sync-${competitionId}`);
-    setMessage('');
-    try {
-      const syncCompetitionNow = httpsCallable(functions, 'syncCompetitionNow');
-      const result = await syncCompetitionNow({ competitionId });
-      setMessage(`${result.data.importedMatches} jogos importados; ${result.data.scoredBets} palpites atualizados.`);
-    } catch (err) {
-      console.error(err);
-      setMessage('Sincronizacao falhou. Configure o secret e publique as Firebase Functions.');
     }
     setWorking('');
   };
@@ -113,9 +102,11 @@ export default function CompetitionsAdmin() {
     }
     setWorking('podium');
     try {
-      const setOfficialPodium = httpsCallable(functions, 'setOfficialPodium');
-      await setOfficialPodium({ competitionId: 'worldcup-2026', ...podium });
-      setMessage('Podio oficial salvo e bonus reprocessado.');
+      await updateDoc(doc(db, 'competitions', 'worldcup-2026'), {
+        officialPodium: podium,
+        officialPodiumAt: serverTimestamp(),
+      });
+      setMessage('Podio oficial salvo. Execute Atualizar resultados no GitHub para recalcular o bonus.');
     } catch (err) {
       console.error(err);
       setMessage('Falha ao salvar podio oficial.');
@@ -133,6 +124,10 @@ export default function CompetitionsAdmin() {
           {working === 'initialize' ? '...' : 'Configurar padroes'}
         </button>
       </div>
+      <p className="competition-admin__message">
+        A coleta e executada manualmente no GitHub Actions.{' '}
+        <a href={ACTIONS_URL} target="_blank" rel="noreferrer">Abrir Atualizar resultados</a>
+      </p>
       {message && <p className="competition-admin__message">{message}</p>}
       {competitions.length === 0 ? (
         <p className="admin__empty">Nenhuma competicao configurada. Clique em Configurar padroes.</p>
@@ -146,16 +141,16 @@ export default function CompetitionsAdmin() {
                 <h4>{competition.name}</h4>
                 <p>{competition.id} / API: {competition.apiCode}</p>
               </div>
-              <button className="admin__btn admin__btn--primary" onClick={() => handleSync(competition.id)} disabled={working === `sync-${competition.id}`}>
-                {working === `sync-${competition.id}` ? 'Sincronizando...' : 'Sincronizar agora'}
-              </button>
+              <a className="admin__btn admin__btn--primary" href={ACTIONS_URL} target="_blank" rel="noreferrer">
+                Atualizar no GitHub
+              </a>
             </div>
             <div className="competition-admin__meta">
               <span>Jogos importados: <strong>{competition.lastSyncMatchCount ?? '-'}</strong></span>
               <span>Status: <strong>{competition.lastSyncStatus || 'ainda nao executado'}</strong></span>
               <label className="competition-admin__toggle">
                 <input type="checkbox" checked={Boolean(competition.syncEnabled)} onChange={() => handleToggleSync(competition)} />
-                Sync automatico
+                Incluir na opcao atualizar todos
               </label>
             </div>
             {competition.id === 'worldcup-2026' && (
