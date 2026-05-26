@@ -20,17 +20,8 @@ export default function Rules() {
       </section>
 
       <section className="rules__section">
-        <h3 className="rules__section-title">{t('rulesPodium')}</h3>
-        <ul className="rules__list">
-          <li>{t('rulesPodiumHow')}</li>
-          <li>{t('rulesPodiumExact')}</li>
-          <li>{t('rulesPodiumPartial')}</li>
-          <li>{t('rulesPodiumPerfect')}</li>
-        </ul>
-      </section>
-
-      <section className="rules__section">
         <h3 className="rules__section-title">{t('rulesScoring')}</h3>
+        <p className="rules__callout">{t('rulesNonCumulative')}</p>
         <div className="rules__points">
           <div className="rules__point-row">
             <span className="rules__point-badge rules__point-badge--5">5 {t('pts')}</span>
@@ -49,6 +40,18 @@ export default function Rules() {
             <span>{t('rulesMiss')}</span>
           </div>
         </div>
+      </section>
+
+      <section className="rules__section">
+        <h3 className="rules__section-title">{t('rulesPodium')}</h3>
+        <p className="rules__callout">{t('rulesPodiumAvailability')}</p>
+        <ul className="rules__list">
+          <li>{t('rulesPodiumHow')}</li>
+          <li>{t('rulesPodiumExact')}</li>
+          <li>{t('rulesPodiumPartial')}</li>
+          <li>{t('rulesPodiumPerfect')}</li>
+          <li>{t('rulesPodiumOfficial')}</li>
+        </ul>
       </section>
 
       <section className="rules__section">
@@ -72,6 +75,14 @@ export default function Rules() {
             <span className="rules__point-badge rules__point-badge--0">0 {t('pts')}</span>
           </div>
         </div>
+      </section>
+
+      <section className="rules__section">
+        <h3 className="rules__section-title">{t('rulesRanking')}</h3>
+        <ul className="rules__list">
+          <li>{t('rulesRanking1')}</li>
+          <li>{t('rulesRanking2')}</li>
+        </ul>
       </section>
 
       <section className="rules__section">

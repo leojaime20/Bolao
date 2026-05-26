@@ -5,6 +5,7 @@ import UsersAdmin from './admin/UsersAdmin';
 import ScoresAdmin from './admin/ScoresAdmin';
 import ErrorLogs from './admin/ErrorLogs';
 import CompetitionsAdmin from './admin/CompetitionsAdmin';
+import BackupAdmin from './admin/BackupAdmin';
 
 const SECTIONS = [
   { id: 'overview', label: 'Overview', icon: '📊' },
@@ -12,6 +13,7 @@ const SECTIONS = [
   { id: 'users', label: 'Utilizadores', icon: '👥' },
   { id: 'scores', label: 'Resultados antigos', icon: '⚽' },
   { id: 'competitions', label: 'Competições', icon: '🏆' },
+  { id: 'backup', label: 'Backup', icon: '⬇️' },
   { id: 'logs', label: 'Error Logs', icon: '🐛' },
 ];
 
@@ -38,6 +40,7 @@ export default function Admin() {
         {section === 'users' && <UsersAdmin />}
         {section === 'scores' && <ScoresAdmin />}
         {section === 'competitions' && <CompetitionsAdmin />}
+        {section === 'backup' && <BackupAdmin />}
         {section === 'logs' && <ErrorLogs />}
       </div>
     </div>

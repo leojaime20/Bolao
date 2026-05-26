@@ -1046,6 +1046,17 @@
   margin-bottom: 12px;
 }
 
+.rules__callout {
+  padding: 10px 12px;
+  margin: 0 0 12px;
+  border-left: 3px solid var(--yellow);
+  border-radius: 0 6px 6px 0;
+  background: rgba(255, 198, 50, 0.16);
+  color: var(--dark);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
 .rules__list {
   list-style: none;
   display: flex;
@@ -3144,6 +3155,31 @@
 .competition-admin__message a {
   color: var(--green-dark);
   font-weight: 700;
+}
+
+.backup-admin__description {
+  max-width: 660px;
+  margin: 0 0 16px;
+  color: var(--gray);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.backup-admin .competition-admin__message {
+  margin-top: 16px;
+}
+
+.backup-admin__downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 0;
+}
+
+.backup-admin__note {
+  margin: 18px 0 0;
+  color: var(--gray);
+  font-size: 12px;
 }
 
 .competition-admin__card {
