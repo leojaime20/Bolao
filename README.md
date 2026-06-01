@@ -168,7 +168,7 @@ After publishing the frontend, sign in as the configured admin, open `Admin > Co
 `Configurar padroes`. This creates:
 
 ```text
-competitions/libertadores-test
+competitions/ranking-sandbox
 competitions/worldcup-2026
 ```
 

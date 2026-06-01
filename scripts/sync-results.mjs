@@ -10,13 +10,13 @@ const requestedCompetition = process.argv[2] && process.argv[2] !== 'all'
   : null;
 
 const DEFAULT_COMPETITIONS = {
-  'brasileirao-test': {
-    name: 'Brasileirao Serie A 2026 - Teste',
-    apiProvider: 'football-data',
-    apiCode: 'BSA',
+  'ranking-sandbox': {
+    name: 'Sandbox Ranking',
+    apiProvider: 'manual',
+    apiCode: null,
     season: 2026,
     enabled: true,
-    syncEnabled: true,
+    syncEnabled: false,
     isTest: true,
     podiumPredictionEnabled: false,
     sortOrder: 1,

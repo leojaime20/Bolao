@@ -7,8 +7,10 @@ import { useCompetition } from '../hooks/useCompetition';
 import { usePools } from '../hooks/usePools';
 import { useLanguage } from '../i18n/LanguageContext';
 
-const COMPETITION_ID = 'brasileirao-test';
-const ACTIONS_URL = 'https://github.com/leojaime20/Bolao/actions/workflows/sync-results.yml';
+const COMPETITION_ID = 'ranking-sandbox';
+const SANDBOX_POOL_ID = 'ranking-sandbox-pool';
+const SANDBOX_INVITE_CODE = 'RANKTEST';
+const ACTIONS_URL = 'https://github.com/leojaime20/Bolao/actions/workflows/setup-ranking-sandbox.yml';
 
 function groupByDate(matches) {
   return matches.reduce((acc, match) => {
@@ -26,6 +28,7 @@ export default function LibertadoresTest() {
   const { saveBet } = useBets(COMPETITION_ID);
   const { betsMap, setBetsMap, loading } = useMyBetsMap(COMPETITION_ID);
   const matchesByDate = useMemo(() => groupByDate(matches), [matches]);
+  const isSandboxPool = activePoolId === SANDBOX_POOL_ID;
 
   const handleSave = async (matchId, scoreA, scoreB) => {
     await saveBet(String(matchId), scoreA, scoreB);
@@ -48,6 +51,21 @@ export default function LibertadoresTest() {
     );
   }
 
+  if (!isSandboxPool) {
+    return (
+      <div className="bets libertadores">
+        <div className="bets__no-pool">
+          <span className="bets__no-pool-icon">🧪</span>
+          <h2 className="bets__no-pool-title">{t('sandboxPoolRequired')}</h2>
+          <p className="bets__no-pool-desc">
+            {t('sandboxPoolRequiredDesc').replace('{code}', SANDBOX_INVITE_CODE)}
+          </p>
+        </div>
+        <PoolManager />
+      </div>
+    );
+  }
+
   return (
     <div className="bets libertadores">
       <div className="bets__pool-header">
@@ -58,13 +76,13 @@ export default function LibertadoresTest() {
       <div className="libertadores__intro">
         <div>
           <h2>{competition?.name || t('libertadoresTitle')}</h2>
-          <p>Jogos reais do Brasileirao importados para o Firebase pelo processo manual de atualizacao.</p>
+          <p>{t('sandboxIntro')}</p>
         </div>
       </div>
 
       <div className="libertadores__admin">
         <a className="admin__btn admin__btn--primary" href={ACTIONS_URL} target="_blank" rel="noreferrer">
-          Atualizar resultados no GitHub
+          Recriar sandbox no GitHub
         </a>
       </div>
 
@@ -93,7 +111,7 @@ export default function LibertadoresTest() {
         <div className="bets__no-pool">
           <span className="bets__no-pool-icon">⚽</span>
           <h2 className="bets__no-pool-title">Nenhum jogo importado</h2>
-          <p className="bets__no-pool-desc">O administrador deve sincronizar o Brasileirao no portal admin.</p>
+          <p className="bets__no-pool-desc">O administrador deve recriar o sandbox no GitHub Actions.</p>
         </div>
       ) : (
         <div className="bets__list">

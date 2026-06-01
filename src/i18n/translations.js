@@ -8,7 +8,7 @@ export const translations = {
     navSchedule: 'Calendário',
     navMyMatches: 'Os Meus Jogos',
     navTeams: 'Equipas',
-    navLibertadores: 'Brasileirao',
+    navLibertadores: 'Sandbox',
 
     // Match card
     nextMatch: 'Próximo Jogo',
@@ -141,8 +141,11 @@ export const translations = {
     you: 'tu',
     leaderboardEmpty: 'Ainda não há apostas no teu grupo.',
     matchTeamsPending: 'Palpites abrem quando os times estiverem definidos.',
-    libertadoresTitle: 'Brasileirao Serie A',
-    libertadoresDesc: 'Campeonato real para testar palpites, resultados e ranking antes do Mundial.',
+    libertadoresTitle: 'Sandbox Ranking',
+    libertadoresDesc: 'Competição fictícia para testar palpites, resultados e ranking antes do Mundial.',
+    sandboxIntro: '10 jogos fictícios para validar palpites e ranking. Os palpites ficam abertos por 12 horas a partir da criação do sandbox.',
+    sandboxPoolRequired: 'Usa o pool de teste',
+    sandboxPoolRequiredDesc: 'Este teste fica separado do bolão oficial. Entra no pool com o código {code}.',
     refresh: 'Atualizar',
 
     // Auth
@@ -304,7 +307,7 @@ export const translations = {
     navSchedule: 'Schedule',
     navMyMatches: 'My Matches',
     navTeams: 'Teams',
-    navLibertadores: 'Brasileirao',
+    navLibertadores: 'Sandbox',
 
     // Match card
     nextMatch: 'Next Match',
@@ -437,8 +440,11 @@ export const translations = {
     you: 'you',
     leaderboardEmpty: 'No bets in your group yet.',
     matchTeamsPending: 'Predictions open once both teams are confirmed.',
-    libertadoresTitle: 'Brasileirao Serie A',
-    libertadoresDesc: 'A real competition for testing bets, results, and rankings before the World Cup.',
+    libertadoresTitle: 'Ranking Sandbox',
+    libertadoresDesc: 'A fictional competition for testing bets, results, and rankings before the World Cup.',
+    sandboxIntro: '10 fictional matches to validate predictions and ranking. Predictions stay open for 12 hours after the sandbox is created.',
+    sandboxPoolRequired: 'Use the test pool',
+    sandboxPoolRequiredDesc: 'This test is separate from the official pool. Join the pool with code {code}.',
     refresh: 'Refresh',
 
     // Auth

@@ -4,12 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       competition_id:
-        description: "ID da competicao (all, brasileirao-test ou worldcup-2026)"
+        description: "ID da competicao (all ou worldcup-2026)"
         required: true
-        default: "brasileirao-test"
+        default: "worldcup-2026"
         type: choice
         options:
-          - brasileirao-test
           - worldcup-2026
           - all
 

@@ -15,13 +15,13 @@ import schedule from '../../data/schedule.json';
 const ACTIONS_URL = 'https://github.com/leojaime20/Bolao/actions/workflows/sync-results.yml';
 const DEFAULT_COMPETITIONS = [
   {
-    id: 'brasileirao-test',
-    name: 'Brasileirao Serie A 2026 - Teste',
-    apiProvider: 'football-data',
-    apiCode: 'BSA',
+    id: 'ranking-sandbox',
+    name: 'Sandbox Ranking',
+    apiProvider: 'manual',
+    apiCode: null,
     season: 2026,
     enabled: true,
-    syncEnabled: true,
+    syncEnabled: false,
     isTest: true,
     podiumPredictionEnabled: false,
     sortOrder: 1,
