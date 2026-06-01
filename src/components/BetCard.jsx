@@ -19,6 +19,7 @@ export default function BetCard({ match, bet, onSave, matchScore, onTeamClick })
   const kickoffAt = match.kickoffAt?.toDate ? match.kickoffAt.toDate() : null;
   const isStarted = kickoffAt ? new Date() >= kickoffAt : false;
   const isLocked = isFinished || isLive || isStarted;
+  const isBettingClosed = isLocked || !hasTeams;
 
   const [scoreA, setScoreA] = useState(bet?.predictedScoreA ?? '');
   const [scoreB, setScoreB] = useState(bet?.predictedScoreB ?? '');
@@ -110,7 +111,7 @@ export default function BetCard({ match, bet, onSave, matchScore, onTeamClick })
             min="0"
             value={scoreA}
             onChange={(e) => handleChange('home', e.target.value)}
-            disabled={isLocked || !hasTeams}
+            disabled={isBettingClosed}
             aria-label={`${homeName} ${t('goals')}`}
           />
           <span className="bet-card__separator">:</span>
@@ -120,7 +121,7 @@ export default function BetCard({ match, bet, onSave, matchScore, onTeamClick })
             min="0"
             value={scoreB}
             onChange={(e) => handleChange('away', e.target.value)}
-            disabled={isLocked || !hasTeams}
+            disabled={isBettingClosed}
             aria-label={`${awayName} ${t('goals')}`}
           />
         </div>
@@ -138,6 +139,12 @@ export default function BetCard({ match, bet, onSave, matchScore, onTeamClick })
           )}
         </div>
       </div>
+
+      {!hasTeams && (
+        <div className="bet-card__notice">
+          {t('matchTeamsPending')}
+        </div>
+      )}
 
       {isFinished && matchScore?.scoreHome != null && (
         <div className="bet-card__result">

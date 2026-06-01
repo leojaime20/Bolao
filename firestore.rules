@@ -16,6 +16,7 @@ service cloud.firestore {
 
     function matchIsOpen(competitionId, matchId) {
       return exists(/databases/$(database)/documents/competitions/$(competitionId)/matches/$(matchId))
+        && competitionMatch(competitionId, matchId).isPlayable == true
         && request.time < competitionMatch(competitionId, matchId).kickoffAt;
     }
 
