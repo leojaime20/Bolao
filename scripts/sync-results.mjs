@@ -9,6 +9,32 @@ const requestedCompetition = process.argv[2] && process.argv[2] !== 'all'
   ? process.argv[2]
   : null;
 
+const DEFAULT_COMPETITIONS = {
+  'brasileirao-test': {
+    name: 'Brasileirao Serie A 2026 - Teste',
+    apiProvider: 'football-data',
+    apiCode: 'BSA',
+    season: 2026,
+    enabled: true,
+    syncEnabled: true,
+    isTest: true,
+    podiumPredictionEnabled: false,
+    sortOrder: 1,
+  },
+  'worldcup-2026': {
+    name: 'Copa do Mundo 2026',
+    apiProvider: 'football-data',
+    apiCode: 'WC',
+    season: 2026,
+    enabled: true,
+    syncEnabled: true,
+    isTest: false,
+    podiumPredictionEnabled: true,
+    podiumPredictionDeadline: Timestamp.fromDate(new Date('2026-06-11T19:00:00Z')),
+    sortOrder: 2,
+  },
+};
+
 if (!apiToken) throw new Error('Missing FOOTBALL_DATA_API_KEY secret.');
 if (!serviceAccountValue) throw new Error('Missing FIREBASE_SERVICE_ACCOUNT secret.');
 
@@ -207,7 +233,11 @@ async function scoreCompetitionPools(competitionId, config) {
 
 async function runCompetition(competitionId) {
   const ref = competitionRef(competitionId);
-  const snapshot = await ref.get();
+  let snapshot = await ref.get();
+  if (!snapshot.exists && DEFAULT_COMPETITIONS[competitionId]) {
+    await ref.set(DEFAULT_COMPETITIONS[competitionId], { merge: true });
+    snapshot = await ref.get();
+  }
   if (!snapshot.exists) throw new Error(`Competition ${competitionId} does not exist in Firestore.`);
   const config = snapshot.data();
   try {

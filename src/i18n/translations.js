@@ -8,7 +8,7 @@ export const translations = {
     navSchedule: 'Calendário',
     navMyMatches: 'Os Meus Jogos',
     navTeams: 'Equipas',
-    navLibertadores: 'Teste',
+    navLibertadores: 'Brasileirao',
 
     // Match card
     nextMatch: 'Próximo Jogo',
@@ -140,7 +140,7 @@ export const translations = {
     player: 'Jogador',
     you: 'tu',
     leaderboardEmpty: 'Ainda não há apostas no teu grupo.',
-    libertadoresTitle: 'Teste Libertadores',
+    libertadoresTitle: 'Brasileirao Serie A',
     libertadoresDesc: 'Campeonato real para testar palpites, resultados e ranking antes do Mundial.',
     refresh: 'Atualizar',
 
@@ -302,7 +302,7 @@ export const translations = {
     navSchedule: 'Schedule',
     navMyMatches: 'My Matches',
     navTeams: 'Teams',
-    navLibertadores: 'Test',
+    navLibertadores: 'Brasileirao',
 
     // Match card
     nextMatch: 'Next Match',
@@ -434,7 +434,7 @@ export const translations = {
     player: 'Player',
     you: 'you',
     leaderboardEmpty: 'No bets in your group yet.',
-    libertadoresTitle: 'Libertadores Test',
+    libertadoresTitle: 'Brasileirao Serie A',
     libertadoresDesc: 'A real competition for testing bets, results, and rankings before the World Cup.',
     refresh: 'Refresh',
 

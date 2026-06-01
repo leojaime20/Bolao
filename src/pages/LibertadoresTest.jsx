@@ -7,7 +7,7 @@ import { useCompetition } from '../hooks/useCompetition';
 import { usePools } from '../hooks/usePools';
 import { useLanguage } from '../i18n/LanguageContext';
 
-const COMPETITION_ID = 'libertadores-test';
+const COMPETITION_ID = 'brasileirao-test';
 const ACTIONS_URL = 'https://github.com/leojaime20/Bolao/actions/workflows/sync-results.yml';
 
 function groupByDate(matches) {
@@ -58,7 +58,7 @@ export default function LibertadoresTest() {
       <div className="libertadores__intro">
         <div>
           <h2>{competition?.name || t('libertadoresTitle')}</h2>
-          <p>Jogos reais importados para o Firebase pelo processo manual de atualizacao.</p>
+          <p>Jogos reais do Brasileirao importados para o Firebase pelo processo manual de atualizacao.</p>
         </div>
       </div>
 
@@ -93,7 +93,7 @@ export default function LibertadoresTest() {
         <div className="bets__no-pool">
           <span className="bets__no-pool-icon">⚽</span>
           <h2 className="bets__no-pool-title">Nenhum jogo importado</h2>
-          <p className="bets__no-pool-desc">O administrador deve sincronizar esta competicao no portal admin.</p>
+          <p className="bets__no-pool-desc">O administrador deve sincronizar o Brasileirao no portal admin.</p>
         </div>
       ) : (
         <div className="bets__list">

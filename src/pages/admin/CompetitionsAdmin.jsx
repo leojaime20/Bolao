@@ -15,10 +15,10 @@ import schedule from '../../data/schedule.json';
 const ACTIONS_URL = 'https://github.com/leojaime20/Bolao/actions/workflows/sync-results.yml';
 const DEFAULT_COMPETITIONS = [
   {
-    id: 'libertadores-test',
-    name: 'Libertadores 2026 - Teste',
+    id: 'brasileirao-test',
+    name: 'Brasileirao Serie A 2026 - Teste',
     apiProvider: 'football-data',
-    apiCode: 'CLI',
+    apiCode: 'BSA',
     season: 2026,
     enabled: true,
     syncEnabled: true,
