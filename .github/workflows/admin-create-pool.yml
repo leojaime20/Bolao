@@ -1,0 +1,40 @@
+name: Admin criar pool
+
+on:
+  workflow_dispatch:
+    inputs:
+      pool_name:
+        description: "Nome do pool"
+        required: true
+        default: "Bolao PB CHINA"
+      invite_code:
+        description: "Codigo de convite"
+        required: true
+        default: "PBCHINA"
+      pool_id:
+        description: "ID interno do documento"
+        required: true
+        default: "bolao-pb-china"
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  create:
+    name: Criar pool
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Criar ou atualizar pool
+        run: node scripts/create-pool.mjs "${{ inputs.pool_name }}" "${{ inputs.invite_code }}" "${{ inputs.pool_id }}"
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          ADMIN_UID: ${{ secrets.VITE_ADMIN_UID }}

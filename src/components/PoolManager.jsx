@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { useAuth } from '../hooks/useAuth';
 import { usePools } from '../hooks/usePools';
 import { useLanguage } from '../i18n/LanguageContext';
 import PoolAdmin from './PoolAdmin';
 
 export default function PoolManager() {
-  const { user } = useAuth();
-  const { pools, activePoolId, selectPool, createPool, joinPool } = usePools();
+  const { pools, activePoolId, selectPool, createPool, joinPool, canCreatePool } = usePools();
   const { t } = useLanguage();
   const [view, setView] = useState('list');
   const [name, setName] = useState('');
@@ -65,7 +63,9 @@ export default function PoolManager() {
     const appUrl = window.location.origin + window.location.pathname;
     const text = t('shareMessage').replace('{code}', inviteCode).replace('{url}', appUrl);
     if (navigator.share) {
-      try { await navigator.share({ text }); } catch {}
+      try { await navigator.share({ text }); } catch {
+        // User cancelled the native share sheet.
+      }
     } else {
       await navigator.clipboard.writeText(text);
       setCopied(true);
@@ -109,6 +109,18 @@ export default function PoolManager() {
   }
 
   if (view === 'create') {
+    if (!canCreatePool) {
+      return (
+        <div className="pool-manager">
+          <button className="pool-manager__back" onClick={() => { setView('list'); setError(''); }}>
+            ← {t('back')}
+          </button>
+          <h3 className="pool-manager__title">{t('poolCreateTitle')}</h3>
+          <p className="pool-manager__empty">{t('poolCreateAdminOnly')}</p>
+        </div>
+      );
+    }
+
     return (
       <div className="pool-manager">
         <button className="pool-manager__back" onClick={() => { setView('list'); setError(''); }}>
@@ -205,9 +217,11 @@ export default function PoolManager() {
       )}
 
       <div className="pool-manager__actions">
-        <button className="pool-manager__action-btn pool-manager__action-btn--create" onClick={() => setView('create')}>
-          + {t('poolCreateBtn')}
-        </button>
+        {canCreatePool && (
+          <button className="pool-manager__action-btn pool-manager__action-btn--create" onClick={() => setView('create')}>
+            + {t('poolCreateBtn')}
+          </button>
+        )}
         <button className="pool-manager__action-btn" onClick={() => setView('join')}>
           {t('poolJoinBtn')}
         </button>

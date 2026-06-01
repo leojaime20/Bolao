@@ -20,6 +20,7 @@ import { useAuth } from './useAuth';
 const PoolContext = createContext(null);
 
 const ACTIVE_POOL_KEY = 'Copa-Yantai-active-pool';
+const ADMIN_UID = import.meta.env.VITE_ADMIN_UID;
 
 function generateInviteCode() {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -99,6 +100,7 @@ export function PoolProvider({ children }) {
 
   const createPool = useCallback(async (name) => {
     if (!user) return null;
+    if (user.uid !== ADMIN_UID) throw new Error('NOT_ADMIN');
 
     // Generate unique invite code
     let inviteCode;
@@ -124,6 +126,8 @@ export function PoolProvider({ children }) {
     // Init leaderboard entry
     await setDoc(doc(db, 'pools', poolRef.id, 'leaderboard', user.uid), {
       nickname: profile?.nickname || '',
+      matchPoints: 0,
+      bonusPoints: 0,
       totalPoints: 0,
       exactResultsCount: 0,
       correctOutcomeCount: 0,
@@ -309,12 +313,14 @@ export function PoolProvider({ children }) {
   }, [pools]);
 
   const activePool = pools.find((p) => p.id === activePoolId) || null;
+  const canCreatePool = Boolean(user?.uid && user.uid === ADMIN_UID);
 
   return (
     <PoolContext.Provider value={{
       pools,
       activePool,
       activePoolId,
+      canCreatePool,
       selectPool,
       createPool,
       joinPool,
