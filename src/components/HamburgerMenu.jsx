@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useAuth } from '../hooks/useAuth';
 import { usePools } from '../hooks/usePools';
+import { buildPoolInviteText } from '../utils/invite';
 
 export default function HamburgerMenu({ onNavigate }) {
   const [open, setOpen] = useState(false);
@@ -22,11 +23,16 @@ export default function HamburgerMenu({ onNavigate }) {
     if (!code) return;
 
     const appUrl = window.location.origin + window.location.pathname;
-    const text = t('shareMessage').replace('{code}', code).replace('{url}', appUrl);
+    const text = buildPoolInviteText({
+      poolName: activePool?.name,
+      inviteCode: code,
+      appUrl,
+      t,
+    });
 
     if (navigator.share) {
       try {
-        await navigator.share({ text });
+        await navigator.share({ title: activePool?.name || t('navBets'), text });
       } catch {
         // user cancelled share
       }

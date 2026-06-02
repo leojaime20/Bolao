@@ -21,6 +21,15 @@ export default function Rules() {
       </section>
 
       <section className="rules__section">
+        <h3 className="rules__section-title">{t('rulesInviteTitle')}</h3>
+        <ul className="rules__list">
+          <li>{t('rulesInvite1')}</li>
+          <li>{t('rulesInvite2')}</li>
+          <li>{t('rulesInvite3')}</li>
+        </ul>
+      </section>
+
+      <section className="rules__section">
         <h3 className="rules__section-title">{t('rulesScoring')}</h3>
         <p className="rules__callout">{t('rulesNonCumulative')}</p>
         <div className="rules__points">

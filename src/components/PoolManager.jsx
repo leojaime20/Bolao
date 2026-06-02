@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { usePools } from '../hooks/usePools';
 import { useLanguage } from '../i18n/LanguageContext';
+import { buildPoolInviteText } from '../utils/invite';
 import PoolAdmin from './PoolAdmin';
 
 export default function PoolManager() {
@@ -14,6 +15,7 @@ export default function PoolManager() {
   const [createdPool, setCreatedPool] = useState(null);
   const [copied, setCopied] = useState(false);
   const [adminPoolId, setAdminPoolId] = useState(null);
+  const [invitePool, setInvitePool] = useState(null);
 
   const handleCreate = async (e) => {
     e.preventDefault();
@@ -59,11 +61,20 @@ export default function PoolManager() {
     setSaving(false);
   };
 
-  const handleCopy = async (inviteCode) => {
+  const buildInviteText = (pool) => {
     const appUrl = window.location.origin + window.location.pathname;
-    const text = t('shareMessage').replace('{code}', inviteCode).replace('{url}', appUrl);
+    return buildPoolInviteText({
+      poolName: pool?.name,
+      inviteCode: pool?.inviteCode,
+      appUrl,
+      t,
+    });
+  };
+
+  const handleCopy = async (pool) => {
+    const text = buildInviteText(pool);
     if (navigator.share) {
-      try { await navigator.share({ text }); } catch {
+      try { await navigator.share({ title: pool?.name || t('navBets'), text }); } catch {
         // User cancelled the native share sheet.
       }
     } else {
@@ -84,6 +95,7 @@ export default function PoolManager() {
   }
 
   if (view === 'created' && createdPool) {
+    const inviteText = buildInviteText(createdPool);
     return (
       <div className="pool-manager">
         <div className="pool-manager__success">
@@ -96,14 +108,39 @@ export default function PoolManager() {
             <span className="pool-manager__code-value">{createdPool.inviteCode}</span>
           </div>
 
-          <button className="pool-manager__share-btn" onClick={() => handleCopy(createdPool.inviteCode)}>
+          <button className="pool-manager__share-btn" onClick={() => handleCopy(createdPool)}>
             {copied ? t('copiedToClipboard') : t('poolShareCode')}
           </button>
+
+          <div className="pool-manager__invite-preview">
+            <span className="pool-manager__invite-title">{t('poolInvitePreviewTitle')}</span>
+            <pre>{inviteText}</pre>
+          </div>
 
           <button className="pool-manager__done-btn" onClick={() => { setView('list'); setCreatedPool(null); }}>
             {t('done')}
           </button>
         </div>
+      </div>
+    );
+  }
+
+  if (view === 'invite' && invitePool) {
+    const inviteText = buildInviteText(invitePool);
+    return (
+      <div className="pool-manager">
+        <button className="pool-manager__back" onClick={() => { setView('list'); setInvitePool(null); }}>
+          ← {t('back')}
+        </button>
+        <h3 className="pool-manager__title">{t('poolInviteTitle')}</h3>
+        <p className="pool-manager__empty">{t('poolInviteDescription')}</p>
+        <div className="pool-manager__invite-preview pool-manager__invite-preview--standalone">
+          <span className="pool-manager__invite-title">{t('poolInvitePreviewTitle')}</span>
+          <pre>{inviteText}</pre>
+        </div>
+        <button className="pool-manager__share-btn" onClick={() => handleCopy(invitePool)}>
+          {copied ? t('copiedToClipboard') : t('poolShareCode')}
+        </button>
       </div>
     );
   }
@@ -213,6 +250,13 @@ export default function PoolManager() {
                 aria-label={t('poolSettings')}
               >
                 ⚙️
+              </button>
+              <button
+                className="pool-manager__item-settings"
+                onClick={() => { setInvitePool(pool); setView('invite'); }}
+                aria-label={t('poolInviteTitle')}
+              >
+                📩
               </button>
             </div>
           ))}
