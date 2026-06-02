@@ -163,9 +163,12 @@ export default function PoolManager() {
               className="modal__input"
               type="text"
               value={code}
-              onChange={(e) => setCode(e.target.value)}
+              onChange={(e) => setCode(e.target.value.toUpperCase())}
               placeholder={t('poolCodePlaceholder')}
-              maxLength={12}
+              maxLength={32}
+              autoCapitalize="characters"
+              autoCorrect="off"
+              spellCheck="false"
               autoFocus
             />
           </label>
