@@ -10,7 +10,16 @@ import { useLanguage } from '../i18n/LanguageContext';
 const COMPETITION_ID = 'ranking-sandbox';
 const SANDBOX_POOL_ID = 'ranking-sandbox-pool';
 const SANDBOX_INVITE_CODE = 'RANKTEST';
-const ACTIONS_URL = 'https://github.com/leojaime20/Bolao/actions/workflows/setup-ranking-sandbox.yml';
+const SETUP_ACTION_URL = 'https://github.com/leojaime20/Bolao/actions/workflows/setup-ranking-sandbox.yml';
+const ADVANCE_ACTION_URL = 'https://github.com/leojaime20/Bolao/actions/workflows/score-ranking-sandbox.yml';
+
+const phaseLabels = {
+  groups: 'Fase de grupos',
+  quarterfinals: 'Quartas de final',
+  semifinals: 'Semifinais',
+  finals: 'Disputa de terceiro e final',
+  complete: 'Torneio completo',
+};
 
 function groupByDate(matches) {
   return matches.reduce((acc, match) => {
@@ -77,12 +86,20 @@ export default function LibertadoresTest() {
         <div>
           <h2>{competition?.name || t('libertadoresTitle')}</h2>
           <p>{t('sandboxIntro')}</p>
+          {competition?.sandboxPhase && (
+            <p>
+              Fase atual: <strong>{phaseLabels[competition.sandboxPhase] || competition.sandboxPhase}</strong>
+            </p>
+          )}
         </div>
       </div>
 
       <div className="libertadores__admin">
-        <a className="admin__btn admin__btn--primary" href={ACTIONS_URL} target="_blank" rel="noreferrer">
+        <a className="admin__btn admin__btn--primary" href={SETUP_ACTION_URL} target="_blank" rel="noreferrer">
           Recriar sandbox no GitHub
+        </a>
+        <a className="admin__btn" href={ADVANCE_ACTION_URL} target="_blank" rel="noreferrer">
+          Avançar fase no GitHub
         </a>
       </div>
 

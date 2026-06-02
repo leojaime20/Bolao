@@ -8,6 +8,45 @@ const COMPETITION_ID = 'ranking-sandbox';
 const POOL_ID = 'ranking-sandbox-pool';
 const POOL_NAME = 'Teste Ranking';
 const INVITE_CODE = 'RANKTEST';
+const BETTING_WINDOW_HOURS = 12;
+
+const teams = [
+  { name: 'Brasil Teste', group: 'A' },
+  { name: 'China Teste', group: 'A' },
+  { name: 'Portugal Teste', group: 'A' },
+  { name: 'Argentina Teste', group: 'A' },
+  { name: 'Franca Teste', group: 'B' },
+  { name: 'Espanha Teste', group: 'B' },
+  { name: 'Inglaterra Teste', group: 'B' },
+  { name: 'Italia Teste', group: 'B' },
+  { name: 'Alemanha Teste', group: 'C' },
+  { name: 'Holanda Teste', group: 'C' },
+  { name: 'Japao Teste', group: 'C' },
+  { name: 'Coreia Teste', group: 'C' },
+  { name: 'Mexico Teste', group: 'D' },
+  { name: 'Uruguai Teste', group: 'D' },
+  { name: 'Colombia Teste', group: 'D' },
+  { name: 'Chile Teste', group: 'D' },
+];
+
+const groupFixtures = [
+  ['g-01', 'Brasil Teste', 'China Teste', 'A'],
+  ['g-02', 'Portugal Teste', 'Argentina Teste', 'A'],
+  ['g-03', 'Brasil Teste', 'Portugal Teste', 'A'],
+  ['g-04', 'China Teste', 'Argentina Teste', 'A'],
+  ['g-05', 'Franca Teste', 'Espanha Teste', 'B'],
+  ['g-06', 'Inglaterra Teste', 'Italia Teste', 'B'],
+  ['g-07', 'Franca Teste', 'Inglaterra Teste', 'B'],
+  ['g-08', 'Espanha Teste', 'Italia Teste', 'B'],
+  ['g-09', 'Alemanha Teste', 'Holanda Teste', 'C'],
+  ['g-10', 'Japao Teste', 'Coreia Teste', 'C'],
+  ['g-11', 'Alemanha Teste', 'Japao Teste', 'C'],
+  ['g-12', 'Holanda Teste', 'Coreia Teste', 'C'],
+  ['g-13', 'Mexico Teste', 'Uruguai Teste', 'D'],
+  ['g-14', 'Colombia Teste', 'Chile Teste', 'D'],
+  ['g-15', 'Mexico Teste', 'Colombia Teste', 'D'],
+  ['g-16', 'Uruguai Teste', 'Chile Teste', 'D'],
+];
 
 if (!serviceAccountValue) throw new Error('Missing FIREBASE_SERVICE_ACCOUNT secret.');
 if (!adminUid) throw new Error('Missing ADMIN_UID/VITE_ADMIN_UID secret.');
@@ -22,7 +61,31 @@ try {
 initializeApp({ credential: cert(serviceAccount) });
 const db = getFirestore();
 
-function matchDoc(id, home, away, kickoffAt, matchday) {
+async function deleteCollection(collectionRef) {
+  const snapshot = await collectionRef.get();
+  if (snapshot.empty) return;
+
+  let batch = db.batch();
+  let count = 0;
+  for (const doc of snapshot.docs) {
+    batch.delete(doc.ref);
+    count += 1;
+    if (count === 400) {
+      await batch.commit();
+      batch = db.batch();
+      count = 0;
+    }
+  }
+  if (count) await batch.commit();
+}
+
+function kickoffBase() {
+  const startsAt = new Date(Date.now() + BETTING_WINDOW_HOURS * 60 * 60 * 1000);
+  startsAt.setSeconds(0, 0);
+  return startsAt;
+}
+
+function matchDoc({ id, home, away, kickoffAt, matchday, groupLabel, stage, label, isPlayable = true }) {
   return {
     apiMatchId: `sandbox-${id}`,
     date: kickoffAt.toISOString().slice(0, 10),
@@ -33,39 +96,34 @@ function matchDoc(id, home, away, kickoffAt, matchday) {
     away,
     home_crest: null,
     away_crest: null,
-    group_label: 'Teste',
+    group_label: groupLabel || '',
     matchday,
-    stage: 'SANDBOX',
+    stage,
+    label: label || '',
     status: 'upcoming',
     apiStatus: 'SCHEDULED',
     scoreHome: null,
     scoreAway: null,
     winner: null,
-    isPlayable: true,
+    isPlayable,
     updatedAt: FieldValue.serverTimestamp(),
   };
 }
-
-const startsAt = new Date(Date.now() + 12 * 60 * 60 * 1000);
-startsAt.setSeconds(0, 0);
-
-const fixtures = [
-  ['Brasil Teste', 'China Teste'],
-  ['Portugal Teste', 'Argentina Teste'],
-  ['Franca Teste', 'Espanha Teste'],
-  ['Inglaterra Teste', 'Italia Teste'],
-  ['Alemanha Teste', 'Holanda Teste'],
-  ['Japao Teste', 'Coreia Teste'],
-  ['Mexico Teste', 'Uruguai Teste'],
-  ['Colombia Teste', 'Chile Teste'],
-  ['Marrocos Teste', 'Senegal Teste'],
-  ['Canada Teste', 'EUA Teste'],
-];
 
 const userSnap = await db.collection('users').doc(adminUid).get();
 const adminNickname = userSnap.exists ? userSnap.data().nickname || '' : '';
 
 const poolRef = db.collection('pools').doc(POOL_ID);
+const poolCompetitionRef = poolRef.collection('competitions').doc(COMPETITION_ID);
+const competitionRef = db.collection('competitions').doc(COMPETITION_ID);
+
+await Promise.all([
+  deleteCollection(competitionRef.collection('matches')),
+  deleteCollection(poolCompetitionRef.collection('bets')),
+  deleteCollection(poolCompetitionRef.collection('leaderboard')),
+  deleteCollection(poolCompetitionRef.collection('podiumPredictions')),
+]);
+
 await poolRef.set({
   name: POOL_NAME,
   createdBy: adminUid,
@@ -77,7 +135,7 @@ await poolRef.set({
   isPublic: true,
 }, { merge: true });
 
-await poolRef.collection('leaderboard').doc(adminUid).set({
+await poolCompetitionRef.collection('leaderboard').doc(adminUid).set({
   nickname: adminNickname,
   matchPoints: 0,
   bonusPoints: 0,
@@ -91,9 +149,8 @@ await db.collection('users').doc(adminUid).set({
   updatedAt: FieldValue.serverTimestamp(),
 }, { merge: true });
 
-const competitionRef = db.collection('competitions').doc(COMPETITION_ID);
 await competitionRef.set({
-  name: 'Sandbox Ranking',
+  name: 'Sandbox Ranking Multi-fase',
   apiProvider: 'manual',
   apiCode: null,
   season: 2026,
@@ -101,21 +158,33 @@ await competitionRef.set({
   syncEnabled: false,
   isTest: true,
   podiumPredictionEnabled: false,
-  lastSyncAt: FieldValue.serverTimestamp(),
-  lastSyncStatus: 'success',
-  lastSyncMatchCount: fixtures.length,
+  sandboxPhase: 'groups',
+  sandboxLastAdvancedFrom: FieldValue.delete(),
+  sandboxStandings: FieldValue.delete(),
   sandboxPoolId: POOL_ID,
   sandboxInviteCode: INVITE_CODE,
-  bettingWindowHours: 12,
+  bettingWindowHours: BETTING_WINDOW_HOURS,
+  teams,
+  lastSyncAt: FieldValue.serverTimestamp(),
+  lastSyncStatus: 'success',
+  lastSyncMatchCount: groupFixtures.length,
   sortOrder: 1,
 }, { merge: true });
 
+const startsAt = kickoffBase();
 const batch = db.batch();
-fixtures.forEach(([home, away], index) => {
+groupFixtures.forEach(([id, home, away, groupLabel], index) => {
   const kickoffAt = new Date(startsAt.getTime() + index * 5 * 60 * 1000);
-  const id = `sandbox-${String(index + 1).padStart(2, '0')}`;
-  batch.set(competitionRef.collection('matches').doc(id), matchDoc(id, home, away, kickoffAt, index + 1), { merge: true });
+  batch.set(competitionRef.collection('matches').doc(id), matchDoc({
+    id,
+    home,
+    away,
+    kickoffAt,
+    matchday: index + 1,
+    groupLabel,
+    stage: 'GROUP_STAGE',
+  }));
 });
 await batch.commit();
 
-console.log(`Sandbox ready: competition=${COMPETITION_ID}; pool=${POOL_NAME} (${POOL_ID}); inviteCode=${INVITE_CODE}; firstKickoff=${startsAt.toISOString()}`);
+console.log(`Sandbox multi-phase ready: competition=${COMPETITION_ID}; pool=${POOL_NAME} (${POOL_ID}); inviteCode=${INVITE_CODE}; phase=groups; matches=${groupFixtures.length}; firstKickoff=${startsAt.toISOString()}`);

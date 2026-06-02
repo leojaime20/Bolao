@@ -143,9 +143,9 @@ export const translations = {
     matchTeamsPending: 'Palpites abrem quando os times estiverem definidos.',
     libertadoresTitle: 'Sandbox Ranking',
     libertadoresDesc: 'Competição fictícia para testar palpites, resultados e ranking antes do Mundial.',
-    sandboxIntro: '10 jogos fictícios para validar palpites e ranking. Os palpites ficam abertos por 12 horas a partir da criação do sandbox.',
+    sandboxIntro: 'Teste multi-fase com 16 jogos de grupos, quartas, semifinais, terceiro lugar e final. Cada fase nova fica aberta por 12 horas para palpites.',
     sandboxPoolRequired: 'Usa o pool de teste',
-    sandboxPoolRequiredDesc: 'Este teste fica separado do bolão oficial. Entra no pool com o código {code}.',
+    sandboxPoolRequiredDesc: 'Este teste fica separado do bolão oficial. Selecciona o pool de teste quando ele aparecer na lista.',
     refresh: 'Atualizar',
 
     // Auth
@@ -443,9 +443,9 @@ export const translations = {
     matchTeamsPending: 'Predictions open once both teams are confirmed.',
     libertadoresTitle: 'Ranking Sandbox',
     libertadoresDesc: 'A fictional competition for testing bets, results, and rankings before the World Cup.',
-    sandboxIntro: '10 fictional matches to validate predictions and ranking. Predictions stay open for 12 hours after the sandbox is created.',
+    sandboxIntro: 'Multi-phase test with 16 group matches, quarterfinals, semifinals, third place and final. Each new phase stays open for predictions for 12 hours.',
     sandboxPoolRequired: 'Use the test pool',
-    sandboxPoolRequiredDesc: 'This test is separate from the official pool. Join the pool with code {code}.',
+    sandboxPoolRequiredDesc: 'This test is separate from the official pool. Select the test pool when it appears in the list.',
     refresh: 'Refresh',
 
     // Auth
