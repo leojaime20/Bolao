@@ -8,7 +8,7 @@ const COMPETITION_ID = 'ranking-sandbox';
 const POOL_ID = 'ranking-sandbox-pool';
 const POOL_NAME = 'Teste Ranking';
 const INVITE_CODE = 'RANKTEST';
-const BETTING_WINDOW_HOURS = 12;
+const BETTING_WINDOW_HOURS = 1;
 
 const teams = [
   { name: 'Brasil Teste', group: 'A' },

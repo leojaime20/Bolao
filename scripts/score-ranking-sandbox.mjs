@@ -5,7 +5,7 @@ import { calculateMatchPoints } from './scoring.mjs';
 const serviceAccountValue = process.env.FIREBASE_SERVICE_ACCOUNT;
 const COMPETITION_ID = 'ranking-sandbox';
 const POOL_ID = 'ranking-sandbox-pool';
-const BETTING_WINDOW_HOURS = 12;
+const BETTING_WINDOW_HOURS = 1;
 
 const PHASE_ORDER = ['groups', 'quarterfinals', 'semifinals', 'finals', 'complete'];
 
