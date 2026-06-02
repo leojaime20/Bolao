@@ -72,7 +72,7 @@ function normalizeApiMatch(match) {
     scoreHome: hasScore ? fullTime.home : null,
     scoreAway: hasScore ? fullTime.away : null,
     winner: match.score?.winner || null,
-    isPlayable: Boolean(match.homeTeam?.id && match.awayTeam?.id),
+    isPlayable: true,
     updatedAt: FieldValue.serverTimestamp(),
   };
 }

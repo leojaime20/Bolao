@@ -7,8 +7,7 @@ function getFlagUrl(iso) {
 
 export default function BetCard({ match, bet, onSave, matchScore, onTeamClick }) {
   const { t } = useLanguage();
-  const isPlayable = match.isPlayable ?? !!match.home_iso;
-  const hasTeams = isPlayable;
+  const hasTeams = Boolean(match.home_iso || match.home_crest || match.away_iso || match.away_crest);
   const isKnockout = !hasTeams;
 
   const homeName = match.home_iso ? t(`team.${match.home_iso}`) : match.home;
@@ -19,7 +18,7 @@ export default function BetCard({ match, bet, onSave, matchScore, onTeamClick })
   const kickoffAt = match.kickoffAt?.toDate ? match.kickoffAt.toDate() : null;
   const isStarted = kickoffAt ? new Date() >= kickoffAt : false;
   const isLocked = isFinished || isLive || isStarted;
-  const isBettingClosed = isLocked || !hasTeams;
+  const isBettingClosed = isLocked;
 
   const [scoreA, setScoreA] = useState(bet?.predictedScoreA ?? '');
   const [scoreB, setScoreB] = useState(bet?.predictedScoreB ?? '');

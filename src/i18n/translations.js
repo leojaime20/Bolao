@@ -139,7 +139,7 @@ export const translations = {
     player: 'Jogador',
     you: 'tu',
     leaderboardEmpty: 'Ainda não há apostas no teu grupo.',
-    matchTeamsPending: 'Palpites abrem quando os times estiverem definidos.',
+    matchTeamsPending: 'Confronto ainda pode mudar, mas o palpite já está liberado até o início da partida.',
     refresh: 'Atualizar',
 
     // Auth
@@ -433,7 +433,7 @@ export const translations = {
     player: 'Player',
     you: 'you',
     leaderboardEmpty: 'No bets in your group yet.',
-    matchTeamsPending: 'Predictions open once both teams are confirmed.',
+    matchTeamsPending: 'This matchup can still change, but predictions are open until kickoff.',
     refresh: 'Refresh',
 
     // Auth
