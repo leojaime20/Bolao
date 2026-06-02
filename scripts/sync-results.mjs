@@ -51,9 +51,28 @@ function mapApiStatus(status) {
   return 'upcoming';
 }
 
+function pickScoringScore(score = {}) {
+  const regularTime = score.regularTime || {};
+  const fullTime = score.fullTime || {};
+  const source = regularTime.home != null && regularTime.away != null ? regularTime : fullTime;
+  const sourceName = source === regularTime ? 'regularTime' : 'fullTime';
+
+  return {
+    home: source.home,
+    away: source.away,
+    source: source.home != null && source.away != null ? sourceName : null,
+  };
+}
+
 function normalizeApiMatch(match) {
+  const score = match.score || {};
   const fullTime = match.score?.fullTime || {};
-  const hasScore = fullTime.home != null && fullTime.away != null;
+  const regularTime = match.score?.regularTime || {};
+  const extraTime = match.score?.extraTime || {};
+  const penalties = match.score?.penalties || {};
+  const scoringScore = pickScoringScore(score);
+  const hasScore = scoringScore.home != null && scoringScore.away != null;
+
   return {
     apiMatchId: match.id,
     date: match.utcDate.slice(0, 10),
@@ -69,8 +88,17 @@ function normalizeApiMatch(match) {
     stage: match.stage || '',
     status: mapApiStatus(match.status),
     apiStatus: match.status,
-    scoreHome: hasScore ? fullTime.home : null,
-    scoreAway: hasScore ? fullTime.away : null,
+    scoreHome: hasScore ? scoringScore.home : null,
+    scoreAway: hasScore ? scoringScore.away : null,
+    scoreSource: scoringScore.source,
+    regularTimeScoreHome: regularTime.home ?? null,
+    regularTimeScoreAway: regularTime.away ?? null,
+    fullTimeScoreHome: fullTime.home ?? null,
+    fullTimeScoreAway: fullTime.away ?? null,
+    extraTimeScoreHome: extraTime.home ?? null,
+    extraTimeScoreAway: extraTime.away ?? null,
+    penaltiesScoreHome: penalties.home ?? null,
+    penaltiesScoreAway: penalties.away ?? null,
     winner: match.score?.winner || null,
     isPlayable: true,
     updatedAt: FieldValue.serverTimestamp(),

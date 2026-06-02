@@ -9,6 +9,7 @@ export function buildPoolInviteText({ poolName, inviteCode, appUrl, t }) {
     '',
     t('inviteMessageRulesTitle'),
     `- ${t('inviteRuleMatchDeadline')}`,
+    `- ${t('inviteRuleRegularTime')}`,
     `- ${t('inviteRuleScoring')}`,
     `- ${t('inviteRulePodium')}`,
     `- ${t('inviteRulePrizeTie')}`,

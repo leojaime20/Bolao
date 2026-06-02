@@ -16,6 +16,7 @@ export default function Rules() {
           <li>{t('rulesHow1')}</li>
           <li>{t('rulesHow2')}</li>
           <li>{t('rulesHowDeadline')}</li>
+          <li>{t('rulesRegularTime')}</li>
           <li>{t('rulesHow3')}</li>
         </ul>
       </section>
