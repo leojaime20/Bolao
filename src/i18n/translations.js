@@ -1,7 +1,7 @@
 export const translations = {
   'pt-BR': {
     // Header
-    appTitle: 'MUNDIAL',
+    appTitle: 'COPA',
     appYear: '2026',
 
     // Bottom nav
