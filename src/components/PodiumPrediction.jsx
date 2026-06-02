@@ -43,7 +43,7 @@ export default function PodiumPrediction({ competitionId, competition }) {
   if (!competition?.podiumPredictionEnabled && !savedPrediction) {
     return (
       <div className="podium">
-        <p className="podium__notice">O palpite bonus do podio nao esta habilitado para esta competicao.</p>
+        <p className="podium__notice">O palpite bônus do pódio não está habilitado para esta competição.</p>
       </div>
     );
   }
@@ -58,7 +58,7 @@ export default function PodiumPrediction({ competitionId, competition }) {
 
   const handleSave = async () => {
     if (new Set(Object.values(prediction)).size !== 3 || Object.values(prediction).some((value) => !value)) {
-      setMessage('Selecione tres equipes diferentes.');
+      setMessage('Selecione três seleções diferentes.');
       return;
     }
     setSaving(true);
@@ -82,29 +82,29 @@ export default function PodiumPrediction({ competitionId, competition }) {
         });
       }
       setSavedPrediction({ ...prediction, bonusPoints: null });
-      setMessage('Palpite do podio salvo.');
+      setMessage('Palpite do pódio salvo.');
     } catch (err) {
       console.error('Podium save failed:', err);
-      setMessage('Nao foi possivel salvar. Confirme se o prazo ainda esta aberto.');
+      setMessage('Não foi possível salvar. Confirme se o prazo ainda está aberto.');
     }
     setSaving(false);
   };
 
   const positions = [
-    ['champion', 'Campeao', '10 pts'],
-    ['runnerUp', 'Vice-campeao', '6 pts'],
+    ['champion', 'Campeão', '10 pts'],
+    ['runnerUp', 'Vice-campeão', '6 pts'],
     ['thirdPlace', 'Terceiro colocado', '4 pts'],
   ];
 
   return (
     <div className="podium">
       <div className="podium__heading">
-        <h3>Palpite bonus do podio</h3>
-        <p>Acertos exatos valem 10, 6 e 4 pontos. Os tres exatos recebem +3.</p>
+        <h3>Palpite bônus do pódio</h3>
+        <p>Acertos exatos valem 10, 6 e 4 pontos. Os três exatos recebem +3.</p>
       </div>
       {deadline && (
         <div className={`podium__status ${locked ? 'podium__status--locked' : ''}`}>
-          {locked ? 'Palpites encerrados' : `Aberto ate ${deadline.toLocaleString(t('dateLocale'))}`}
+          {locked ? 'Palpites encerrados' : `Aberto até ${deadline.toLocaleString(t('dateLocale'))}`}
         </div>
       )}
       <div className="podium__fields">
@@ -122,10 +122,10 @@ export default function PodiumPrediction({ competitionId, competition }) {
       </div>
       {!locked && (
         <button className="podium__save" disabled={saving} onClick={handleSave}>
-          {saving ? t('saving') : 'Salvar palpite do podio'}
+          {saving ? t('saving') : 'Salvar palpite do pódio'}
         </button>
       )}
-      {savedPrediction?.bonusPoints != null && <p className="podium__points">Bonus obtido: {savedPrediction.bonusPoints} pts</p>}
+      {savedPrediction?.bonusPoints != null && <p className="podium__points">Bônus obtido: {savedPrediction.bonusPoints} pts</p>}
       {message && <p className="podium__message">{message}</p>}
     </div>
   );

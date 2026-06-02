@@ -9,11 +9,11 @@ export default {
   worldCupGoals: 8,
   internationalTitles: ['Asian Cup 1968', 'Asian Cup 1972', 'Asian Cup 1976'],
   qualification2026: {
-    topScorer: { pt: 'Mehdi Taremi (7 golos)', en: 'Mehdi Taremi (7 goals)' },
+    topScorer: { pt: 'Mehdi Taremi (7 gols)', en: 'Mehdi Taremi (7 goals)' },
     topAssists: 'Saman Ghoddos (3)',
     mostUsed: 'Alireza Beiranvand',
     chancesCreated: 'Alireza Jahanbakhsh (12)',
-    note: { pt: 'Liderou o Grupo A da AFC com 23 pontos. Taremi marcou os dois golos no decisivo empate 2\u20132 contra o Uzbequistão que selou a qualificação. 4.º Mundial consecutivo.', en: 'Topped AFC Group A with 23 points. Taremi scored both goals in the decisive 2\u20132 draw vs Uzbekistan that clinched qualification. 4th consecutive WC.' },
+    note: { pt: 'Liderou o Grupo A da AFC com 23 pontos. Taremi marcou os dois gols no decisivo empate 2\u20132 contra o Uzbequistão que selou a qualificação. 4º Copa do Mundo consecutivo.', en: 'Topped AFC Group A with 23 points. Taremi scored both goals in the decisive 2\u20132 draw vs Uzbekistan that clinched qualification. 4th consecutive WC.' },
   },
   probableSquad: {
     goalkeepers: [
@@ -45,21 +45,21 @@ export default {
     ],
   },
   funFacts: [
-    { emoji: '\ud83d\udcaa', text: { pt: 'O Irão é a seleção asiática com mais sucesso na história da qualificação para Mundiais — esta é a sua 7.ª participação, mais do que qualquer outra nação da AFC.', en: 'Iran are the most successful Asian team in World Cup qualifying history \u2014 this is their 7th appearance, more than any other AFC nation.' } },
-    { emoji: '\u26bd', text: { pt: 'Mehdi Taremi marcou em três Mundiais diferentes e joga pelo gigante europeu Inter de Milão — é o talismã moderno do Irão.', en: 'Mehdi Taremi has scored at three different World Cups and plays for European giants Inter Milan \u2014 he is Iran\'s modern talisman.' } },
+    { emoji: '\ud83d\udcaa', text: { pt: 'O Irã é a seleção asiática com mais sucesso na história da qualificação para Copas do Mundo — esta é a sua 7ª participação, mais do que qualquer outra nação da AFC.', en: 'Iran are the most successful Asian team in World Cup qualifying history \u2014 this is their 7th appearance, more than any other AFC nation.' } },
+    { emoji: '\u26bd', text: { pt: 'Mehdi Taremi marcou em três Copas do Mundo diferentes e joga pelo gigante europeu Inter de Milão — é o talismã moderno do Irã.', en: 'Mehdi Taremi has scored at three different World Cups and plays for European giants Inter Milan \u2014 he is Iran\'s modern talisman.' } },
     { emoji: '\ud83c\udfc6', text: { pt: 'A Team Melli venceu três Taças Asiáticas consecutivas (1968, 1972, 1976) mas não levantou o troféu desde então, apesar de ser candidata perene.', en: 'Team Melli won three consecutive Asian Cups (1968, 1972, 1976) but have not lifted the trophy since, despite being perennial contenders.' } },
-    { emoji: '\ud83c\uddfa\ud83c\uddf8', text: { pt: 'A vitória do Irão por 2\u20131 sobre os EUA em França 1998 é um dos jogos mais politicamente carregados da história dos Mundiais, assistido por milhões em todo o mundo.', en: 'Iran\'s 2\u20131 win over the USA at France 1998 is one of the most politically charged matches in World Cup history, watched by millions worldwide.' } },
+    { emoji: '\ud83c\uddfa\ud83c\uddf8', text: { pt: 'A vitória do Irã por 2\u20131 sobre os EUA em França 1998 é um dos jogos mais politicamente carregados da história das Copas do Mundo, assistido por milhões em todo o mundo.', en: 'Iran\'s 2\u20131 win over the USA at France 1998 is one of the most politically charged matches in World Cup history, watched by millions worldwide.' } },
     { emoji: '\ud83c\udfdf\ufe0f', text: { pt: 'O Estádio Azadi em Teerão, com capacidade para 78.116 espectadores, é um dos maiores estádios de futebol do mundo e uma fortaleza nos jogos de qualificação da Team Melli.', en: 'Azadi Stadium in Tehran, with a capacity of 78,116, is one of the largest football grounds in the world and a fortress for Team Melli qualifiers.' } },
-    { emoji: '\ud83d\udc3a', text: { pt: 'O "Leopardo Persa" Sardar Azmoun marcou mais de 50 golos internacionais e continua a ser uma figura chave ao lado de Taremi no ataque.', en: 'The "Persian Leopard" Sardar Azmoun has scored over 50 international goals and remains a key figure alongside Taremi in attack.' } },
+    { emoji: '\ud83d\udc3a', text: { pt: 'O "Leopardo Persa" Sardar Azmoun marcou mais de 50 gols internacionais e continua a ser uma figura chave ao lado de Taremi no ataque.', en: 'The "Persian Leopard" Sardar Azmoun has scored over 50 international goals and remains a key figure alongside Taremi in attack.' } },
   ],
   timeline: [
     { year: 1968, text: { pt: 'Venceu a primeira de três Taças Asiáticas consecutivas (1968, 1972, 1976).', en: 'Won the first of three consecutive Asian Cups (1968, 1972, 1976).' } },
-    { year: 1978, text: { pt: 'Estreia no Mundial na Argentina — empate 1\u20131 com a Escócia.', en: 'World Cup debut in Argentina \u2014 drew 1\u20131 with Scotland.' } },
-    { year: 1998, text: { pt: 'Regresso ao Mundial após 20 anos — famosa vitória por 2\u20131 sobre os EUA em França.', en: 'Returned to the World Cup after 20 years \u2014 famous 2\u20131 win over the USA in France.' } },
+    { year: 1978, text: { pt: 'Estreia na Copa do Mundo na Argentina — empate 1\u20131 com a Escócia.', en: 'World Cup debut in Argentina \u2014 drew 1\u20131 with Scotland.' } },
+    { year: 1998, text: { pt: 'Retorno à Copa do Mundo após 20 anos — famosa vitória por 2\u20131 sobre os EUA em França.', en: 'Returned to the World Cup after 20 years \u2014 famous 2\u20131 win over the USA in France.' } },
     { year: 2014, text: { pt: 'Segurou a Argentina numa estreita derrota por 1\u20130 no Brasil 2014, merecendo elogios generalizados.', en: 'Held Argentina to a narrow 1\u20130 defeat at Brazil 2014, earning widespread praise.' } },
-    { year: 2018, text: { pt: 'Vitória por 1\u20130 sobre Marrocos na Rússia — a segunda vitória do Irão de sempre num Mundial.', en: 'Beat Morocco 1\u20130 in Russia \u2014 Iran\'s second-ever World Cup victory.' } },
+    { year: 2018, text: { pt: 'Vitória por 1\u20130 sobre Marrocos na Rússia — a segunda vitória do Irã da história numa Copa do Mundo.', en: 'Beat Morocco 1\u20130 in Russia \u2014 Iran\'s second-ever World Cup victory.' } },
     { year: 2022, text: { pt: 'Vitória por 2\u20130 sobre o País de Gales no Qatar, mas eliminado na fase de grupos.', en: 'Beat Wales 2\u20130 in Qatar but exited in the group stage.' } },
-    { year: 2026, text: { pt: '7.ª participação no Mundial — Grupo G com Bélgica, Egito e Nova Zelândia.', en: '7th World Cup appearance \u2014 Group G with Belgium, Egypt, New Zealand.' } },
+    { year: 2026, text: { pt: '7ª participação na Copa do Mundo — Grupo G com Bélgica, Egito e Nova Zelândia.', en: '7th World Cup appearance \u2014 Group G with Belgium, Egypt, New Zealand.' } },
   ],
   sources: [
     { name: 'FIFA', url: 'https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/ir-iran' },

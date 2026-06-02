@@ -146,7 +146,7 @@ export default function ScoresAdmin() {
     setSaving(null);
   };
 
-  if (!loaded) return <div className="admin__section"><p className="admin__empty">A carregar...</p></div>;
+  if (!loaded) return <div className="admin__section"><p className="admin__empty">Carregando...</p></div>;
 
   const finishedCount = Object.keys(matchResults).length;
   const totalCount = ALL_MATCHES.length;
@@ -224,7 +224,7 @@ export default function ScoresAdmin() {
                     onClick={() => handleSaveScore(match)}
                     disabled={isSaving}
                   >
-                    {isSaving ? '...' : isSaved ? '✓' : result ? 'Recalcular' : 'Guardar'}
+                    {isSaving ? '...' : isSaved ? '✓' : result ? 'Recalcular' : 'Salvar'}
                   </button>
                 </td>
               </tr>

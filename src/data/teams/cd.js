@@ -9,11 +9,11 @@ export default {
   worldCupGoals: 0,
   internationalTitles: ['CAN 1968', 'CAN 1974'],
   qualification2026: {
-    topScorer: { pt: 'Cédric Bakambu (4 golos)', en: 'Cédric Bakambu (4 goals)' },
+    topScorer: { pt: 'Cédric Bakambu (4 gols)', en: 'Cédric Bakambu (4 goals)' },
     topAssists: 'Yoane Wissa (3)',
     mostUsed: 'Chancel Mbemba',
     chancesCreated: 'Yoane Wissa (11)',
-    note: { pt: 'Terminou em 2.º no Grupo B da CAF, atrás do Senegal. Derrotou os Camarões e a Nigéria na segunda ronda, e depois venceu a Jamaica 1–0 no play-off intercontinental (Tuanzebe, min. 100).', en: 'Finished 2nd in CAF Group B behind Senegal, beat Cameroon and Nigeria in the second round, then defeated Jamaica 1–0 in the intercontinental playoff (Tuanzebe, 100th min).' },
+    note: { pt: 'Terminou em 2º no Grupo B da CAF, atrás do Senegal. Derrotou os Camarões e a Nigéria na segunda fase, e depois venceu a Jamaica 1–0 no play-off intercontinental (Tuanzebe, min. 100).', en: 'Finished 2nd in CAF Group B behind Senegal, beat Cameroon and Nigeria in the second round, then defeated Jamaica 1–0 in the intercontinental playoff (Tuanzebe, 100th min).' },
   },
   probableSquad: {
     goalkeepers: [
@@ -45,20 +45,20 @@ export default {
     ],
   },
   funFacts: [
-    { emoji: '⏳', text: { pt: 'A RD Congo esperou 52 anos entre participações em Mundiais — a primeira foi como Zaire em 1974, o maior intervalo de qualquer nação regressada.', en: 'DR Congo waited 52 years between World Cup appearances — their first was as Zaire in 1974, making this the longest gap for any returning nation.' } },
-    { emoji: '🦅', text: { pt: 'Conhecidos como "Les Léopards" (Os Leopardos), a equipa retira o seu nome do símbolo nacional do leopardo, representando poder e agilidade.', en: 'Known as "Les Léopards" (The Leopards), the team draws its nickname from the national symbol of the leopard, representing power and agility.' } },
-    { emoji: '🥊', text: { pt: 'Em 1974, o defesa Mwepu Ilunga saiu da barreira e chutou a bola para o campo adversário num livre contra o Brasil — um dos momentos mais bizarros da história dos Mundiais.', en: 'In 1974, defender Mwepu Ilunga infamously ran out of the wall and booted a free kick upfield against Brazil — one of football\'s most bizarre World Cup moments.' } },
-    { emoji: '⏱️', text: { pt: 'O golo de Axel Tuanzebe ao minuto 100 contra a Jamaica garantiu a qualificação — o golo decisivo mais tardio da história das eliminatórias para o Mundial.', en: 'Axel Tuanzebe\'s goal in the 100th minute against Jamaica clinched qualification — the latest decisive goal in World Cup qualifying history.' } },
-    { emoji: '🏆', text: { pt: 'A RD Congo venceu duas CAN consecutivas em 1968 e 1974, e alcançou as meias-finais da CAN em 2023 e 2025 sob Desabre.', en: 'DR Congo won back-to-back AFCONs in 1968 and 1974, and reached the AFCON semi-finals in 2023 and 2025 under Desabre.' } },
+    { emoji: '⏳', text: { pt: 'A RD Congo esperou 52 anos entre participações em Copas do Mundo — a primeira foi como Zaire em 1974, o maior intervalo de qualquer nação regressada.', en: 'DR Congo waited 52 years between World Cup appearances — their first was as Zaire in 1974, making this the longest gap for any returning nation.' } },
+    { emoji: '🦅', text: { pt: 'Conhecidos como "Les Léopards" (Os Leopardos), a seleção retira o seu nome do símbolo nacional do leopardo, representando poder e agilidade.', en: 'Known as "Les Léopards" (The Leopards), the team draws its nickname from the national symbol of the leopard, representing power and agility.' } },
+    { emoji: '🥊', text: { pt: 'Em 1974, o zagueiro Mwepu Ilunga saiu da barreira e chutou a bola para o campo adversário num livre contra o Brasil — um dos momentos mais bizarros da história das Copas do Mundo.', en: 'In 1974, defender Mwepu Ilunga infamously ran out of the wall and booted a free kick upfield against Brazil — one of football\'s most bizarre World Cup moments.' } },
+    { emoji: '⏱️', text: { pt: 'O gol de Axel Tuanzebe aos 100 minutos contra a Jamaica garantiu a qualificação — o gol decisivo mais tardio da história das eliminatórias para a Copa do Mundo.', en: 'Axel Tuanzebe\'s goal in the 100th minute against Jamaica clinched qualification — the latest decisive goal in World Cup qualifying history.' } },
+    { emoji: '🏆', text: { pt: 'A RD Congo venceu duas CAN consecutivas em 1968 e 1974, e alcançou as semifinais da CAN em 2023 e 2025 sob Desabre.', en: 'DR Congo won back-to-back AFCONs in 1968 and 1974, and reached the AFCON semi-finals in 2023 and 2025 under Desabre.' } },
     { emoji: '🇧🇪', text: { pt: 'Vários jogadores-chave (Wan-Bissaka, Tuanzebe, Ngakia) nasceram e cresceram em Inglaterra ou na Bélgica antes de optarem por representar a sua herança congolesa.', en: 'Several key players (Wan-Bissaka, Tuanzebe, Ngakia) were born and raised in England or Belgium before choosing to represent their Congolese heritage.' } },
   ],
   timeline: [
     { year: 1968, text: { pt: 'Venceu a Taça das Nações Africanas pela primeira vez, derrotando o Gana 1–0 na final.', en: 'Won the Africa Cup of Nations for the first time, beating Ghana 1–0 in the final.' } },
-    { year: 1974, text: { pt: 'Como Zaire, tornou-se a primeira equipa da África Subsaariana num Mundial (Alemanha Ocidental).', en: 'As Zaire, became the first Sub-Saharan African team at a World Cup (West Germany).' } },
+    { year: 1974, text: { pt: 'Como Zaire, tornou-se a primeira seleção da África Subsaariana numa Copa do Mundo (Alemanha Ocidental).', en: 'As Zaire, became the first Sub-Saharan African team at a World Cup (West Germany).' } },
     { year: 1997, text: { pt: 'País renomeado de Zaire para RD Congo; a federação de futebol seguiu o exemplo.', en: 'Country renamed from Zaire to DR Congo; football federation followed suit.' } },
-    { year: 2015, text: { pt: '3.º lugar na CAN na Guiné Equatorial.', en: 'Reached AFCON third place in Equatorial Guinea.' } },
+    { year: 2015, text: { pt: '3º lugar na CAN na Guiné Equatorial.', en: 'Reached AFCON third place in Equatorial Guinea.' } },
     { year: 2024, text: { pt: 'Semifinalistas da CAN na Costa do Marfim, sob Sébastien Desabre.', en: 'AFCON semi-finalists in Ivory Coast under Sébastien Desabre.' } },
-    { year: 2026, text: { pt: 'Qualificou-se via play-off intercontinental (vitória 1–0 sobre a Jamaica) — primeiro Mundial em 52 anos. Grupo K com Colômbia, Portugal e Uzbequistão.', en: 'Qualified via intercontinental playoff (beat Jamaica 1–0) — first WC in 52 years. Group K with Colombia, Portugal, Uzbekistan.' } },
+    { year: 2026, text: { pt: 'Classificou-se via play-off intercontinental (vitória 1–0 sobre a Jamaica) — primeira Copa do Mundo em 52 anos. Grupo K com Colômbia, Portugal e Uzbequistão.', en: 'Qualified via intercontinental playoff (beat Jamaica 1–0) — first WC in 52 years. Group K with Colombia, Portugal, Uzbekistan.' } },
   ],
   sources: [
     { name: 'FIFA', url: 'https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/dr-congo' },

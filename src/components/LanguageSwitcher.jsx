@@ -6,10 +6,10 @@ export default function LanguageSwitcher() {
   return (
     <button
       className="lang-switcher"
-      onClick={() => setLang(lang === 'pt-PT' ? 'en-GB' : 'pt-PT')}
+      onClick={() => setLang(lang === 'pt-BR' ? 'en-GB' : 'pt-BR')}
       aria-label="Switch language"
     >
-      {lang === 'pt-PT' ? '🇬🇧' : '🇵🇹'}
+      {lang === 'pt-BR' ? '🇬🇧' : '🇧🇷'}
     </button>
   );
 }

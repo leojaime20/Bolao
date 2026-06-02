@@ -17,7 +17,7 @@ function getFlagUrl(iso) {
 function loc(value, lang) {
   if (!value) return '';
   if (typeof value === 'string') return value;
-  const key = lang === 'pt-PT' ? 'pt' : 'en';
+  const key = lang === 'pt-BR' ? 'pt' : 'en';
   return value[key] ?? value.pt ?? value.en ?? '';
 }
 

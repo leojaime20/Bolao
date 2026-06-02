@@ -17,11 +17,11 @@ export default {
     'CAN 2010',
   ],
   qualification2026: {
-    topScorer: { pt: 'Mohamed Salah (6 golos)', en: 'Mohamed Salah (6 goals)' },
+    topScorer: { pt: 'Mohamed Salah (6 gols)', en: 'Mohamed Salah (6 goals)' },
     topAssists: { pt: 'Mohamed Salah (4 assistências)', en: 'Mohamed Salah (4 assists)' },
     mostUsed: { pt: 'Emmam Ashour, Mohamed Abdel-Moneim, Ahmed Fattouh (10 jogos)', en: 'Emmam Ashour, Mohamed Abdel-Moneim, Ahmed Fattouh (10 games)' },
     chancesCreated: { pt: 'Mohamed Salah (16 ocasiões)', en: 'Mohamed Salah (16 chances)' },
-    note: { pt: 'Venceu o Grupo A da CAF com autoridade: 8V-2E-0D, 20 golos marcados e apenas 2 sofridos. Salah foi decisivo em toda a campanha.', en: 'Won CAF Group A with authority: W8 D2 L0, 20 goals scored and just 2 conceded. Salah was decisive throughout the campaign.' },
+    note: { pt: 'Venceu o Grupo A da CAF com autoridade: 8V-2E-0D, 20 gols marcados e apenas 2 sofridos. Salah foi decisivo em toda a campanha.', en: 'Won CAF Group A with authority: W8 D2 L0, 20 goals scored and just 2 conceded. Salah was decisive throughout the campaign.' },
   },
   probableSquad: {
     goalkeepers: [
@@ -58,20 +58,20 @@ export default {
   },
   funFacts: [
     { emoji: '🏆', text: { pt: 'O Egito é a seleção mais titulada de África com 7 CAN — mais do que qualquer outro país do continente.', en: 'Egypt are the most decorated team in Africa with 7 AFCON titles — more than any other country on the continent.' } },
-    { emoji: '⭐', text: { pt: 'Salah é o melhor marcador de sempre do Egito e carrega as esperanças de 100 milhões de egípcios cada vez que joga.', en: 'Salah is Egypt\'s all-time top scorer and carries the hopes of 100 million Egyptians every time he plays.' } },
-    { emoji: '📅', text: { pt: 'O Egito foi a primeira seleção africana a participar num Mundial — em Itália 1934 — mas depois esperou 56 anos pelo regresso (1990).', en: 'Egypt were the first African team to play in a World Cup — at Italy 1934 — but then waited 56 years for their return (1990).' } },
+    { emoji: '⭐', text: { pt: 'Salah é o artilheiro da história do Egito e carrega as esperanças de 100 milhões de egípcios cada vez que joga.', en: 'Salah is Egypt\'s all-time top scorer and carries the hopes of 100 million Egyptians every time he plays.' } },
+    { emoji: '📅', text: { pt: 'O Egito foi a primeira seleção africana a participar numa Copa do Mundo — em Itália 1934 — mas depois esperou 56 anos pelo retorno (1990).', en: 'Egypt were the first African team to play in a World Cup — at Italy 1934 — but then waited 56 years for their return (1990).' } },
     { emoji: '🏛️', text: { pt: 'Conhecidos como "Os Faraós", o Egito é uma das seleções mais antigas do mundo, tendo jogado o primeiro jogo internacional em 1920.', en: 'Known as "The Pharaohs", Egypt are one of the oldest national teams in the world, having played their first international in 1920.' } },
     { emoji: '🎭', text: { pt: 'O Egito venceu 3 CAN consecutivas (2006, 2008, 2010) — um feito sem paralelo na história do torneio.', en: 'Egypt won 3 consecutive AFCONs (2006, 2008, 2010) — an unparalleled feat in the tournament\'s history.' } },
     { emoji: '🤝', text: { pt: 'Omar Marmoush, revelação do Frankfurt transferido para o Man City, forma com Salah uma das duplas ofensivas mais perigosas de África.', en: 'Omar Marmoush, the Frankfurt revelation who moved to Man City, forms one of Africa\'s most dangerous attacking duos alongside Salah.' } },
   ],
   timeline: [
-    { year: 1934, text: { pt: 'Primeira seleção africana num Mundial — Itália 1934. Derrota 4-2 frente à Hungria.', en: 'First African team at a World Cup — Italy 1934. Lost 4-2 to Hungary.' } },
+    { year: 1934, text: { pt: 'Primeira seleção africana numa Copa do Mundo — Itália 1934. Derrota 4-2 frente à Hungria.', en: 'First African team at a World Cup — Italy 1934. Lost 4-2 to Hungary.' } },
     { year: 1957, text: { pt: 'Venceu a primeira CAN da história, organizada em casa no Sudão.', en: 'Won the first ever AFCON, hosted in Sudan.' } },
-    { year: 1990, text: { pt: 'Regresso ao Mundial após 56 anos. Fase de grupos em Itália, com empates contra Holanda e Irlanda.', en: 'Return to the World Cup after 56 years. Group stage in Italy, with draws against the Netherlands and Ireland.' } },
+    { year: 1990, text: { pt: 'Retorno à Copa do Mundo após 56 anos. Fase de grupos em Itália, com empates contra Holanda e Irlanda.', en: 'Return to the World Cup after 56 years. Group stage in Italy, with draws against the Netherlands and Ireland.' } },
     { year: 2006, text: { pt: 'Início de 3 CAN consecutivas (2006, 2008, 2010). Domínio absoluto do futebol africano.', en: 'Start of 3 consecutive AFCONs (2006, 2008, 2010). Absolute dominance of African football.' } },
-    { year: 2018, text: { pt: 'Regresso ao Mundial após 28 anos. Salah marca 2 golos, mas Egito perde os 3 jogos na Rússia.', en: 'Return to the World Cup after 28 years. Salah scores 2 goals, but Egypt lose all 3 matches in Russia.' } },
-    { year: 2022, text: { pt: 'Finalista da CAN 2022 no Camarões. Derrota nos penáltis frente ao Senegal.', en: 'AFCON 2022 finalists in Cameroon. Lost on penalties to Senegal.' } },
-    { year: 2026, text: { pt: '4.ª participação no Mundial. No Grupo G com Bélgica, Irão e Nova Zelândia. Qualificação dominante na CAF (8V-2E-0D).', en: '4th World Cup appearance. In Group G with Belgium, Iran and New Zealand. Dominant CAF qualification (W8 D2 L0).' } },
+    { year: 2018, text: { pt: 'Retorno à Copa do Mundo após 28 anos. Salah marca 2 gols, mas Egito perde os 3 jogos na Rússia.', en: 'Return to the World Cup after 28 years. Salah scores 2 goals, but Egypt lose all 3 matches in Russia.' } },
+    { year: 2022, text: { pt: 'Finalista da CAN 2022 no Camarões. Derrota nos pênaltis frente ao Senegal.', en: 'AFCON 2022 finalists in Cameroon. Lost on penalties to Senegal.' } },
+    { year: 2026, text: { pt: '4ª participação na Copa do Mundo. No Grupo G com Bélgica, Irã e Nova Zelândia. Qualificação dominante na CAF (8V-2E-0D).', en: '4th World Cup appearance. In Group G with Belgium, Iran and New Zealand. Dominant CAF qualification (W8 D2 L0).' } },
   ],
   sources: [
     { name: 'FIFA', url: 'https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/egypt-team-profile-history' },

@@ -82,16 +82,16 @@ export default function UsersAdmin() {
       setUsers((prev) => prev.filter((u) => u.uid !== uid));
     } catch (err) {
       console.error('Failed to delete user:', err);
-      setError(`Erro ao apagar: ${err.message}`);
+      setError(`Erro ao excluir: ${err.message}`);
     }
     setDeleting(false);
   };
 
-  if (loading) return <div className="admin__section"><p className="admin__empty">A carregar...</p></div>;
+  if (loading) return <div className="admin__section"><p className="admin__empty">Carregando...</p></div>;
 
   return (
     <div className="admin__section">
-      <h3>Utilizadores ({users.length})</h3>
+      <h3>Usuários ({users.length})</h3>
       {error && <p className="modal__error" style={{ marginBottom: 12 }}>{error}</p>}
       <table className="admin__table">
         <thead>
@@ -121,8 +121,8 @@ export default function UsersAdmin() {
               <td>{u.email}</td>
               <td>{u.pools.length}</td>
               <td>{u.loginCount}</td>
-              <td>{u.createdAt?.toDate?.()?.toLocaleDateString('pt-PT') || '—'}</td>
-              <td>{u.lastLoginAt?.toDate?.()?.toLocaleDateString('pt-PT') || '—'}</td>
+              <td>{u.createdAt?.toDate?.()?.toLocaleDateString('pt-BR') || '—'}</td>
+              <td>{u.lastLoginAt?.toDate?.()?.toLocaleDateString('pt-BR') || '—'}</td>
               <td>
                 {u.uid !== ADMIN_UID && (
                   <button
@@ -130,7 +130,7 @@ export default function UsersAdmin() {
                     onClick={() => setConfirm(u)}
                     disabled={!!deleting}
                   >
-                    {deleting === u.uid ? '...' : 'Apagar'}
+                    {deleting === u.uid ? '...' : 'Excluir'}
                   </button>
                 )}
               </td>
@@ -141,9 +141,9 @@ export default function UsersAdmin() {
 
       {confirm && (
         <ConfirmModal
-          title="Apagar utilizador"
-          message={`Apagar "${confirm.nickname}" (${confirm.email})? Remove o utilizador de todos os bolões e apaga as suas apostas. Não pode ser desfeito.`}
-          confirmLabel="Apagar"
+          title="Excluir usuário"
+          message={`Excluir "${confirm.nickname}" (${confirm.email})? Remove o usuário de todos os bolões e exclui seus palpites. Não pode ser desfeito.`}
+          confirmLabel="Excluir"
           onConfirm={() => handleDelete(confirm.uid)}
           onCancel={() => setConfirm(null)}
           danger

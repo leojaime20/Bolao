@@ -13,11 +13,11 @@ export default {
     'CAFA Nations Cup 2025',
   ],
   qualification2026: {
-    topScorer: { pt: 'Eldor Shomurodov (5 golos)', en: 'Eldor Shomurodov (5 goals)' },
+    topScorer: { pt: 'Eldor Shomurodov (5 gols)', en: 'Eldor Shomurodov (5 goals)' },
     topAssists: { pt: 'Khojiakbar Alijonov (3 assistências)', en: 'Khojiakbar Alijonov (3 assists)' },
     mostUsed: 'Abdukodir Khusanov',
     chancesCreated: 'Akmal Mozgovoy',
-    note: { pt: 'Terminou em 2.º no Grupo A da Ronda 3 da AFC com 21 pontos (6V-3E-1D), a dois pontos do Irão. Qualificou-se com uma jornada de antecedência após um empate 0-0 nos EAU. Primeira nação da Ásia Central a chegar a um Mundial.', en: 'Finished 2nd in AFC Round 3 Group A with 21 pts (W6 D3 L1), two points behind Iran. Qualified with one match to spare after a 0-0 draw in the UAE. First Central Asian nation ever to reach the World Cup.' },
+    note: { pt: 'Terminou em 2º no Grupo A da Rodada 3 da AFC com 21 pontos (6V-3E-1D), a dois pontos do Irã. Classificou-se com uma rodada de antecedência após um empate 0-0 nos EAU. Primeira nação da Ásia Central a chegar a uma Copa do Mundo.', en: 'Finished 2nd in AFC Round 3 Group A with 21 pts (W6 D3 L1), two points behind Iran. Qualified with one match to spare after a 0-0 draw in the UAE. First Central Asian nation ever to reach the World Cup.' },
   },
   probableSquad: {
     goalkeepers: [
@@ -49,21 +49,21 @@ export default {
     ],
   },
   funFacts: [
-    { emoji: '🐺', text: { pt: 'Conhecidos como os "Lobos Brancos", o Uzbequistão é a primeira nação da Ásia Central e apenas a terceira ex-república soviética (depois da Rússia e Ucrânia) a qualificar-se para o Mundial.', en: 'Known as the "White Wolves," Uzbekistan are the first Central Asian nation and only the third former Soviet republic (after Russia and Ukraine) to qualify for the World Cup.' } },
+    { emoji: '🐺', text: { pt: 'Conhecidos como os "Lobos Brancos", o Uzbequistão é a primeira nação da Ásia Central e apenas a terceira ex-república soviética (depois da Rússia e Ucrânia) a classificar-se para a Copa do Mundo.', en: 'Known as the "White Wolves," Uzbekistan are the first Central Asian nation and only the third former Soviet republic (after Russia and Ukraine) to qualify for the World Cup.' } },
     { emoji: '🏅', text: { pt: 'Em 1994, apenas dois anos após a independência, o Uzbequistão surpreendeu o mundo do futebol ao conquistar o ouro nos Jogos Asiáticos, batendo a China 4-2 na final.', en: 'In 1994, just two years after independence, Uzbekistan stunned the football world by winning the Asian Games gold medal, beating China 4-2 in the final.' } },
-    { emoji: '🇮🇹', text: { pt: 'O selecionador Fabio Cannavaro é vencedor da Bola de Ouro e campeão mundial em 2006 — agora guia uma nação de 36 milhões na sua estreia num Mundial.', en: 'Head coach Fabio Cannavaro is a Ballon d\'Or winner and 2006 World Cup champion — now guiding a nation of 36 million through their first-ever World Cup.' } },
+    { emoji: '🇮🇹', text: { pt: 'O técnico Fabio Cannavaro é vencedor da Bola de Ouro e campeão mundial em 2006 — agora guia uma nação de 36 milhões na sua estreia numa Copa do Mundo.', en: 'Head coach Fabio Cannavaro is a Ballon d\'Or winner and 2006 World Cup champion — now guiding a nation of 36 million through their first-ever World Cup.' } },
     { emoji: '🧱', text: { pt: 'Abdukodir Khusanov, com apenas 21 anos, passou da liga uzbeque para o Manchester City numa única época — é o primeiro jogador uzbeque na Premier League.', en: 'Abdukodir Khusanov, just 21, went from the Uzbek league to Manchester City in one season — he is the country\'s first-ever Premier League player.' } },
-    { emoji: '⚽', text: { pt: 'Eldor Shomurodov é o melhor marcador de sempre do Uzbequistão com 43 golos — o primeiro uzbeque a jogar pela Roma na Serie A.', en: 'Eldor Shomurodov is Uzbekistan\'s all-time top scorer with 43 goals — the first Uzbek to play for Roma in Serie A.' } },
+    { emoji: '⚽', text: { pt: 'Eldor Shomurodov é o artilheiro da história do Uzbequistão com 43 gols — o primeiro uzbeque a jogar pela Roma na Serie A.', en: 'Eldor Shomurodov is Uzbekistan\'s all-time top scorer with 43 goals — the first Uzbek to play for Roma in Serie A.' } },
     { emoji: '🎉', text: { pt: 'Quando a qualificação foi confirmada após o empate nos EAU, as celebrações explodiram por Tashkent — com milhares a reunirem-se no Parque Alisher Navoi apesar de já ser meia-noite.', en: 'When qualification was confirmed after the UAE draw, celebrations erupted across Tashkent — with thousands gathering at Alisher Navoi Park despite it being past midnight.' } },
   ],
   timeline: [
     { year: 1992, text: { pt: 'Formou-se como seleção independente após a dissolução da União Soviética; juntou-se à FIFA e à AFC em 1994.', en: 'Formed as an independent national team after the dissolution of the Soviet Union; joined FIFA and the AFC in 1994.' } },
     { year: 1994, text: { pt: 'Conquistou o ouro nos Jogos Asiáticos em Hiroshima, batendo a China 4-2 na final — a primeira grande conquista da nova nação.', en: 'Won the Asian Games gold medal in Hiroshima, beating China 4-2 in the final — the first major honour for the new nation.' } },
-    { year: 2011, text: { pt: 'Alcançou as meias-finais da Taça Asiática pela primeira vez, terminando em quarto — o melhor resultado da sua história na competição.', en: 'Reached the AFC Asian Cup semi-finals for the first time, finishing fourth — the best result in their Asian Cup history.' } },
-    { year: 2018, text: { pt: 'Venceu a Taça Asiática Sub-23 da AFC, sinalizando a emergência de uma geração de ouro do talento uzbeque.', en: 'Won the AFC U-23 Asian Cup, signalling the emergence of a golden generation of Uzbek talent.' } },
-    { year: 2025, text: { pt: 'Fez história ao qualificar-se para o Mundial pela primeira vez, garantindo o lugar com um empate nos EAU com uma jornada de antecedência.', en: 'Made history by qualifying for the FIFA World Cup for the first time, clinching their spot with a draw against the UAE with one match to spare.' } },
-    { year: 2025, text: { pt: 'Venceu a CAFA Nations Cup com uma dramática vitória 1-0 sobre o Irão no prolongamento da final.', en: 'Won the CAFA Nations Cup with a dramatic 1-0 extra-time victory over Iran in the final.' } },
-    { year: 2025, text: { pt: 'Nomeou Fabio Cannavaro como selecionador em outubro, trazendo experiência tática de classe mundial para a estreia no Mundial.', en: 'Appointed Fabio Cannavaro as head coach in October, bringing world-class tactical expertise for the World Cup debut.' } },
+    { year: 2011, text: { pt: 'Alcançou as semifinais da Copa da Ásia pela primeira vez, terminando em quarto — o melhor resultado da sua história na competição.', en: 'Reached the AFC Asian Cup semi-finals for the first time, finishing fourth — the best result in their Asian Cup history.' } },
+    { year: 2018, text: { pt: 'Venceu a Copa da Ásia Sub-23 da AFC, sinalizando a emergência de uma geração de ouro do talento uzbeque.', en: 'Won the AFC U-23 Asian Cup, signalling the emergence of a golden generation of Uzbek talent.' } },
+    { year: 2025, text: { pt: 'Fez história ao classificar-se para a Copa do Mundo pela primeira vez, garantindo o lugar com um empate nos EAU com uma rodada de antecedência.', en: 'Made history by qualifying for the FIFA World Cup for the first time, clinching their spot with a draw against the UAE with one match to spare.' } },
+    { year: 2025, text: { pt: 'Venceu a CAFA Nations Cup com uma dramática vitória 1-0 sobre o Irã na prorrogação da final.', en: 'Won the CAFA Nations Cup with a dramatic 1-0 extra-time victory over Iran in the final.' } },
+    { year: 2025, text: { pt: 'Nomeou Fabio Cannavaro como técnico em outubro, trazendo experiência tática de classe mundial para a estreia na Copa do Mundo.', en: 'Appointed Fabio Cannavaro as head coach in October, bringing world-class tactical expertise for the World Cup debut.' } },
   ],
   sources: [
     { name: 'FIFA', url: 'https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/uzbekistan' },

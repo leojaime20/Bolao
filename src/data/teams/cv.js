@@ -11,11 +11,11 @@ export default {
     'Nenhum título sénior de seleções',
   ],
   qualification2026: {
-    topScorer: { pt: 'Dailon Livramento (4 golos)', en: 'Dailon Livramento (4 goals)' },
+    topScorer: { pt: 'Dailon Livramento (4 gols)', en: 'Dailon Livramento (4 goals)' },
     topAssists: 'Ryan Mendes (4)',
     mostUsed: 'Roberto Lopes',
     chancesCreated: 'Ryan Mendes (12)',
-    note: { pt: 'Qualificou como líder do Grupo D da CAF — 7V-2E-1D, 16 golos marcados e 8 sofridos em 10 jogos. Primeira qualificação para um Mundial na história do país.', en: 'Qualified as winners of CAF Group D — W7 D2 L1, 16 goals scored and 8 conceded in 10 matches. First ever World Cup qualification in the country\'s history.' },
+    note: { pt: 'Qualificou como líder do Grupo D da CAF — 7V-2E-1D, 16 gols marcados e 8 sofridos em 10 jogos. Primeira qualificação para uma Copa do Mundo na história do país.', en: 'Qualified as winners of CAF Group D — W7 D2 L1, 16 goals scored and 8 conceded in 10 matches. First ever World Cup qualification in the country\'s history.' },
   },
   probableSquad: {
     goalkeepers: [
@@ -49,21 +49,21 @@ export default {
     ],
   },
   funFacts: [
-    { emoji: '🏝️', text: { pt: 'Cabo Verde tem apenas 600 mil habitantes — será uma das menores nações de sempre a disputar um Mundial.', en: 'Cape Verde has only 600,000 inhabitants — it will be one of the smallest nations ever to compete in a World Cup.' } },
+    { emoji: '🏝️', text: { pt: 'Cabo Verde tem apenas 600 mil habitantes — será uma das menores nações da história a disputar uma Copa do Mundo.', en: 'Cape Verde has only 600,000 inhabitants — it will be one of the smallest nations ever to compete in a World Cup.' } },
     { emoji: '🦈', text: { pt: 'A seleção é apelidada de "Tubarões Azuis" (Blue Sharks), refletindo a identidade marítima do arquipélago.', en: 'The national team is nicknamed "Tubarões Azuis" (Blue Sharks), reflecting the archipelago\'s maritime identity.' } },
     { emoji: '🌍', text: { pt: 'A maioria dos jogadores nasceu na diáspora — Portugal, França e Holanda — e foi recrutada através de redes sociais e contactos da comunidade.', en: 'Most players were born in the diaspora — Portugal, France and the Netherlands — and were recruited through social media and community contacts.' } },
     { emoji: '🇮🇪', text: { pt: 'O capitão Roberto Lopes nasceu na Irlanda e foi contactado pela federação cabo-verdiana via Instagram — tornou-se pilar da defesa.', en: 'Captain Roberto Lopes was born in Ireland and was contacted by the Cape Verdean federation via Instagram — he became a defensive pillar.' } },
-    { emoji: '🎉', text: { pt: 'A qualificação para o Mundial em outubro de 2025, com vitória 3-0 sobre a Eswatini, provocou celebrações históricas nas ilhas e na diáspora.', en: 'Qualifying for the World Cup in October 2025, with a 3-0 win over Eswatini, sparked historic celebrations across the islands and the diaspora.' } },
-    { emoji: '⚽', text: { pt: 'Ryan Mendes, aos 35 anos, é o maior goleador e mais internacional de sempre — veterano que lidera pelo exemplo.', en: 'Ryan Mendes, at 35, is the all-time top scorer and most capped player — a veteran who leads by example.' } },
+    { emoji: '🎉', text: { pt: 'A qualificação para a Copa do Mundo em outubro de 2025, com vitória 3-0 sobre a Eswatini, provocou celebrações históricas nas ilhas e na diáspora.', en: 'Qualifying for the World Cup in October 2025, with a 3-0 win over Eswatini, sparked historic celebrations across the islands and the diaspora.' } },
+    { emoji: '⚽', text: { pt: 'Ryan Mendes, aos 35 anos, é o maior goleador e mais internacional da história — veterano que lidera pelo exemplo.', en: 'Ryan Mendes, at 35, is the all-time top scorer and most capped player — a veteran who leads by example.' } },
   ],
   timeline: [
     { year: 2000, text: { pt: 'Cabo Verde começa a competir regularmente nas eliminatórias africanas, ainda como uma força menor.', en: 'Cape Verde begins competing regularly in African qualifiers, still as a minor force.' } },
-    { year: 2013, text: { pt: 'Primeira participação na CAN (Taça das Nações Africanas) na África do Sul — surpreende ao chegar aos quartos de final.', en: 'First appearance at AFCON (Africa Cup of Nations) in South Africa — surprise run to the quarter-finals.' } },
+    { year: 2013, text: { pt: 'Primeira participação na CAN (Taça das Nações Africanas) na África do Sul — surpreende ao chegar aos quartas de final.', en: 'First appearance at AFCON (Africa Cup of Nations) in South Africa — surprise run to the quarter-finals.' } },
     { year: 2015, text: { pt: 'Segunda participação na CAN na Guiné Equatorial — confirma o crescimento do futebol cabo-verdiano.', en: 'Second AFCON appearance in Equatorial Guinea — confirms the growth of Cape Verdean football.' } },
     { year: 2021, text: { pt: 'Participa na CAN 2021 nos Camarões, consolidando presença regular em competições continentais.', en: 'Participates in AFCON 2021 in Cameroon, consolidating regular presence in continental competitions.' } },
-    { year: 2023, text: { pt: 'CAN 2023 na Costa do Marfim — eliminada nos quartos de final pela África do Sul nos penáltis.', en: 'AFCON 2023 in Ivory Coast — eliminated in the quarter-finals by South Africa on penalties.' } },
-    { year: 2025, text: { pt: 'Qualificação histórica para o Mundial 2026 — lidera o Grupo D da CAF à frente dos Camarões.', en: 'Historic qualification for the 2026 World Cup — tops CAF Group D ahead of Cameroon.' } },
-    { year: 2026, text: { pt: 'Estreia absoluta num Mundial, no Grupo H com Espanha, Uruguai e Arábia Saudita.', en: 'World Cup debut, in Group H with Spain, Uruguay and Saudi Arabia.' } },
+    { year: 2023, text: { pt: 'CAN 2023 na Costa do Marfim — eliminada nos quartas de final pela África do Sul nos pênaltis.', en: 'AFCON 2023 in Ivory Coast — eliminated in the quarter-finals by South Africa on penalties.' } },
+    { year: 2025, text: { pt: 'Qualificação histórica para a Copa do Mundo 2026 — lidera o Grupo D da CAF à frente dos Camarões.', en: 'Historic qualification for the 2026 World Cup — tops CAF Group D ahead of Cameroon.' } },
+    { year: 2026, text: { pt: 'Estreia absoluta numa Copa do Mundo, no Grupo H com Espanha, Uruguai e Arábia Saudita.', en: 'World Cup debut, in Group H with Spain, Uruguay and Saudi Arabia.' } },
   ],
   sources: [
     { name: 'FIFA', url: 'https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/cabo-verde-team-profile-history' },

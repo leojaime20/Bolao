@@ -65,7 +65,7 @@ export default function PoolsAdmin() {
     if (selectedPool?.id === poolId) setSelectedPool(null);
   };
 
-  if (loading) return <div className="admin__section"><p className="admin__empty">A carregar...</p></div>;
+  if (loading) return <div className="admin__section"><p className="admin__empty">Carregando...</p></div>;
 
   if (selectedPool) {
     return (
@@ -79,7 +79,7 @@ export default function PoolsAdmin() {
         </p>
 
         {loadingMembers ? (
-          <p className="admin__empty">A carregar membros...</p>
+          <p className="admin__empty">Carregando membros...</p>
         ) : (
           <table className="admin__table">
             <thead>
@@ -87,7 +87,7 @@ export default function PoolsAdmin() {
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Pontos</th>
-                <th>Apostas</th>
+                <th>Palpites</th>
               </tr>
             </thead>
             <tbody>
@@ -137,13 +137,13 @@ export default function PoolsAdmin() {
               </td>
               <td style={{ fontFamily: "'Oswald', sans-serif", letterSpacing: 1 }}>{pool.inviteCode}</td>
               <td>{pool.members?.length || 0}</td>
-              <td>{pool.createdAt?.toDate?.()?.toLocaleDateString('pt-PT') || '—'}</td>
+              <td>{pool.createdAt?.toDate?.()?.toLocaleDateString('pt-BR') || '—'}</td>
               <td>
                 <button
                   className="admin__btn admin__btn--danger admin__btn--small"
                   onClick={() => setConfirm({ poolId: pool.id, poolName: pool.name })}
                 >
-                  Apagar
+                  Excluir
                 </button>
               </td>
             </tr>
@@ -153,9 +153,9 @@ export default function PoolsAdmin() {
 
       {confirm && (
         <ConfirmModal
-          title="Apagar bolão"
-          message={`Apagar "${confirm.poolName}" e todas as apostas/rankings? Não pode ser desfeito.`}
-          confirmLabel="Apagar"
+          title="Excluir bolão"
+          message={`Excluir "${confirm.poolName}" e todos os palpites/rankings? Não pode ser desfeito.`}
+          confirmLabel="Excluir"
           onConfirm={() => handleDeletePool(confirm.poolId)}
           onCancel={() => setConfirm(null)}
           danger

@@ -11,11 +11,11 @@ export default {
     'Nenhum título sénior de seleções',
   ],
   qualification2026: {
-    topScorer: { pt: 'Ermedin Demirović (4 golos)', en: 'Ermedin Demirović (4 goals)' },
+    topScorer: { pt: 'Ermedin Demirović (4 gols)', en: 'Ermedin Demirović (4 goals)' },
     topAssists: 'Amar Dedić (3)',
     mostUsed: 'Nikola Vasilj',
     chancesCreated: 'Benjamin Tahirović (10)',
-    note: { pt: 'Qualificou via play-off: 2.º lugar no Grupo H da UEFA, depois vitórias nos penáltis contra País de Gales (4-2) e Itália (4-1). A eliminação da Itália chocou o mundo do futebol.', en: 'Qualified via playoff: 2nd in UEFA Group H, then penalty shootout wins over Wales (4-2) and Italy (4-1). Italy\'s elimination shocked the football world.' },
+    note: { pt: 'Qualificou via play-off: 2º lugar no Grupo H da UEFA, depois vitórias nos pênaltis contra País de Gales (4-2) e Itália (4-1). A eliminação da Itália chocou o mundo do futebol.', en: 'Qualified via playoff: 2nd in UEFA Group H, then penalty shootout wins over Wales (4-2) and Italy (4-1). Italy\'s elimination shocked the football world.' },
   },
   probableSquad: {
     goalkeepers: [
@@ -50,20 +50,20 @@ export default {
     ],
   },
   funFacts: [
-    { emoji: '🐉', text: { pt: 'Edin Džeko, aos 40 anos, continua a ser o capitão e melhor marcador de sempre da seleção com mais de 65 golos — uma lenda viva.', en: 'Edin Džeko, at 40, remains captain and all-time top scorer with over 65 goals — a living legend.' } },
-    { emoji: '🇮🇹', text: { pt: 'Eliminou a Itália nos penáltis do play-off para o Mundial 2026 — a terceira vez que a Itália falha um Mundial consecutivamente.', en: 'Eliminated Italy on penalties in the 2026 World Cup playoff — the third time Italy have missed a World Cup in a row.' } },
-    { emoji: '🎯', text: { pt: 'A Bósnia estreou-se em Mundiais apenas em 2014, apesar de ter uma das melhores gerações do futebol europeu nos anos 2000.', en: 'Bosnia only made their World Cup debut in 2014, despite having one of the best European football generations in the 2000s.' } },
-    { emoji: '⚡', text: { pt: 'Sead Kolašinac detém o recorde do autogolo mais rápido da história dos Mundiais — aos 2 minutos e 6 segundos contra a Argentina em 2014.', en: 'Sead Kolašinac holds the record for the fastest own goal in World Cup history — at 2 minutes and 6 seconds against Argentina in 2014.' } },
+    { emoji: '🐉', text: { pt: 'Edin Džeko, aos 40 anos, continua a ser o capitão e artilheiro da história da seleção com mais de 65 gols — uma lenda viva.', en: 'Edin Džeko, at 40, remains captain and all-time top scorer with over 65 goals — a living legend.' } },
+    { emoji: '🇮🇹', text: { pt: 'Eliminou a Itália nos pênaltis do play-off para a Copa do Mundo 2026 — a terceira vez que a Itália falha uma Copa do Mundo consecutivamente.', en: 'Eliminated Italy on penalties in the 2026 World Cup playoff — the third time Italy have missed a World Cup in a row.' } },
+    { emoji: '🎯', text: { pt: 'A Bósnia estreou-se em Copas do Mundo apenas em 2014, apesar de ter uma das melhores gerações do futebol europeu nos anos 2000.', en: 'Bosnia only made their World Cup debut in 2014, despite having one of the best European football generations in the 2000s.' } },
+    { emoji: '⚡', text: { pt: 'Sead Kolašinac detém o recorde do autogolo mais rápido da história das Copas do Mundo — aos 2 minutos e 6 segundos contra a Argentina em 2014.', en: 'Sead Kolašinac holds the record for the fastest own goal in World Cup history — at 2 minutes and 6 seconds against Argentina in 2014.' } },
     { emoji: '🏟️', text: { pt: 'O treinador Sergej Barbarez é um antigo internacional bósnio que brilhou no Hamburgo e na Bayer Leverkusen nos anos 2000.', en: 'Coach Sergej Barbarez is a former Bosnian international who shone at Hamburg and Bayer Leverkusen in the 2000s.' } },
     { emoji: '❤️', text: { pt: 'O futebol bósnio ressurgiu após a guerra dos anos 90 — a seleção representa a unidade de um país com três comunidades étnicas.', en: 'Bosnian football re-emerged after the 1990s war — the national team represents the unity of a country with three ethnic communities.' } },
   ],
   timeline: [
     { year: 1992, text: { pt: 'A Bósnia-Herzegovina torna-se independente e é reconhecida pela FIFA em 1996.', en: 'Bosnia and Herzegovina becomes independent and is recognised by FIFA in 1996.' } },
-    { year: 2010, text: { pt: 'Quase qualificada para o Mundial 2010 — perde o play-off para Portugal de Cristiano Ronaldo.', en: 'Nearly qualified for the 2010 World Cup — lost the playoff to Cristiano Ronaldo\'s Portugal.' } },
-    { year: 2014, text: { pt: 'Estreia histórica no Mundial do Brasil — derrota o Irão 3-1 mas é eliminada na fase de grupos.', en: 'Historic World Cup debut in Brazil — beat Iran 3-1 but eliminated in the group stage.' } },
-    { year: 2024, text: { pt: 'Sergej Barbarez assume como selecionador após uma campanha dececionante no Euro 2024.', en: 'Sergej Barbarez takes over as head coach after a disappointing Euro 2024 campaign.' } },
-    { year: 2025, text: { pt: 'Termina em 2.º no Grupo H das eliminatórias UEFA, atrás da Áustria, e segue para os play-offs.', en: 'Finished 2nd in UEFA qualifying Group H, behind Austria, and advanced to the playoffs.' } },
-    { year: 2026, text: { pt: 'Qualifica-se para o Mundial nos penáltis contra País de Gales e Itália — segundo Mundial da história.', en: 'Qualified for the World Cup on penalties against Wales and Italy — second World Cup in history.' } },
+    { year: 2010, text: { pt: 'Quase qualificada para a Copa do Mundo 2010 — perde o play-off para Portugal de Cristiano Ronaldo.', en: 'Nearly qualified for the 2010 World Cup — lost the playoff to Cristiano Ronaldo\'s Portugal.' } },
+    { year: 2014, text: { pt: 'Estreia histórica na Copa do Mundo do Brasil — derrota o Irã 3-1 mas é eliminada na fase de grupos.', en: 'Historic World Cup debut in Brazil — beat Iran 3-1 but eliminated in the group stage.' } },
+    { year: 2024, text: { pt: 'Sergej Barbarez assume como técnico após uma campanha dececionante no Euro 2024.', en: 'Sergej Barbarez takes over as head coach after a disappointing Euro 2024 campaign.' } },
+    { year: 2025, text: { pt: 'Termina em 2º no Grupo H das eliminatórias UEFA, atrás da Áustria, e segue para os play-offs.', en: 'Finished 2nd in UEFA qualifying Group H, behind Austria, and advanced to the playoffs.' } },
+    { year: 2026, text: { pt: 'Qualifica-se para a Copa do Mundo nos pênaltis contra País de Gales e Itália — segunda Copa do Mundo da história.', en: 'Qualified for the World Cup on penalties against Wales and Italy — second World Cup in history.' } },
   ],
   sources: [
     { name: 'FIFA', url: 'https://www.fifa.com/en/articles/bosnia-herzegovina-qualify' },

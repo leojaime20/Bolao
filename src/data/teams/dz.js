@@ -13,11 +13,11 @@ export default {
     'FIFA Arab Cup 2021',
   ],
   qualification2026: {
-    topScorer: { pt: 'Mohamed Amoura (10 golos)', en: 'Mohamed Amoura (10 goals)' },
+    topScorer: { pt: 'Mohamed Amoura (10 gols)', en: 'Mohamed Amoura (10 goals)' },
     topAssists: 'Riyad Mahrez (5)',
     mostUsed: 'Aïssa Mandi',
     chancesCreated: 'Riyad Mahrez (14)',
-    note: { pt: 'Qualificou como líder do Grupo G da CAF — 8V-1E-1D, 22 golos marcados e 6 sofridos em 10 jogos. Sete pontos à frente do Uganda.', en: 'Qualified as winners of CAF Group G — W8 D1 L1, 22 goals scored and 6 conceded in 10 matches. Seven points ahead of Uganda.' },
+    note: { pt: 'Qualificou como líder do Grupo G da CAF — 8V-1E-1D, 22 gols marcados e 6 sofridos em 10 jogos. Sete pontos à frente do Uganda.', en: 'Qualified as winners of CAF Group G — W8 D1 L1, 22 goals scored and 6 conceded in 10 matches. Seven points ahead of Uganda.' },
   },
   probableSquad: {
     goalkeepers: [
@@ -51,20 +51,20 @@ export default {
   },
   funFacts: [
     { emoji: '🏆', text: { pt: 'A Argélia venceu a CAN 2019 na conquista mais dominante da sua história — invicta em 7 jogos, incluindo uma final memorável contra o Senegal.', en: 'Algeria won AFCON 2019 in the most dominant run in their history — unbeaten in 7 matches, including a memorable final against Senegal.' } },
-    { emoji: '⚽', text: { pt: 'Em 1982 derrotou a Alemanha Ocidental por 2-1 no Mundial — uma das maiores surpresas de sempre, mas foi eliminada pela infame "Vergonha de Gijón".', en: 'In 1982 they beat West Germany 2-1 at the World Cup — one of the biggest upsets ever, but were eliminated by the infamous "Disgrace of Gijón".' } },
+    { emoji: '⚽', text: { pt: 'Em 1982 derrotou a Alemanha Ocidental por 2-1 na Copa do Mundo — uma das maiores surpresas da história, mas foi eliminada pela infame "Vergonha de Gijón".', en: 'In 1982 they beat West Germany 2-1 at the World Cup — one of the biggest upsets ever, but were eliminated by the infamous "Disgrace of Gijón".' } },
     { emoji: '🦊', text: { pt: 'Riyad Mahrez foi peça-chave do Leicester City na conquista improvável da Premier League em 2015/16.', en: 'Riyad Mahrez was a key player in Leicester City\'s unlikely Premier League triumph in 2015/16.' } },
     { emoji: '🌍', text: { pt: 'A seleção é apelidada de "Les Fennecs" (as raposas do deserto), animal símbolo nacional da Argélia.', en: 'The team is nicknamed "Les Fennecs" (the desert foxes), Algeria\'s national animal symbol.' } },
-    { emoji: '🔥', text: { pt: 'Em 2014 marcou 4 golos contra a Coreia do Sul, recorde de golos num único jogo nesse Mundial, e quase eliminou a Alemanha nos oitavos.', en: 'In 2014 they scored 4 goals against South Korea, a record for a single match at that World Cup, and nearly knocked out Germany in the Round of 16.' } },
+    { emoji: '🔥', text: { pt: 'Em 2014 marcou 4 gols contra a Coreia do Sul, recorde de gols num único jogo nesse Copa do Mundo, e quase eliminou a Alemanha nos oitavas.', en: 'In 2014 they scored 4 goals against South Korea, a record for a single match at that World Cup, and nearly knocked out Germany in the Round of 16.' } },
     { emoji: '🇩🇿', text: { pt: 'A maioria dos internacionais argelinos nasceu e cresceu em França, representando a diáspora — incluindo Mahrez, Bennacer e Aït-Nouri.', en: 'Most Algerian internationals were born and raised in France, representing the diaspora — including Mahrez, Bennacer and Aït-Nouri.' } },
   ],
   timeline: [
-    { year: 1982, text: { pt: 'Estreia no Mundial em Espanha — vitória histórica 2-1 sobre a Alemanha Ocidental, eliminada pela controversa "Vergonha de Gijón".', en: 'World Cup debut in Spain — historic 2-1 win over West Germany, eliminated by the controversial "Disgrace of Gijón".' } },
-    { year: 1986, text: { pt: 'Segunda participação no Mundial no México, sem conseguir passar a fase de grupos.', en: 'Second World Cup appearance in Mexico, unable to advance past the group stage.' } },
+    { year: 1982, text: { pt: 'Estreia na Copa do Mundo na Espanha — vitória histórica 2-1 sobre a Alemanha Ocidental, eliminada pela controversa "Vergonha de Gijón".', en: 'World Cup debut in Spain — historic 2-1 win over West Germany, eliminated by the controversial "Disgrace of Gijón".' } },
+    { year: 1986, text: { pt: 'Segunda participação na Copa do Mundo no México, sem conseguir passar a fase de grupos.', en: 'Second World Cup appearance in Mexico, unable to advance past the group stage.' } },
     { year: 1990, text: { pt: 'Conquista da CAN 1990 na Argélia, o primeiro grande título continental.', en: 'Won AFCON 1990 in Algeria, their first major continental title.' } },
-    { year: 2010, text: { pt: 'Regresso ao Mundial na África do Sul após 24 anos de ausência, mas eliminada na fase de grupos.', en: 'Return to the World Cup in South Africa after 24 years away, but eliminated in the group stage.' } },
-    { year: 2014, text: { pt: 'Melhor campanha de sempre no Mundial — alcança os oitavos de final, perdendo 2-1 após prolongamento contra a eventual campeã Alemanha.', en: 'Best-ever World Cup campaign — reached the Round of 16, losing 2-1 after extra time to eventual champions Germany.' } },
-    { year: 2019, text: { pt: 'Conquista da CAN 2019 no Egito sob comando de Djamel Belmadi — Mahrez marca o golo da meia-final de livre direto.', en: 'Won AFCON 2019 in Egypt under Djamel Belmadi — Mahrez scores the semi-final goal from a free kick.' } },
-    { year: 2026, text: { pt: 'Regresso ao Mundial após 12 anos, no Grupo J com Argentina, Áustria e Jordânia.', en: 'Return to the World Cup after 12 years, in Group J with Argentina, Austria and Jordan.' } },
+    { year: 2010, text: { pt: 'Retorno à Copa do Mundo na África do Sul após 24 anos de ausência, mas eliminada na fase de grupos.', en: 'Return to the World Cup in South Africa after 24 years away, but eliminated in the group stage.' } },
+    { year: 2014, text: { pt: 'Melhor campanha da história na Copa do Mundo — alcança os oitavas de final, perdendo 2-1 após prorrogação contra a eventual campeã Alemanha.', en: 'Best-ever World Cup campaign — reached the Round of 16, losing 2-1 after extra time to eventual champions Germany.' } },
+    { year: 2019, text: { pt: 'Conquista da CAN 2019 no Egito sob comando de Djamel Belmadi — Mahrez marca o gol da semifinal em cobrança de falta.', en: 'Won AFCON 2019 in Egypt under Djamel Belmadi — Mahrez scores the semi-final goal from a free kick.' } },
+    { year: 2026, text: { pt: 'Retorno à Copa do Mundo após 12 anos, no Grupo J com Argentina, Áustria e Jordânia.', en: 'Return to the World Cup after 12 years, in Group J with Argentina, Austria and Jordan.' } },
   ],
   sources: [
     { name: 'FIFA', url: 'https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/algeria-team-profile-history' },

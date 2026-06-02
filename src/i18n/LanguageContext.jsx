@@ -5,14 +5,20 @@ const LanguageContext = createContext();
 
 const STORAGE_KEY = 'Copa-Yantai-lang';
 
+function normalizeLang(value) {
+  if (value === 'pt-PT' || value === 'pt' || value === 'pt_BR') return 'pt-BR';
+  if (value && translations[value]) return value;
+  return 'pt-BR';
+}
+
 function getInitialLang() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved && translations[saved]) return saved;
+    if (saved) return normalizeLang(saved);
   } catch {}
   // Default based on browser language
   const browserLang = navigator.language || '';
-  if (browserLang.startsWith('pt')) return 'pt-PT';
+  if (browserLang.startsWith('pt')) return 'pt-BR';
   return 'en-GB';
 }
 
@@ -20,18 +26,24 @@ export function LanguageProvider({ children }) {
   const [lang, setLangState] = useState(getInitialLang);
 
   const setLang = useCallback((newLang) => {
-    setLangState(newLang);
+    const normalizedLang = normalizeLang(newLang);
+    setLangState(normalizedLang);
     try {
-      localStorage.setItem(STORAGE_KEY, newLang);
+      localStorage.setItem(STORAGE_KEY, normalizedLang);
     } catch {}
   }, []);
 
   useEffect(() => {
-    document.documentElement.lang = lang === 'pt-PT' ? 'pt' : 'en';
-  }, [lang]);
+    const normalizedLang = normalizeLang(lang);
+    if (normalizedLang !== lang) {
+      setLang(normalizedLang);
+      return;
+    }
+    document.documentElement.lang = normalizedLang === 'pt-BR' ? 'pt-BR' : 'en';
+  }, [lang, setLang]);
 
   const t = useCallback(
-    (key) => translations[lang]?.[key] ?? translations['pt-PT']?.[key] ?? key,
+    (key) => translations[lang]?.[key] ?? translations['pt-BR']?.[key] ?? key,
     [lang]
   );
 

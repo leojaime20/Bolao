@@ -237,10 +237,10 @@ export default function BackupAdmin() {
         calculationRows: { matches: matchRows, podium: podiumRows, leaderboard: leaderboardRows },
       };
       setBackup(result);
-      setMessage(`Backup preparado: ${matchRows.length} palpites de partidas, ${podiumRows.length} palpites de podio e ${leaderboardRows.length} linhas de ranking.`);
+      setMessage(`Backup preparado: ${matchRows.length} palpites de partidas, ${podiumRows.length} palpites de pódio e ${leaderboardRows.length} linhas de ranking.`);
     } catch (error) {
       console.error('Backup generation failed:', error);
-      setMessage('Falha ao preparar backup. Confirme que esta sessao e do administrador.');
+      setMessage('Falha ao preparar backup. Confirme que esta sessão é do administrador.');
     }
     setLoading(false);
   };
@@ -265,7 +265,7 @@ export default function BackupAdmin() {
     <div className="admin__section backup-admin">
       <h3>Backup e auditoria</h3>
       <p className="backup-admin__description">
-        Gere uma copia completa antes e depois de cada actualizacao de resultados. O JSON preserva
+        Gere uma cópia completa antes e depois de cada atualização de resultados. O JSON preserva
         documentos e regras; os CSVs permitem recalcular ou conferir pontos em uma planilha.
       </p>
       <button className="admin__btn admin__btn--primary" onClick={handleGenerate} disabled={loading}>
@@ -302,7 +302,7 @@ export default function BackupAdmin() {
               'text/csv;charset=utf-8'
             )}
           >
-            Baixar CSV podio
+            Baixar CSV pódio
           </button>
           <button
             className="admin__btn admin__btn--ghost"
@@ -317,7 +317,7 @@ export default function BackupAdmin() {
         </div>
       )}
       <p className="backup-admin__note">
-        O arquivo contem dados dos participantes e deve ser guardado em local restrito.
+        O arquivo contém dados dos participantes e deve ser guardado em local restrito.
       </p>
     </div>
   );

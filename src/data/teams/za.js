@@ -11,11 +11,11 @@ export default {
     'Africa Cup of Nations 1996',
   ],
   qualification2026: {
-    topScorer: { pt: 'Lyle Foster (4 golos)', en: 'Lyle Foster (4 goals)' },
+    topScorer: { pt: 'Lyle Foster (4 gols)', en: 'Lyle Foster (4 goals)' },
     topAssists: { pt: 'Percy Tau (3 assistências)', en: 'Percy Tau (3 assists)' },
     mostUsed: 'Ronwen Williams',
     chancesCreated: 'Themba Zwane',
-    note: { pt: 'Liderou o Grupo C da CAF com 18 pontos apesar de uma dedução de 3 pontos por alinhar um jogador inelegível. Broos reconstruiu o plantel misturando veteranos do Sundowns com jovens baseados na Europa. Primeiro Mundial desde 2010, quando foi anfitrião.', en: 'Topped CAF Group C with 18 pts despite a 3-point deduction for fielding an ineligible player. Broos rebuilt a squad mixing Sundowns veterans with European-based youth. First World Cup since hosting in 2010.' },
+    note: { pt: 'Liderou o Grupo C da CAF com 18 pontos apesar de uma dedução de 3 pontos por alinhar um jogador inelegível. Broos reconstruiu o plantel misturando veteranos do Sundowns com jovens baseados na Europa. Primeira Copa do Mundo desde 2010, quando foi anfitrião.', en: 'Topped CAF Group C with 18 pts despite a 3-point deduction for fielding an ineligible player. Broos rebuilt a squad mixing Sundowns veterans with European-based youth. First World Cup since hosting in 2010.' },
   },
   probableSquad: {
     goalkeepers: [
@@ -49,20 +49,20 @@ export default {
     ],
   },
   funFacts: [
-    { emoji: '🏟️', text: { pt: 'A África do Sul organizou o Mundial de 2010 — a primeira nação africana a fazê-lo — com a icónica vuvuzela a tornar-se um fenómeno cultural global.', en: 'South Africa hosted the 2010 World Cup — the first African nation to do so — with the iconic vuvuzela becoming a global cultural phenomenon.' } },
-    { emoji: '😢', text: { pt: 'Apesar de ser anfitriã em 2010, a Bafana Bafana tornou-se a primeira nação anfitriã na história dos Mundiais a ser eliminada na fase de grupos.', en: 'Despite hosting in 2010, Bafana Bafana became the first host nation in World Cup history to be eliminated in the group stage.' } },
+    { emoji: '🏟️', text: { pt: 'A África do Sul organizou a Copa do Mundo de 2010 — a primeira nação africana a fazê-lo — com a icônica vuvuzela a tornar-se um fenómeno cultural global.', en: 'South Africa hosted the 2010 World Cup — the first African nation to do so — with the iconic vuvuzela becoming a global cultural phenomenon.' } },
+    { emoji: '😢', text: { pt: 'Apesar de ser anfitriã em 2010, a Bafana Bafana tornou-se a primeira nação anfitriã na história das Copas do Mundo a ser eliminada na fase de grupos.', en: 'Despite hosting in 2010, Bafana Bafana became the first host nation in World Cup history to be eliminated in the group stage.' } },
     { emoji: '🏆', text: { pt: 'A África do Sul venceu a CAN 1996 em casa na sua estreia no torneio — uma de apenas duas seleções a vencê-lo na primeira participação.', en: 'South Africa won the 1996 AFCON on home soil in their debut tournament appearance — one of only two nations to win it on their first try.' } },
-    { emoji: '🧤', text: { pt: 'Ronwen Williams venceu o prémio de Futebolista Africano do Ano 2024 da CAF — o primeiro guarda-redes de sempre a receber o galardão, batendo Mohamed Salah e Ademola Lookman.', en: 'Ronwen Williams won the 2024 CAF African Footballer of the Year — the first goalkeeper ever to receive the award, beating Mohamed Salah and Ademola Lookman.' } },
-    { emoji: '🌍', text: { pt: 'A Bafana Bafana abrirá o Mundial 2026 com um jogo contra os co-anfitriões México na Cidade do México a 11 de junho — ecoando a abertura de 2010 contra o mesmo adversário.', en: 'Bafana Bafana will open the 2026 World Cup with a match against co-hosts Mexico in Mexico City on June 11 — echoing their 2010 opener against the same opponent.' } },
-    { emoji: '🔥', text: { pt: 'Hugo Broos, um belga que venceu a CAN 2017 com os Camarões, transformou a Bafana de 75.ª do mundo em verdadeira candidata em menos de três anos.', en: 'Hugo Broos, a Belgian who won the 2017 AFCON with Cameroon, transformed Bafana from 75th in the world to genuine contenders in under three years.' } },
+    { emoji: '🧤', text: { pt: 'Ronwen Williams venceu o prémio de Futebolista Africano do Ano 2024 da CAF — o primeiro goleiro da história a receber o galardão, batendo Mohamed Salah e Ademola Lookman.', en: 'Ronwen Williams won the 2024 CAF African Footballer of the Year — the first goalkeeper ever to receive the award, beating Mohamed Salah and Ademola Lookman.' } },
+    { emoji: '🌍', text: { pt: 'A Bafana Bafana abrirá a Copa do Mundo 2026 com um jogo contra os co-anfitriões México na Cidade do México a 11 de junho — ecoando a abertura de 2010 contra o mesmo adversário.', en: 'Bafana Bafana will open the 2026 World Cup with a match against co-hosts Mexico in Mexico City on June 11 — echoing their 2010 opener against the same opponent.' } },
+    { emoji: '🔥', text: { pt: 'Hugo Broos, um belga que venceu a CAN 2017 com os Camarões, transformou a Bafana de 75ª do mundo em verdadeira candidata em menos de três anos.', en: 'Hugo Broos, a Belgian who won the 2017 AFCON with Cameroon, transformed Bafana from 75th in the world to genuine contenders in under three years.' } },
   ],
   timeline: [
     { year: 1992, text: { pt: 'Readmitida na FIFA após o fim do apartheid; jogou a primeira internacionalização em décadas, empatando 0-0 com os Camarões.', en: 'Readmitted to FIFA after the end of apartheid; played their first international in decades, drawing 0-0 with Cameroon.' } },
     { year: 1996, text: { pt: 'Venceu a Taça das Nações Africanas em casa na sua primeira participação na CAN, batendo a Tunísia 2-0 na final.', en: 'Won the Africa Cup of Nations at home in their first-ever AFCON appearance, beating Tunisia 2-0 in the final.' } },
-    { year: 1998, text: { pt: 'Estreia no Mundial em França, tornando-se a primeira seleção sul-africana a jogar no palco mundial.', en: 'Made their World Cup debut in France, becoming the first South African team to play on the world stage.' } },
-    { year: 2010, text: { pt: 'Organizou o Mundial — Siphiwe Tshabalala marcou um golaço na abertura contra o México, mas a Bafana foi eliminada na fase de grupos.', en: 'Hosted the FIFA World Cup — Siphiwe Tshabalala scored a stunning opening goal against Mexico, but Bafana exited in the group stage.' } },
-    { year: 2024, text: { pt: 'Alcançou as meias-finais da CAN na Costa do Marfim sob Broos, perdendo nos penáltis contra a Nigéria num jogo dramático.', en: 'Reached the AFCON semi-finals in Ivory Coast under Broos, losing on penalties to Nigeria in a dramatic match.' } },
-    { year: 2025, text: { pt: 'Qualificou-se para o Mundial 2026 ao liderar o Grupo C da CAF, pondo fim a 16 anos de ausência do torneio.', en: 'Qualified for the 2026 World Cup by topping CAF Group C, ending a 16-year absence from the tournament.' } },
+    { year: 1998, text: { pt: 'Estreia na Copa do Mundo na França, tornando-se a primeira seleção sul-africana a jogar no palco mundial.', en: 'Made their World Cup debut in France, becoming the first South African team to play on the world stage.' } },
+    { year: 2010, text: { pt: 'Organizou a Copa do Mundo — Siphiwe Tshabalala marcou um golaço na abertura contra o México, mas a Bafana foi eliminada na fase de grupos.', en: 'Hosted the FIFA World Cup — Siphiwe Tshabalala scored a stunning opening goal against Mexico, but Bafana exited in the group stage.' } },
+    { year: 2024, text: { pt: 'Alcançou as semifinais da CAN na Costa do Marfim sob Broos, perdendo nos pênaltis contra a Nigéria num jogo dramático.', en: 'Reached the AFCON semi-finals in Ivory Coast under Broos, losing on penalties to Nigeria in a dramatic match.' } },
+    { year: 2025, text: { pt: 'Classificou-se para a Copa do Mundo 2026 ao liderar o Grupo C da CAF, pondo fim a 16 anos de ausência do torneio.', en: 'Qualified for the 2026 World Cup by topping CAF Group C, ending a 16-year absence from the tournament.' } },
   ],
   sources: [
     { name: 'FIFA', url: 'https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/south-africa' },

@@ -9,11 +9,11 @@ export default {
   worldCupGoals: 0,
   internationalTitles: ['FIFA Arab Cup 2025'],
   qualification2026: {
-    topScorer: { pt: 'Ali Olwan (9 golos)', en: 'Ali Olwan (9 goals)' },
+    topScorer: { pt: 'Ali Olwan (9 gols)', en: 'Ali Olwan (9 goals)' },
     topAssists: 'Musa Al-Taamari (5)',
     mostUsed: 'Yazeed Abu Laila',
     chancesCreated: 'Musa Al-Taamari (16)',
-    note: { pt: 'Qualificado via Terceira Ronda da AFC — terminou em 2.º no Grupo B atrás da Coreia do Sul. Primeira qualificação de sempre para um Mundial.', en: 'Qualified via AFC Third Round — finished 2nd in Group B behind South Korea. First ever World Cup qualification.' },
+    note: { pt: 'Qualificado via Terceira Rodada da AFC — terminou em 2º no Grupo B atrás da Coreia do Sul. Primeira qualificação da história para uma Copa do Mundo.', en: 'Qualified via AFC Third Round — finished 2nd in Group B behind South Korea. First ever World Cup qualification.' },
   },
   probableSquad: {
     goalkeepers: [
@@ -45,19 +45,19 @@ export default {
     ],
   },
   funFacts: [
-    { emoji: '🎉', text: { pt: 'A Jordânia qualificou-se para o Mundial pela primeira vez em 2025 — um momento histórico para a nação de 11 milhões de habitantes.', en: 'Jordan qualified for the World Cup for the first time ever in 2025 — a historic moment for the nation of 11 million.' } },
-    { emoji: '🥈', text: { pt: 'A Jordânia chegou à final da Taça Asiática de 2024 no Qatar, perdendo 3-1 contra os anfitriões — o seu melhor resultado continental de sempre.', en: 'Jordan reached the 2024 AFC Asian Cup final in Qatar, losing 3-1 to hosts Qatar — their best-ever continental result.' } },
+    { emoji: '🎉', text: { pt: 'A Jordânia classificou-se para a Copa do Mundo pela primeira vez em 2025 — um momento histórico para a nação de 11 milhões de habitantes.', en: 'Jordan qualified for the World Cup for the first time ever in 2025 — a historic moment for the nation of 11 million.' } },
+    { emoji: '🥈', text: { pt: 'A Jordânia chegou à final da Copa da Ásia de 2024 no Qatar, perdendo 3-1 contra os anfitriões — o seu melhor resultado continental da história.', en: 'Jordan reached the 2024 AFC Asian Cup final in Qatar, losing 3-1 to hosts Qatar — their best-ever continental result.' } },
     { emoji: '🏆', text: { pt: 'Venceu a Taça Árabe da FIFA em dezembro de 2025, passando invicta pelo torneio e batendo cinco adversários.', en: 'Won the FIFA Arab Cup in December 2025, going unbeaten through the tournament and beating five opponents.' } },
-    { emoji: '🇲🇦', text: { pt: 'O treinador Jamal Sellami é marroquino — foi nomeado em junho de 2024 e transformou a Jordânia numa equipa estruturada e destemida.', en: 'Coach Jamal Sellami is Moroccan — he was appointed in June 2024 and transformed Jordan into a structured, fearless side.' } },
-    { emoji: '⚽', text: { pt: 'Musa Al-Taamari, a estrela criativa da Jordânia, joga na Ligue 1 pelo Montpellier — o jogador tecnicamente mais dotado da equipa.', en: 'Musa Al-Taamari, Jordan\'s creative star, plies his trade in Ligue 1 with Montpellier — the team\'s most technically gifted player.' } },
-    { emoji: '🌟', text: { pt: 'A Jordânia é uma das quatro estreantes no Mundial 2026, ao lado da Indonésia, Turquia e Iraque (que regressa após 40 anos).', en: 'Jordan are one of four World Cup debutants in 2026, alongside Indonesia, Turkey, and Iraq (returning after 40 years).' } },
+    { emoji: '🇲🇦', text: { pt: 'O treinador Jamal Sellami é marroquino — foi nomeado em junho de 2024 e transformou a Jordânia numa seleção estruturada e destemida.', en: 'Coach Jamal Sellami is Moroccan — he was appointed in June 2024 and transformed Jordan into a structured, fearless side.' } },
+    { emoji: '⚽', text: { pt: 'Musa Al-Taamari, a estrela criativa da Jordânia, joga na Ligue 1 pelo Montpellier — o jogador tecnicamente mais dotado da seleção.', en: 'Musa Al-Taamari, Jordan\'s creative star, plies his trade in Ligue 1 with Montpellier — the team\'s most technically gifted player.' } },
+    { emoji: '🌟', text: { pt: 'A Jordânia é uma das quatro estreantes na Copa do Mundo 2026, ao lado da Indonésia, Turquia e Iraque (que regressa após 40 anos).', en: 'Jordan are one of four World Cup debutants in 2026, alongside Indonesia, Turkey, and Iraq (returning after 40 years).' } },
   ],
   timeline: [
-    { year: 2004, text: { pt: 'Chegou aos quartos-de-final da Taça Asiática pela primeira vez.', en: 'Reached the AFC Asian Cup quarter-finals for the first time.' } },
-    { year: 2011, text: { pt: 'Organizou a Taça Asiática — boa prestação em casa com forte apoio dos adeptos.', en: 'Hosted the AFC Asian Cup — performed well on home soil with strong fan support.' } },
-    { year: 2024, text: { pt: 'Chegou à final da Taça Asiática no Qatar — derrota por 3-1 contra os anfitriões.', en: 'Reached the AFC Asian Cup final in Qatar — lost 3-1 to the hosts.' } },
-    { year: 2025, text: { pt: 'Qualificação para o primeiro Mundial de sempre com uma vitória por 3-0 sobre Omã. Venceu a Taça Árabe da FIFA.', en: 'Qualified for first-ever FIFA World Cup with a 3-0 win over Oman. Won the FIFA Arab Cup.' } },
-    { year: 2026, text: { pt: 'Estreia no Mundial — sorteada no Grupo J com Argentina, Argélia e Áustria.', en: 'World Cup debut — drawn in Group J with Argentina, Algeria, and Austria.' } },
+    { year: 2004, text: { pt: 'Chegou aos quartos-de-final da Copa da Ásia pela primeira vez.', en: 'Reached the AFC Asian Cup quarter-finals for the first time.' } },
+    { year: 2011, text: { pt: 'Organizou a Copa da Ásia — boa desempenho em casa com forte apoio dos torcedores.', en: 'Hosted the AFC Asian Cup — performed well on home soil with strong fan support.' } },
+    { year: 2024, text: { pt: 'Chegou à final da Copa da Ásia no Qatar — derrota por 3-1 contra os anfitriões.', en: 'Reached the AFC Asian Cup final in Qatar — lost 3-1 to the hosts.' } },
+    { year: 2025, text: { pt: 'Qualificação para a primeira Copa da história com uma vitória por 3-0 sobre Omã. Venceu a Taça Árabe da FIFA.', en: 'Qualified for first-ever FIFA World Cup with a 3-0 win over Oman. Won the FIFA Arab Cup.' } },
+    { year: 2026, text: { pt: 'Estreia na Copa do Mundo — sorteada no Grupo J com Argentina, Argélia e Áustria.', en: 'World Cup debut — drawn in Group J with Argentina, Algeria, and Austria.' } },
   ],
   sources: [
     { name: 'FIFA', url: 'https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/jordan' },

@@ -16,7 +16,7 @@ export function useCompetition(competitionId) {
         setCompetition(snap.exists() ? { id: snap.id, ...snap.data() } : null);
         setError('');
       },
-      () => setError('Nao foi possivel carregar a competicao.')
+      () => setError('Não foi possível carregar a competição.')
     );
     const unsubMatches = onSnapshot(
       query(collection(db, 'competitions', competitionId, 'matches'), orderBy('kickoffAt')),
@@ -26,7 +26,7 @@ export function useCompetition(competitionId) {
         setLoading(false);
       },
       () => {
-        setError('Nao foi possivel carregar os jogos.');
+        setError('Não foi possível carregar os jogos.');
         setLoading(false);
       }
     );

@@ -58,10 +58,10 @@ export default function CompetitionsAdmin() {
           await setDoc(reference, data);
         }
       }
-      setMessage('Competicoes verificadas no Firestore. Configuracoes existentes foram preservadas.');
+      setMessage('Competições verificadas no Firestore. Configurações existentes foram preservadas.');
     } catch (err) {
       console.error(err);
-      setMessage('Falha ao configurar competicoes. Publique as regras do Firestore primeiro.');
+      setMessage('Falha ao configurar competições. Publique as regras do Firestore primeiro.');
     }
     setWorking('');
   };
@@ -75,7 +75,7 @@ export default function CompetitionsAdmin() {
   const handleTogglePodium = async (competition) => {
     const deadline = competition.podiumPredictionDeadline?.toDate?.();
     if (deadline && new Date() >= deadline) {
-      setMessage('O bonus nao pode ser alterado depois do inicio da Copa.');
+      setMessage('O bônus não pode ser alterado depois do início da Copa.');
       return;
     }
     await updateDoc(doc(db, 'competitions', competition.id), {
@@ -85,7 +85,7 @@ export default function CompetitionsAdmin() {
 
   const handleOfficialPodium = async () => {
     if (new Set(Object.values(podium)).size !== 3 || Object.values(podium).some((value) => !value)) {
-      setMessage('Selecione tres equipes diferentes para o podio oficial.');
+      setMessage('Selecione três seleções diferentes para o pódio oficial.');
       return;
     }
     setWorking('podium');
@@ -94,31 +94,31 @@ export default function CompetitionsAdmin() {
         officialPodium: podium,
         officialPodiumAt: serverTimestamp(),
       });
-      setMessage('Podio oficial salvo. Execute Atualizar resultados no GitHub para recalcular o bonus.');
+      setMessage('Pódio oficial salvo. Execute Atualizar resultados no GitHub para recalcular o bônus.');
     } catch (err) {
       console.error(err);
-      setMessage('Falha ao salvar podio oficial.');
+      setMessage('Falha ao salvar pódio oficial.');
     }
     setWorking('');
   };
 
-  if (loading) return <div className="admin__section"><p className="admin__empty">A carregar...</p></div>;
+  if (loading) return <div className="admin__section"><p className="admin__empty">Carregando...</p></div>;
 
   return (
     <div className="admin__section competition-admin">
       <div className="competition-admin__title">
-        <h3>Competicoes e sincronizacao</h3>
+        <h3>Competições e sincronização</h3>
         <button className="admin__btn admin__btn--ghost" onClick={handleInitialize} disabled={working === 'initialize'}>
-          {working === 'initialize' ? '...' : 'Configurar padroes'}
+          {working === 'initialize' ? '...' : 'Configurar padrões'}
         </button>
       </div>
       <p className="competition-admin__message">
-        A coleta e executada manualmente no GitHub Actions.{' '}
+        A coleta é executada manualmente no GitHub Actions.{' '}
         <a href={ACTIONS_URL} target="_blank" rel="noreferrer">Abrir Atualizar resultados</a>
       </p>
       {message && <p className="competition-admin__message">{message}</p>}
       {competitions.length === 0 ? (
-        <p className="admin__empty">Nenhuma competicao configurada. Clique em Configurar padroes.</p>
+        <p className="admin__empty">Nenhuma competição configurada. Clique em Configurar padrões.</p>
       ) : competitions.map((competition) => {
         const deadline = competition.podiumPredictionDeadline?.toDate?.();
         const podiumLocked = deadline ? new Date() >= deadline : false;
@@ -135,10 +135,10 @@ export default function CompetitionsAdmin() {
             </div>
             <div className="competition-admin__meta">
               <span>Jogos importados: <strong>{competition.lastSyncMatchCount ?? '-'}</strong></span>
-              <span>Status: <strong>{competition.lastSyncStatus || 'ainda nao executado'}</strong></span>
+              <span>Status: <strong>{competition.lastSyncStatus || 'ainda não executado'}</strong></span>
               <label className="competition-admin__toggle">
                 <input type="checkbox" checked={Boolean(competition.syncEnabled)} onChange={() => handleToggleSync(competition)} />
-                Incluir na opcao atualizar todos
+                Incluir na opção atualizar todos
               </label>
             </div>
             {competition.id === 'worldcup-2026' && (
@@ -151,16 +151,16 @@ export default function CompetitionsAdmin() {
                       onChange={() => handleTogglePodium(competition)}
                       disabled={podiumLocked}
                     />
-                    Bonus do podio ativo
+                    Bônus do pódio ativo
                   </label>
                   <span>Prazo: <strong>{deadline?.toLocaleString('pt-BR') || '-'}</strong></span>
-                  <span>{podiumLocked ? 'Configuracao bloqueada' : 'Configuracao editavel'}</span>
+                  <span>{podiumLocked ? 'Configuração bloqueada' : 'Configuração editável'}</span>
                 </div>
-                <h5>Podio oficial para apuracao final</h5>
+                <h5>Pódio oficial para apuração final</h5>
                 <div className="competition-admin__selects">
                   {[
-                    ['champion', 'Campeao'],
-                    ['runnerUp', 'Vice-campeao'],
+                    ['champion', 'Campeão'],
+                    ['runnerUp', 'Vice-campeão'],
                     ['thirdPlace', 'Terceiro'],
                   ].map(([key, label]) => (
                     <label key={key}>
@@ -172,7 +172,7 @@ export default function CompetitionsAdmin() {
                     </label>
                   ))}
                   <button className="admin__btn admin__btn--primary" onClick={handleOfficialPodium} disabled={working === 'podium'}>
-                    Salvar podio oficial
+                    Salvar pódio oficial
                   </button>
                 </div>
               </div>

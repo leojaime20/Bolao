@@ -48,11 +48,11 @@ export default function ErrorLogs() {
     setLogs((prev) => prev.map((l) => l.id === logId ? { ...l, resolved: true } : l));
   };
 
-  if (loading) return <div className="admin__section"><p className="admin__empty">A carregar...</p></div>;
+  if (loading) return <div className="admin__section"><p className="admin__empty">Carregando...</p></div>;
 
   return (
     <div className="admin__section">
-      <h3>Error Logs ({logs.length})</h3>
+      <h3>Logs de erro ({logs.length})</h3>
 
       <div className="admin__filter">
         {TYPES.map((t) => (
@@ -67,7 +67,7 @@ export default function ErrorLogs() {
       </div>
 
       {logs.length === 0 ? (
-        <p className="admin__empty">Sem erros registados.</p>
+        <p className="admin__empty">Sem erros registrados.</p>
       ) : (
         <table className="admin__table">
           <thead>
@@ -75,9 +75,9 @@ export default function ErrorLogs() {
               <th>Data</th>
               <th>Tipo</th>
               <th>Mensagem</th>
-              <th>User</th>
+              <th>Usuário</th>
               <th>Rota</th>
-              <th>Estado</th>
+              <th>Status</th>
               <th></th>
             </tr>
           </thead>
@@ -85,7 +85,7 @@ export default function ErrorLogs() {
             {logs.map((log) => (
               <tr key={log.id}>
                 <td style={{ whiteSpace: 'nowrap' }}>
-                  {log.timestamp?.toDate?.()?.toLocaleString('pt-PT', {
+                  {log.timestamp?.toDate?.()?.toLocaleString('pt-BR', {
                     day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit',
                   }) || '—'}
                 </td>
@@ -98,7 +98,7 @@ export default function ErrorLogs() {
                 <td style={{ fontSize: 11, fontFamily: 'monospace' }}>
                   {log.userId ? log.userId.slice(0, 8) + '...' : '—'}
                 </td>
-                <td>{log.route || '���'}</td>
+                <td>{log.route || '—'}</td>
                 <td>
                   {log.resolved ? (
                     <span className="admin__badge admin__badge--resolved">Resolvido</span>

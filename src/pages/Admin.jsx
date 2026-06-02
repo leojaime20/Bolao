@@ -8,13 +8,13 @@ import CompetitionsAdmin from './admin/CompetitionsAdmin';
 import BackupAdmin from './admin/BackupAdmin';
 
 const SECTIONS = [
-  { id: 'overview', label: 'Overview', icon: '📊' },
+  { id: 'overview', label: 'Visão geral', icon: '📊' },
   { id: 'pools', label: 'Bolões', icon: '🎱' },
-  { id: 'users', label: 'Utilizadores', icon: '👥' },
+  { id: 'users', label: 'Usuários', icon: '👥' },
   { id: 'scores', label: 'Resultados antigos', icon: '⚽' },
   { id: 'competitions', label: 'Competições', icon: '🏆' },
   { id: 'backup', label: 'Backup', icon: '⬇️' },
-  { id: 'logs', label: 'Error Logs', icon: '🐛' },
+  { id: 'logs', label: 'Logs de erro', icon: '🐛' },
 ];
 
 export default function Admin() {

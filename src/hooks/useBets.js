@@ -36,7 +36,7 @@ export function useBets(competitionId = null) {
   const saveBet = useCallback(
     async (matchId, predictedScoreA, predictedScoreB) => {
       if (!user || !activePoolId) {
-        logError('NO_POOL', 'Tentativa de guardar aposta sem pool activo', {
+        logError('NO_POOL', 'Tentativa de salvar palpite sem bolão ativo', {
           userId: user?.uid,
           matchId,
         });

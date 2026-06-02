@@ -12,7 +12,7 @@ function formatDate(date, kickoff, offsetHours = -1) {
 }
 
 function buildEvent({ title, date, kickoff, duration = 120 }) {
-  const uid = `Copa-Yantai-${date}-${kickoff.replace(':', '')}@mundial2026`;
+  const uid = `Copa-Yantai-${date}-${kickoff.replace(':', '')}@copa2026`;
   const dtStart = formatDate(date, kickoff, -1);
   const end = new Date(
     Date.UTC(
@@ -60,7 +60,7 @@ export function downloadICS({ title, date, kickoff, duration = 120 }) {
   const ics = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//Mundial 2026//EN',
+    'PRODID:-//Copa 2026//EN',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     buildEvent({ title, date, kickoff, duration }),
@@ -75,13 +75,13 @@ export function downloadICS({ title, date, kickoff, duration = 120 }) {
  * @param {Array} matches - Array of { title, date, kickoff, duration }
  * @param {string} filename - Output filename
  */
-export function downloadMultipleICS(matches, filename = 'Mundial_2026.ics') {
+export function downloadMultipleICS(matches, filename = 'Copa_2026.ics') {
   const events = matches.map((m) => buildEvent(m)).join('\r\n');
 
   const ics = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//Mundial 2026//EN',
+    'PRODID:-//Copa 2026//EN',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     events,

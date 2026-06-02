@@ -9,11 +9,11 @@ export default {
   worldCupGoals: 0,
   internationalTitles: ['Caribbean Cup 2017'],
   qualification2026: {
-    topScorer: { pt: 'Gervane Kastaneer (5 golos)', en: 'Gervane Kastaneer (5 goals)' },
+    topScorer: { pt: 'Gervane Kastaneer (5 gols)', en: 'Gervane Kastaneer (5 goals)' },
     topAssists: 'Leandro Bacuna (3)',
     mostUsed: 'Leandro Bacuna',
     chancesCreated: 'Juninho Bacuna (12)',
-    note: { pt: 'Liderou o Grupo B da CONCACAF de forma invicta (3V-3E) com 12 pontos. A menor nação por população (~156 mil) a qualificar-se para um Mundial.', en: 'Topped CONCACAF Group B unbeaten (W3 D3) with 12 points. Smallest nation by population (~156k) ever to qualify for a World Cup.' },
+    note: { pt: 'Liderou o Grupo B da CONCACAF de forma invicta (3V-3E) com 12 pontos. A menor nação por população (~156 mil) a classificar-se para uma Copa do Mundo.', en: 'Topped CONCACAF Group B unbeaten (W3 D3) with 12 points. Smallest nation by population (~156k) ever to qualify for a World Cup.' },
   },
   probableSquad: {
     goalkeepers: [
@@ -46,21 +46,21 @@ export default {
     ],
   },
   funFacts: [
-    { emoji: '🏖️', text: { pt: 'Curaçao é uma ilha caribenha com apenas 156 mil habitantes — a menor nação de sempre a qualificar-se para um Mundial da FIFA, superando a Islândia (350 mil em 2018).', en: 'Curaçao is a Caribbean island of just 156,000 people — the smallest nation ever to qualify for a FIFA World Cup, surpassing Iceland (350k in 2018).' } },
+    { emoji: '🏖️', text: { pt: 'Curaçao é uma ilha caribenha com apenas 156 mil habitantes — a menor nação da história a classificar-se para uma Copa do Mundo da FIFA, superando a Islândia (350 mil em 2018).', en: 'Curaçao is a Caribbean island of just 156,000 people — the smallest nation ever to qualify for a FIFA World Cup, surpassing Iceland (350k in 2018).' } },
     { emoji: '🇳🇱', text: { pt: 'Quase todo o plantel joga na Eredivisie holandesa ou em ligas inferiores dos Países Baixos, graças ao estatuto de Curaçao como país constituinte do Reino dos Países Baixos.', en: 'Nearly the entire squad plays in the Dutch Eredivisie or lower Dutch leagues, thanks to Curaçao\'s status as a constituent country of the Kingdom of the Netherlands.' } },
     { emoji: '👴', text: { pt: 'Dick Advocaat, de 78 anos, foi o arquiteto da qualificação histórica, mas resignou em fevereiro de 2026 por razões familiares. Fred Rutten assumiu o comando para a fase final.', en: 'Dick Advocaat, 78, masterminded their historic qualification but resigned in February 2026 for family reasons. Fred Rutten stepped in to lead them at the finals.' } },
-    { emoji: '👨‍👨‍👦‍👦', text: { pt: 'O capitão Leandro Bacuna e o médio Juninho Bacuna são primos que escolheram representar Curaçao em vez dos Países Baixos.', en: 'Captain Leandro Bacuna and midfielder Juninho Bacuna are cousins who both chose Curaçao over the Netherlands.' } },
+    { emoji: '👨‍👨‍👦‍👦', text: { pt: 'O capitão Leandro Bacuna e o meio-campista Juninho Bacuna são primos que escolheram representar Curaçao em vez dos Países Baixos.', en: 'Captain Leandro Bacuna and midfielder Juninho Bacuna are cousins who both chose Curaçao over the Netherlands.' } },
     { emoji: '⚽', text: { pt: 'Como Antilhas Neerlandesas (1958–2010), a federação de futebol existiu muito antes da nação atual — a FIFA reconhece Curaçao como sucessor direto.', en: 'As the Netherlands Antilles (1958–2010), the football federation existed long before the current nation — FIFA recognises Curaçao as the direct successor.' } },
-    { emoji: '🌟', text: { pt: 'Qualificaram-se de forma invicta na ronda final da CONCACAF, incluindo uma goleada de 7–0 às Bermudas e um histórico empate sem golos na Jamaica que selou a qualificação.', en: 'They qualified unbeaten in the final CONCACAF round, including a 7–0 demolition of Bermuda and a historic goalless draw in Jamaica that sealed the deal.' } },
+    { emoji: '🌟', text: { pt: 'Classificaram-se de forma invicta na fase final da CONCACAF, incluindo uma goleada de 7–0 às Bermudas e um histórico empate sem gols na Jamaica que selou a qualificação.', en: 'They qualified unbeaten in the final CONCACAF round, including a 7–0 demolition of Bermuda and a historic goalless draw in Jamaica that sealed the deal.' } },
   ],
   timeline: [
     { year: 1924, text: { pt: 'Primeiro jogo internacional como Território de Curaçao — vitória 4–0 sobre Aruba.', en: 'First international match as Territory of Curaçao — a 4–0 win over Aruba.' } },
     { year: 1958, text: { pt: 'Federação de futebol reconstituída como Antilhas Neerlandesas após alterações constitucionais.', en: 'Football federation reconstituted as Netherlands Antilles after constitutional changes.' } },
     { year: 2010, text: { pt: 'As Antilhas Neerlandesas foram dissolvidas; Curaçao tornou-se um país constituinte separado e assumiu a filiação à FIFA.', en: 'Netherlands Antilles dissolved; Curaçao became a separate constituent country and took over FIFA membership.' } },
     { year: 2017, text: { pt: 'Conquistou a Caribbean Cup, o primeiro grande troféu regional.', en: 'Won the Caribbean Cup, their first major regional trophy.' } },
-    { year: 2019, text: { pt: 'Alcançou os quartos de final da Gold Cup da CONCACAF pela primeira vez.', en: 'Reached the CONCACAF Gold Cup quarter-finals for the first time.' } },
-    { year: 2025, text: { pt: 'Qualificação para o Mundial 2026 — a menor nação de sempre a alcançar a fase final.', en: 'Qualified for the 2026 World Cup — smallest nation ever to reach the finals.' } },
-    { year: 2026, text: { pt: 'Estreia no Mundial — Grupo E com Alemanha, Costa do Marfim e Equador.', en: 'World Cup debut — Group E with Germany, Ivory Coast, Ecuador.' } },
+    { year: 2019, text: { pt: 'Alcançou os quartas de final da Gold Cup da CONCACAF pela primeira vez.', en: 'Reached the CONCACAF Gold Cup quarter-finals for the first time.' } },
+    { year: 2025, text: { pt: 'Qualificação para a Copa do Mundo 2026 — a menor nação da história a alcançar a fase final.', en: 'Qualified for the 2026 World Cup — smallest nation ever to reach the finals.' } },
+    { year: 2026, text: { pt: 'Estreia na Copa do Mundo — Grupo E com Alemanha, Costa do Marfim e Equador.', en: 'World Cup debut — Group E with Germany, Ivory Coast, Ecuador.' } },
   ],
   sources: [
     { name: 'FIFA', url: 'https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/curacao' },

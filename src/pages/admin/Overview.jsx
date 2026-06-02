@@ -90,30 +90,30 @@ export default function Overview() {
   }, [live, fetchMetrics]);
 
   const cards = [
-    { label: 'Utilizadores', value: metrics.totalUsers },
+    { label: 'Usuários', value: metrics.totalUsers },
     { label: 'Bolões', value: metrics.totalPools },
-    { label: 'Apostas', value: metrics.totalBets },
-    { label: 'Apostas (24h)', value: metrics.bets24h },
-    { label: 'Erros por resolver', value: metrics.unresolvedErrors },
+    { label: 'Palpites', value: metrics.totalBets },
+    { label: 'Palpites (24h)', value: metrics.bets24h },
+    { label: 'Erros pendentes', value: metrics.unresolvedErrors },
   ];
 
   return (
     <div className="admin__section">
-      <h3>Overview</h3>
+      <h3>Visão geral</h3>
 
       <div className="admin__realtime-toggle">
         <span className={`admin__realtime-dot ${live ? '' : 'admin__realtime-dot--off'}`} />
-        <span>{live ? 'Tempo real activo' : 'Tempo real pausado'}</span>
+        <span>{live ? 'Tempo real ativo' : 'Tempo real pausado'}</span>
         <button
           className="admin__btn admin__btn--ghost admin__btn--small"
           onClick={() => setLive(!live)}
         >
-          {live ? 'Parar' : 'Activar'}
+          {live ? 'Parar' : 'Ativar'}
         </button>
       </div>
 
       {loading ? (
-        <p className="admin__empty">A carregar métricas...</p>
+        <p className="admin__empty">Carregando métricas...</p>
       ) : (
         <div className="admin__cards">
           {cards.map((c) => (

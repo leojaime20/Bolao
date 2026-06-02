@@ -45,7 +45,7 @@ export default function MyMatches({ favorites, onNavigate, onTeamClick }) {
         kickoff: m.kickoff_bst,
       };
     });
-    downloadMultipleICS(events, 'Mundial_2026_Jogos.ics');
+    downloadMultipleICS(events, 'Copa_2026_Jogos.ics');
   }, [groupMatches, t]);
 
   if (favorites.length === 0) {

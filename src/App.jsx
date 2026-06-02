@@ -27,11 +27,11 @@ const SPLASH_DURATION_MS = 6000;
 const SPLASH_INTROS = [
   {
     src: splashNoComplaints,
-    alt: 'Nao vou reclamar durante a Copa',
+    alt: 'Não vou reclamar durante a Copa',
   },
   {
     src: splashForbiddenNe,
-    alt: 'Sabe que e proibido ne',
+    alt: 'Sabe que é proibido, né',
   },
 ];
 
@@ -109,7 +109,7 @@ export default function App() {
     return (
       <div className="app">
         <div className="app-loading">
-          <img src={logo} alt="Mundial 2026" className="app-header__logo" />
+          <img src={logo} alt="Copa 2026" className="app-header__logo" />
           <span className="app-loading__text">⚽</span>
         </div>
       </div>
