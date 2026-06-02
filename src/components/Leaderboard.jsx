@@ -22,8 +22,7 @@ export default function Leaderboard({ competitionId = null }) {
         .map((d) => ({ uid: d.id, ...d.data() }))
         .sort((a, b) => {
           if (b.totalPoints !== a.totalPoints) return b.totalPoints - a.totalPoints;
-          if (b.exactResultsCount !== a.exactResultsCount) return b.exactResultsCount - a.exactResultsCount;
-          return b.correctOutcomeCount - a.correctOutcomeCount;
+          return 0;
         });
       setEntries(list);
       setLoading(false);
@@ -52,7 +51,7 @@ export default function Leaderboard({ competitionId = null }) {
         <span className="leaderboard__col leaderboard__col--pos">#</span>
         <span className="leaderboard__col leaderboard__col--name">{t('player')}</span>
         <span className="leaderboard__col leaderboard__col--score">Jogos</span>
-        <span className="leaderboard__col leaderboard__col--score">Bonus</span>
+        <span className="leaderboard__col leaderboard__col--score">Bônus</span>
         <span className="leaderboard__col leaderboard__col--pts">Total</span>
       </div>
 

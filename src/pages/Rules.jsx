@@ -15,6 +15,7 @@ export default function Rules() {
         <ul className="rules__list">
           <li>{t('rulesHow1')}</li>
           <li>{t('rulesHow2')}</li>
+          <li>{t('rulesHowDeadline')}</li>
           <li>{t('rulesHow3')}</li>
         </ul>
       </section>
@@ -82,16 +83,8 @@ export default function Rules() {
         <ul className="rules__list">
           <li>{t('rulesRanking1')}</li>
           <li>{t('rulesRanking2')}</li>
+          <li>{t('rulesRanking3')}</li>
         </ul>
-      </section>
-
-      <section className="rules__section">
-        <h3 className="rules__section-title">{t('rulesTiebreak')}</h3>
-        <ol className="rules__list rules__list--ordered">
-          <li>{t('rulesTie1')}</li>
-          <li>{t('rulesTie2')}</li>
-          <li>{t('rulesTie3')}</li>
-        </ol>
       </section>
     </div>
   );
