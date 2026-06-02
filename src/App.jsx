@@ -19,16 +19,31 @@ import { useAuth } from './hooks/useAuth';
 import Admin from './pages/Admin';
 import logo from './assets/logo.png';
 import headerBanner from './assets/header-banner.jpg';
-import splashIntro from './assets/splash-intro.jpg';
+import splashNoComplaints from './assets/splash-intro.jpg';
+import splashForbiddenNe from './assets/splash-proibido-ne.jpg';
 import './App.css';
 
 const ADMIN_UID = import.meta.env.VITE_ADMIN_UID;
+const SPLASH_DURATION_MS = 6000;
+const SPLASH_INTROS = [
+  {
+    src: splashNoComplaints,
+    alt: 'Nao vou reclamar durante a Copa',
+  },
+  {
+    src: splashForbiddenNe,
+    alt: 'Sabe que e proibido ne',
+  },
+];
 
 export default function App() {
   const [page, setPage] = useState('schedule');
   const [animClass, setAnimClass] = useState('page-enter-done');
   const [teamIso, setTeamIso] = useState(null);
   const [showSplash, setShowSplash] = useState(true);
+  const [splashIntro] = useState(() =>
+    SPLASH_INTROS[Math.floor(Math.random() * SPLASH_INTROS.length)]
+  );
   const prevPageRef = useRef('schedule');
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
   const { user, profile, loading } = useAuth();
@@ -87,7 +102,7 @@ export default function App() {
     if (loading) return undefined;
     const timer = window.setTimeout(() => {
       setShowSplash(false);
-    }, 3000);
+    }, SPLASH_DURATION_MS);
     return () => window.clearTimeout(timer);
   }, [loading]);
 
@@ -108,8 +123,8 @@ export default function App() {
         <div className="splash-intro" aria-label="Abertura Copa-Yantai">
           <div className="splash-intro__glow" />
           <img
-            src={splashIntro}
-            alt="Nao vou reclamar durante a Copa"
+            src={splashIntro.src}
+            alt={splashIntro.alt}
             className="splash-intro__image"
           />
         </div>
