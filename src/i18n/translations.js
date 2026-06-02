@@ -8,7 +8,6 @@ export const translations = {
     navSchedule: 'Calendário',
     navMyMatches: 'Os Meus Jogos',
     navTeams: 'Equipas',
-    navLibertadores: 'Sandbox',
 
     // Match card
     nextMatch: 'Próximo Jogo',
@@ -141,11 +140,6 @@ export const translations = {
     you: 'tu',
     leaderboardEmpty: 'Ainda não há apostas no teu grupo.',
     matchTeamsPending: 'Palpites abrem quando os times estiverem definidos.',
-    libertadoresTitle: 'Sandbox Ranking',
-    libertadoresDesc: 'Competição fictícia para testar palpites, resultados e ranking antes do Mundial.',
-    sandboxIntro: 'Teste multi-fase com 16 jogos de grupos, quartas, semifinais, terceiro lugar e final. Cada fase nova fica aberta por 1 hora para palpites.',
-    sandboxPoolRequired: 'Usa o pool de teste',
-    sandboxPoolRequiredDesc: 'Este teste fica separado do bolão oficial. Selecciona o pool de teste quando ele aparecer na lista.',
     refresh: 'Atualizar',
 
     // Auth
@@ -308,7 +302,6 @@ export const translations = {
     navSchedule: 'Schedule',
     navMyMatches: 'My Matches',
     navTeams: 'Teams',
-    navLibertadores: 'Sandbox',
 
     // Match card
     nextMatch: 'Next Match',
@@ -441,11 +434,6 @@ export const translations = {
     you: 'you',
     leaderboardEmpty: 'No bets in your group yet.',
     matchTeamsPending: 'Predictions open once both teams are confirmed.',
-    libertadoresTitle: 'Ranking Sandbox',
-    libertadoresDesc: 'A fictional competition for testing bets, results, and rankings before the World Cup.',
-    sandboxIntro: 'Multi-phase test with 16 group matches, quarterfinals, semifinals, third place and final. Each new phase stays open for predictions for 1 hour.',
-    sandboxPoolRequired: 'Use the test pool',
-    sandboxPoolRequiredDesc: 'This test is separate from the official pool. Select the test pool when it appears in the list.',
     refresh: 'Refresh',
 
     // Auth

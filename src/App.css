@@ -1440,58 +1440,6 @@
   color: var(--gray);
 }
 
-/* ===== LIBERTADORES TEST ===== */
-.libertadores__intro {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 16px 0;
-}
-
-.libertadores__intro h2 {
-  font-family: 'Oswald', sans-serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--dark);
-  margin: 0 0 4px;
-}
-
-.libertadores__intro p {
-  font-size: 13px;
-  color: var(--gray);
-  line-height: 1.4;
-  margin: 0;
-}
-
-.libertadores__admin {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 16px 0;
-  flex-wrap: wrap;
-}
-
-.libertadores__sync-message {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--green-dark);
-}
-
-.libertadores__notice {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 10px 12px;
-  margin: 0 16px 12px;
-  border: 1px solid rgba(255, 198, 50, 0.5);
-  border-radius: 8px;
-  background: rgba(255, 226, 122, 0.28);
-  color: var(--dark);
-  font-size: 12px;
-  line-height: 1.35;
-}
-
 /* ===== POOL SELECTOR ===== */
 .pool-selector {
   position: relative;

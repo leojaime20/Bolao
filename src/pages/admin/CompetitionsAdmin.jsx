@@ -15,18 +15,6 @@ import schedule from '../../data/schedule.json';
 const ACTIONS_URL = 'https://github.com/leojaime20/Bolao/actions/workflows/sync-results.yml';
 const DEFAULT_COMPETITIONS = [
   {
-    id: 'ranking-sandbox',
-    name: 'Sandbox Ranking',
-    apiProvider: 'manual',
-    apiCode: null,
-    season: 2026,
-    enabled: true,
-    syncEnabled: false,
-    isTest: true,
-    podiumPredictionEnabled: false,
-    sortOrder: 1,
-  },
-  {
     id: 'worldcup-2026',
     name: 'Copa do Mundo 2026',
     apiProvider: 'football-data',
@@ -37,7 +25,7 @@ const DEFAULT_COMPETITIONS = [
     isTest: false,
     podiumPredictionEnabled: true,
     podiumPredictionDeadline: Timestamp.fromDate(new Date('2026-06-11T19:00:00Z')),
-    sortOrder: 2,
+    sortOrder: 1,
   },
 ];
 

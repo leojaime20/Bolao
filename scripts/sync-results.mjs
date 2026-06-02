@@ -10,17 +10,6 @@ const requestedCompetition = process.argv[2] && process.argv[2] !== 'all'
   : null;
 
 const DEFAULT_COMPETITIONS = {
-  'ranking-sandbox': {
-    name: 'Sandbox Ranking',
-    apiProvider: 'manual',
-    apiCode: null,
-    season: 2026,
-    enabled: true,
-    syncEnabled: false,
-    isTest: true,
-    podiumPredictionEnabled: false,
-    sortOrder: 1,
-  },
   'worldcup-2026': {
     name: 'Copa do Mundo 2026',
     apiProvider: 'football-data',
@@ -31,7 +20,7 @@ const DEFAULT_COMPETITIONS = {
     isTest: false,
     podiumPredictionEnabled: true,
     podiumPredictionDeadline: Timestamp.fromDate(new Date('2026-06-11T19:00:00Z')),
-    sortOrder: 2,
+    sortOrder: 1,
   },
 };
 

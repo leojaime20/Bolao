@@ -81,9 +81,6 @@ export default function HamburgerMenu({ onNavigate }) {
           <button className="hamburger-menu__item" onClick={() => handleNav('rules')}>
             <span>📋</span> {t('navRules')}
           </button>
-          <button className="hamburger-menu__item" onClick={() => handleNav('libertadores')}>
-            <span>🧪</span> {t('navLibertadores')}
-          </button>
           <button className="hamburger-menu__item" onClick={() => handleNav('missing')}>
             <span>👻</span> {t('navMissing')}
           </button>

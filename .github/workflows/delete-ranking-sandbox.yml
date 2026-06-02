@@ -1,4 +1,4 @@
-name: Score ranking sandbox
+name: Delete ranking sandbox
 
 on:
   workflow_dispatch:
@@ -10,8 +10,8 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  score:
-    name: Lancar resultados ficticios
+  delete:
+    name: Apagar sandbox
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -20,8 +20,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm run test:scoring
-      - name: Fechar sandbox e recalcular ranking
-        run: node scripts/score-ranking-sandbox.mjs
+      - name: Apagar pool e competicao de teste
+        run: node scripts/delete-ranking-sandbox.mjs
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
