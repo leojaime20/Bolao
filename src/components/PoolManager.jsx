@@ -200,7 +200,9 @@ export default function PoolManager() {
                 <div className="pool-manager__item-info">
                   <span className="pool-manager__item-name">{pool.name}</span>
                   <span className="pool-manager__item-code">
-                    {pool.inviteCode} · {pool.members?.length || 0} {t('poolMemberCount')}
+                    {pool.inviteCode} · {pool.isPublic
+                      ? t('poolPublicAccess')
+                      : `${pool.members?.length || 0} ${t('poolMemberCount')}`}
                   </span>
                 </div>
                 {pool.id === activePoolId && <span className="pool-manager__item-check">✓</span>}

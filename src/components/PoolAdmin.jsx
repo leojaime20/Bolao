@@ -272,7 +272,7 @@ export default function PoolAdmin({ poolId, onBack }) {
           </>
         )}
 
-        {!isAdmin && (
+        {!isAdmin && !pool.isPublic && (
           <button
             className="pool-admin__action pool-admin__action--danger"
             onClick={() => setConfirm({ type: 'leave' })}

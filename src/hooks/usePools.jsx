@@ -43,7 +43,7 @@ export function PoolProvider({ children }) {
   });
   const [loading, setLoading] = useState(true);
 
-  // Load user's pools
+  // Load public pools plus any legacy pools the user joined by code.
   useEffect(() => {
     if (!user || !profile) {
       setLoading(false);
@@ -52,23 +52,25 @@ export function PoolProvider({ children }) {
 
     let cancelled = false;
     (async () => {
-      const poolIds = profile.pools || [];
-      if (poolIds.length === 0) {
-        setPools([]);
-        setActivePoolId(null);
-        setLoading(false);
-        return;
-      }
+      const loadedById = new Map();
+      const publicPoolsQuery = query(collection(db, 'pools'), where('isPublic', '==', true));
+      const publicPoolsSnap = await getDocs(publicPoolsQuery);
 
-      const loaded = [];
+      publicPoolsSnap.docs.forEach((poolDoc) => {
+        loadedById.set(poolDoc.id, { id: poolDoc.id, ...poolDoc.data() });
+      });
+
+      const poolIds = profile.pools || [];
       for (const pid of poolIds) {
+        if (loadedById.has(pid)) continue;
         const snap = await getDoc(doc(db, 'pools', pid));
-        if (snap.exists()) {
-          loaded.push({ id: snap.id, ...snap.data() });
-        }
+        if (snap.exists()) loadedById.set(snap.id, { id: snap.id, ...snap.data() });
       }
       if (cancelled) return;
 
+      const loaded = Array.from(loadedById.values()).sort((a, b) =>
+        (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' })
+      );
       setPools(loaded);
 
       // Validate active pool
@@ -119,6 +121,7 @@ export function PoolProvider({ children }) {
       createdAt: serverTimestamp(),
       inviteCode,
       members: [user.uid],
+      isPublic: true,
     };
 
     await setDoc(poolRef, poolData);
@@ -156,8 +159,24 @@ export function PoolProvider({ children }) {
     const poolDoc = snap.docs[0];
     const poolData = poolDoc.data();
 
-    // Already a member?
-    if (poolData.members?.includes(user.uid)) {
+    // Already visible or already a member?
+    if (poolData.isPublic || poolData.members?.includes(user.uid)) {
+      await setDoc(doc(db, 'pools', poolDoc.id, 'leaderboard', user.uid), {
+        nickname: profile?.nickname || '',
+        matchPoints: 0,
+        bonusPoints: 0,
+        totalPoints: 0,
+        exactResultsCount: 0,
+        correctOutcomeCount: 0,
+      }, { merge: true });
+      await updateDoc(doc(db, 'users', user.uid), {
+        pools: arrayUnion(poolDoc.id),
+      });
+      setPools((prev) => (
+        prev.some((p) => p.id === poolDoc.id)
+          ? prev
+          : [...prev, { id: poolDoc.id, ...poolData }]
+      ));
       selectPool(poolDoc.id);
       return { id: poolDoc.id, ...poolData };
     }
@@ -181,7 +200,11 @@ export function PoolProvider({ children }) {
     });
 
     const joinedPool = { id: poolDoc.id, ...poolData };
-    setPools((prev) => [...prev, joinedPool]);
+    setPools((prev) => (
+      prev.some((p) => p.id === poolDoc.id)
+        ? prev
+        : [...prev, joinedPool]
+    ));
     selectPool(poolDoc.id);
 
     return joinedPool;
@@ -255,6 +278,10 @@ export function PoolProvider({ children }) {
     if (!user) return;
     const pool = pools.find((p) => p.id === poolId);
     if (!pool) return;
+    if (pool.isPublic) {
+      selectPool(null);
+      return;
+    }
     if (pool.createdBy === user.uid) throw new Error('OWNER_CANNOT_LEAVE');
 
     await updateDoc(doc(db, 'pools', poolId), {

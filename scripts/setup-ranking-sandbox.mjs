@@ -74,6 +74,7 @@ await poolRef.set({
   createdAt: FieldValue.serverTimestamp(),
   updatedAt: FieldValue.serverTimestamp(),
   isSandbox: true,
+  isPublic: true,
 }, { merge: true });
 
 await poolRef.collection('leaderboard').doc(adminUid).set({

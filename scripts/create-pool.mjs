@@ -45,6 +45,7 @@ await db.runTransaction(async (transaction) => {
     createdBy: adminUid,
     inviteCode,
     members: FieldValue.arrayUnion(adminUid),
+    isPublic: true,
     createdAt: FieldValue.serverTimestamp(),
     updatedAt: FieldValue.serverTimestamp(),
   }, { merge: true });
