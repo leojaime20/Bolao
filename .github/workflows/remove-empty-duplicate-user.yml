@@ -1,0 +1,34 @@
+name: Remover usuario duplicado vazio
+
+on:
+  workflow_dispatch:
+    inputs:
+      nickname:
+        description: "Nome exato duplicado"
+        required: true
+      confirmation:
+        description: "Deixe vazio para simular; use REMOVE_EMPTY para excluir"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  cleanup:
+    name: Auditar e remover duplicado vazio
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verificar duplicados
+        run: node scripts/remove-empty-duplicate-user.mjs "${{ inputs.nickname }}" "${{ inputs.confirmation }}"
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
