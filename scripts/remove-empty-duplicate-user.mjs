@@ -30,7 +30,7 @@ function normalizeName(value) {
     .toLocaleUpperCase('pt-BR');
 }
 
-async function inspectUser(uid, userData, pools) {
+async function inspectUser(uid, userData, pools, globalCompetitionIds) {
   const locations = [];
   let bets = 0;
   let podiumPredictions = 0;
@@ -45,9 +45,13 @@ async function inspectUser(uid, userData, pools) {
     const legacyBets = await root.collection('bets').where('userId', '==', uid).get();
     bets += legacyBets.size;
 
-    const competitions = await root.collection('competitions').get();
-    for (const competitionDoc of competitions.docs) {
-      const competitionRoot = competitionDoc.ref;
+    const poolCompetitions = await root.collection('competitions').get();
+    const competitionIds = new Set([
+      ...globalCompetitionIds,
+      ...poolCompetitions.docs.map((doc) => doc.id),
+    ]);
+    for (const competitionId of competitionIds) {
+      const competitionRoot = root.collection('competitions').doc(competitionId);
       const [competitionBets, podium, leaderboard] = await Promise.all([
         competitionRoot.collection('bets').where('userId', '==', uid).get(),
         competitionRoot.collection('podiumPredictions').where('userId', '==', uid).get(),
@@ -60,7 +64,7 @@ async function inspectUser(uid, userData, pools) {
       if (competitionBets.size || podium.size) {
         locations.push({
           poolId: poolDoc.id,
-          competitionId: competitionDoc.id,
+          competitionId,
           bets: competitionBets.size,
           podiumPredictions: podium.size,
         });
@@ -94,7 +98,7 @@ async function inspectUser(uid, userData, pools) {
   };
 }
 
-async function removeEmptyUser(candidate, pools) {
+async function removeEmptyUser(candidate, pools, globalCompetitionIds) {
   const batch = db.batch();
   batch.delete(db.collection('users').doc(candidate.uid));
 
@@ -102,9 +106,19 @@ async function removeEmptyUser(candidate, pools) {
     batch.set(poolDoc.ref, { members: FieldValue.arrayRemove(candidate.uid) }, { merge: true });
     batch.delete(poolDoc.ref.collection('leaderboard').doc(candidate.uid));
 
-    const competitions = await poolDoc.ref.collection('competitions').get();
-    for (const competitionDoc of competitions.docs) {
-      batch.delete(competitionDoc.ref.collection('leaderboard').doc(candidate.uid));
+    const poolCompetitions = await poolDoc.ref.collection('competitions').get();
+    const competitionIds = new Set([
+      ...globalCompetitionIds,
+      ...poolCompetitions.docs.map((doc) => doc.id),
+    ]);
+    for (const competitionId of competitionIds) {
+      batch.delete(
+        poolDoc.ref
+          .collection('competitions')
+          .doc(competitionId)
+          .collection('leaderboard')
+          .doc(candidate.uid)
+      );
     }
   }
 
@@ -118,10 +132,12 @@ async function removeEmptyUser(candidate, pools) {
 }
 
 const normalizedRequestedName = normalizeName(requestedNickname);
-const [usersSnapshot, poolsSnapshot] = await Promise.all([
+const [usersSnapshot, poolsSnapshot, competitionsSnapshot] = await Promise.all([
   db.collection('users').get(),
   db.collection('pools').get(),
+  db.collection('competitions').get(),
 ]);
+const globalCompetitionIds = competitionsSnapshot.docs.map((doc) => doc.id);
 const matchingUsers = usersSnapshot.docs.filter(
   (userDoc) => normalizeName(userDoc.data().nickname) === normalizedRequestedName
 );
@@ -134,7 +150,9 @@ if (matchingUsers.length !== 2) {
 
 const inspected = [];
 for (const userDoc of matchingUsers) {
-  inspected.push(await inspectUser(userDoc.id, userDoc.data(), poolsSnapshot.docs));
+  inspected.push(
+    await inspectUser(userDoc.id, userDoc.data(), poolsSnapshot.docs, globalCompetitionIds)
+  );
 }
 
 console.log(JSON.stringify({ mode: shouldDelete ? 'delete' : 'dry-run', users: inspected }, null, 2));
@@ -153,5 +171,5 @@ if (!shouldDelete) {
   process.exit(0);
 }
 
-await removeEmptyUser(emptyUsers[0], poolsSnapshot.docs);
+await removeEmptyUser(emptyUsers[0], poolsSnapshot.docs, globalCompetitionIds);
 console.log(`Removed empty duplicate UID ${emptyUsers[0].uid}. Preserved UID ${usersWithData[0].uid}.`);
