@@ -1,0 +1,45 @@
+name: Migrar conta guest
+
+on:
+  workflow_dispatch:
+    inputs:
+      guest_uid:
+        description: "UID antigo da conta guest"
+        required: true
+      target_email:
+        description: "Email da nova conta autenticada"
+        required: true
+      confirmation:
+        description: "Deixe vazio para simular; use MIGRATE_GUEST para executar"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  migrate:
+    name: Auditar e migrar conta
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Auditar ou migrar
+        run: node scripts/migrate-guest-account.mjs "${{ inputs.guest_uid }}" "${{ inputs.target_email }}" "${{ inputs.confirmation }}"
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      - name: Salvar backup da migracao
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: guest-migration-backup-${{ github.run_id }}
+          path: guest-migration-backup.json
+          if-no-files-found: ignore
+          retention-days: 90
