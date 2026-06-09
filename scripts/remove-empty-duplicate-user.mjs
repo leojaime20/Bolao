@@ -34,21 +34,28 @@ async function inspectUser(uid, userData, pools) {
   const locations = [];
   let bets = 0;
   let podiumPredictions = 0;
+  let poolMemberships = 0;
+  let leaderboardEntries = 0;
 
   for (const poolDoc of pools) {
     const root = poolDoc.ref;
+    if ((poolDoc.data().members || []).includes(uid)) poolMemberships += 1;
+    if ((await root.collection('leaderboard').doc(uid).get()).exists) leaderboardEntries += 1;
+
     const legacyBets = await root.collection('bets').where('userId', '==', uid).get();
     bets += legacyBets.size;
 
     const competitions = await root.collection('competitions').get();
     for (const competitionDoc of competitions.docs) {
       const competitionRoot = competitionDoc.ref;
-      const [competitionBets, podium] = await Promise.all([
+      const [competitionBets, podium, leaderboard] = await Promise.all([
         competitionRoot.collection('bets').where('userId', '==', uid).get(),
         competitionRoot.collection('podiumPredictions').where('userId', '==', uid).get(),
+        competitionRoot.collection('leaderboard').doc(uid).get(),
       ]);
       bets += competitionBets.size;
       podiumPredictions += podium.size;
+      if (leaderboard.exists) leaderboardEntries += 1;
 
       if (competitionBets.size || podium.size) {
         locations.push({
@@ -61,10 +68,25 @@ async function inspectUser(uid, userData, pools) {
     }
   }
 
+  let authUser = null;
+  try {
+    authUser = await auth.getUser(uid);
+  } catch (error) {
+    if (error.code !== 'auth/user-not-found') throw error;
+  }
+
   return {
     uid,
     nickname: userData.nickname || '',
     email: userData.email || '',
+    createdAt: userData.createdAt?.toDate?.().toISOString() || null,
+    lastLoginAt: userData.lastLoginAt?.toDate?.().toISOString() || null,
+    loginCount: userData.loginCount || 0,
+    authCreatedAt: authUser?.metadata.creationTime || null,
+    authLastSignInAt: authUser?.metadata.lastSignInTime || null,
+    authProviders: authUser?.providerData.map((provider) => provider.providerId) || [],
+    poolMemberships,
+    leaderboardEntries,
     bets,
     podiumPredictions,
     hasPredictionData: bets > 0 || podiumPredictions > 0,
