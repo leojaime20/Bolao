@@ -1316,40 +1316,16 @@
   transform: scale(0.97);
 }
 
-.auth-screen__divider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--gray);
-  font-size: 13px;
-}
-
-.auth-screen__divider::before,
-.auth-screen__divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.08);
-}
-
-.auth-screen__guest-btn {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  background: transparent;
-  color: var(--green-dark);
-  border: none;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
 .auth-screen__hint {
   font-size: 12px;
   color: var(--gray);
   text-align: center;
   margin-top: -8px;
+}
+
+.auth-screen__hint--protect {
+  margin-top: 0;
+  line-height: 1.45;
 }
 
 .auth-screen__toggle {

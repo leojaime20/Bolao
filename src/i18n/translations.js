@@ -144,8 +144,13 @@ export const translations = {
 
     // Auth
     authSubtitle: 'Entre para salvar seus palpites em todos os dispositivos.',
+    authRequired: 'Para participar e salvar seus palpites, entre com Google ou crie uma conta com email e senha.',
+    authProtectTitle: 'Proteja seus palpites',
+    authProtectExisting: 'Seus palpites deste aparelho continuam salvos. Associe uma conta para não perder o acesso.',
+    authProtectHint: 'Faça a associação neste mesmo navegador. Seu usuário e seus palpites serão mantidos.',
     authGoogle: 'Entrar com Google',
     authEmail: 'Entrar com email',
+    authLinkEmail: 'Associar email e senha',
     authGuest: 'Continuar como convidado',
     authGuestHint: 'Como convidado, seus dados ficam apenas neste dispositivo.',
     authOr: 'ou',
@@ -160,6 +165,7 @@ export const translations = {
     authGoogleError: 'Erro ao entrar com Google. Tente novamente.',
     authPopupBlocked: 'Permita os pop-ups no seu navegador para entrar com Google.',
     authUnauthorizedDomain: 'Este domínio não está autorizado para login. Contate o admin.',
+    authAccountAlreadyExists: 'Este login já pertence a outra conta. Seus palpites continuam seguros neste aparelho; procure o administrador para fazer a migração.',
     authEmailError: 'Erro ao entrar. Tente novamente.',
     authHasAccount: 'Já tem conta? Entre aqui',
     authNoAccount: 'Não tem conta? Crie aqui',
@@ -454,8 +460,13 @@ export const translations = {
 
     // Auth
     authSubtitle: 'Sign in to keep your bets across all your devices.',
+    authRequired: 'To participate and save your predictions, sign in with Google or create an account with email and password.',
+    authProtectTitle: 'Protect your predictions',
+    authProtectExisting: 'Your predictions on this device are still saved. Link an account so you do not lose access.',
+    authProtectHint: 'Link the account in this same browser. Your user and predictions will be preserved.',
     authGoogle: 'Sign in with Google',
     authEmail: 'Sign in with email',
+    authLinkEmail: 'Link email and password',
     authGuest: 'Continue as guest',
     authGuestHint: 'As a guest, your data stays on this device only.',
     authOr: 'or',
@@ -470,6 +481,7 @@ export const translations = {
     authGoogleError: 'Error signing in with Google. Try again.',
     authPopupBlocked: 'Allow popups in your browser to sign in with Google.',
     authUnauthorizedDomain: 'This domain is not authorized for sign-in. Contact the admin.',
+    authAccountAlreadyExists: 'This login already belongs to another account. Your predictions remain safe on this device; contact the administrator to migrate them.',
     authEmailError: 'Error signing in. Try again.',
     authHasAccount: 'Already have an account? Sign in',
     authNoAccount: "Don't have an account? Sign up",

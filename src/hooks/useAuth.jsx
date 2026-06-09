@@ -8,9 +8,7 @@ import {
   EmailAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signInWithCredential,
   signOut,
-  GoogleAuthProvider,
 } from 'firebase/auth';
 import {
   doc,
@@ -23,8 +21,6 @@ import {
   where,
   serverTimestamp,
   arrayUnion,
-  writeBatch,
-  deleteDoc,
   increment,
 } from 'firebase/firestore';
 import { auth, db, googleProvider } from '../firebase';
@@ -126,45 +122,10 @@ async function migrateGroupToPool(uid, groupCode, nickname) {
   return poolId;
 }
 
-async function mergeAnonymousData(oldUid, newUid) {
-  const oldUserSnap = await getDoc(doc(db, 'users', oldUid));
-  if (!oldUserSnap.exists()) return;
-
-  const poolIds = oldUserSnap.data().pools || [];
-  for (const poolId of poolIds) {
-    try {
-      const betsSnap = await getDocs(
-        query(collection(db, 'pools', poolId, 'bets'), where('userId', '==', oldUid))
-      );
-      const batch = writeBatch(db);
-      for (const betDoc of betsSnap.docs) {
-        const betData = betDoc.data();
-        const newBetRef = doc(db, 'pools', poolId, 'bets', `${newUid}_${betData.matchId}`);
-        const existing = await getDoc(newBetRef);
-        if (!existing.exists()) batch.set(newBetRef, { ...betData, userId: newUid });
-        batch.delete(betDoc.ref);
-      }
-      await batch.commit();
-
-      const oldLbRef = doc(db, 'pools', poolId, 'leaderboard', oldUid);
-      const oldLbSnap = await getDoc(oldLbRef);
-      if (oldLbSnap.exists()) {
-        const newLbRef = doc(db, 'pools', poolId, 'leaderboard', newUid);
-        if (!(await getDoc(newLbRef)).exists()) await setDoc(newLbRef, oldLbSnap.data());
-        await deleteDoc(oldLbRef);
-      }
-
-      const poolSnap = await getDoc(doc(db, 'pools', poolId));
-      if (poolSnap.exists()) {
-        const members = (poolSnap.data().members || []).filter((m) => m !== oldUid);
-        if (!members.includes(newUid)) members.push(newUid);
-        await updateDoc(doc(db, 'pools', poolId), { members });
-      }
-      await updateDoc(doc(db, 'users', newUid), { pools: arrayUnion(poolId) });
-    } catch (e) {
-      console.warn(`Merge skip pool ${poolId}:`, e.message);
-    }
-  }
+function accountAlreadyExistsError() {
+  const error = new Error('This login is already linked to another account.');
+  error.code = 'auth/account-already-exists';
+  return error;
 }
 
 // ── Provider ─────────────────────────────────────────────
@@ -198,8 +159,10 @@ export function AuthProvider({ children }) {
         }
 
         if (firebaseUser.isAnonymous) {
-          // Anonymous users don't get a profile until they pick a nickname
-          setProfile(null);
+          // Existing guest profiles must remain available so the account can be
+          // linked without losing the UID that owns its predictions.
+          const guestProfile = await getDoc(doc(db, 'users', firebaseUser.uid));
+          setProfile(guestProfile.exists() ? guestProfile.data() : null);
         } else {
           // Real user — ensure doc exists, load profile
           const data = await ensureUserDoc(firebaseUser);
@@ -225,7 +188,6 @@ export function AuthProvider({ children }) {
   const signInWithGoogle = useCallback(async () => {
     const currentUser = auth.currentUser;
     const wasAnonymous = currentUser?.isAnonymous;
-    const oldUid = currentUser?.uid;
 
     signInInProgress.current = true;
 
@@ -246,17 +208,7 @@ export function AuthProvider({ children }) {
       return resultUser;
     } catch (err) {
       if (err.code === 'auth/credential-already-in-use') {
-        const credential = GoogleAuthProvider.credentialFromError(err);
-        if (credential) {
-          const result = await signInWithCredential(auth, credential);
-          if (wasAnonymous && oldUid && oldUid !== result.user.uid) {
-            await mergeAnonymousData(oldUid, result.user.uid);
-          }
-          setUser(result.user);
-          const data = await ensureUserDoc(result.user);
-          setProfile(data);
-          return result.user;
-        }
+        throw accountAlreadyExistsError();
       }
       throw err;
     } finally {
@@ -267,7 +219,6 @@ export function AuthProvider({ children }) {
   const signInWithEmail = useCallback(async (email, password, isSignUp) => {
     const currentUser = auth.currentUser;
     const wasAnonymous = currentUser?.isAnonymous;
-    const oldUid = currentUser?.uid;
 
     signInInProgress.current = true;
 
@@ -292,14 +243,7 @@ export function AuthProvider({ children }) {
       return resultUser;
     } catch (err) {
       if (err.code === 'auth/credential-already-in-use' || err.code === 'auth/email-already-in-use') {
-        const result = await signInWithEmailAndPassword(auth, email, password);
-        if (wasAnonymous && oldUid && oldUid !== result.user.uid) {
-          await mergeAnonymousData(oldUid, result.user.uid);
-        }
-        setUser(result.user);
-        const data = await ensureUserDoc(result.user);
-        setProfile(data);
-        return result.user;
+        throw accountAlreadyExistsError();
       }
       throw err;
     } finally {

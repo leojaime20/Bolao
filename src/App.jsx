@@ -45,7 +45,7 @@ export default function App() {
   );
   const prevPageRef = useRef('schedule');
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
-  const { user, profile, loading } = useAuth();
+  const { user, profile, loading, isAnonymous } = useAuth();
   const isAdmin = user?.uid && user.uid === ADMIN_UID;
 
   const navigate = useCallback((newPage) => {
@@ -140,7 +140,7 @@ export default function App() {
         )}
       </header>
 
-      {!profile || !profile.nickname ? (
+      {isAnonymous || !profile || !profile.nickname ? (
         <AuthScreen />
       ) : (
         <>
