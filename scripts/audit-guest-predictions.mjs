@@ -96,25 +96,30 @@ for (let index = 0; index < candidates.length; index += 100) {
   for (const authUser of result.users) authUsers.set(authUser.uid, authUser);
 }
 
-const guests = candidates
-  .filter((user) => {
-    const authUser = authUsers.get(user.uid);
-    return authUser && authUser.providerData.length === 0;
-  })
+const accounts = candidates
   .map((user) => {
     const authUser = authUsers.get(user.uid);
+    const providers = authUser?.providerData.map((provider) => provider.providerId) || [];
     return {
       nickname: user.nickname || '(sem nome)',
       uid: user.uid,
+      authStatus: !authUser
+        ? 'missing'
+        : providers.length === 0
+          ? 'guest'
+          : 'authenticated',
+      providers,
       gameBets: user.gameBets,
       podiumPredictions: user.podiumPredictions,
       pools: [...user.pools].sort(),
       competitions: [...user.competitions].sort(),
-      createdAt: authUser.metadata.creationTime,
-      lastSignInAt: authUser.metadata.lastSignInTime,
+      createdAt: authUser?.metadata.creationTime || null,
+      lastSignInAt: authUser?.metadata.lastSignInTime || null,
     };
   })
   .sort((a, b) => a.nickname.localeCompare(b.nickname, 'pt-BR'));
+
+const guests = accounts.filter((account) => account.authStatus === 'guest');
 
 console.log(JSON.stringify({
   guestCount: guests.length,
@@ -124,4 +129,5 @@ console.log(JSON.stringify({
     0
   ),
   guests,
+  accounts,
 }, null, 2));
