@@ -33,10 +33,12 @@ function userSummary(uid) {
   return users.get(uid);
 }
 
-const [usersSnapshot, poolsSnapshot] = await Promise.all([
+const [usersSnapshot, poolsSnapshot, competitionsSnapshot] = await Promise.all([
   db.collection('users').get(),
   db.collection('pools').get(),
+  db.collection('competitions').get(),
 ]);
+const globalCompetitionIds = competitionsSnapshot.docs.map((doc) => doc.id);
 
 for (const userDoc of usersSnapshot.docs) {
   userSummary(userDoc.id).nickname = userDoc.data().nickname || '';
@@ -52,12 +54,18 @@ for (const poolDoc of poolsSnapshot.docs) {
     summary.pools.add(poolDoc.data().name || poolDoc.id);
   }
 
-  const competitions = await poolDoc.ref.collection('competitions').get();
-  for (const competitionDoc of competitions.docs) {
+  const poolCompetitions = await poolDoc.ref.collection('competitions').get();
+  const competitionIds = new Set([
+    ...globalCompetitionIds,
+    ...poolCompetitions.docs.map((doc) => doc.id),
+  ]);
+
+  for (const competitionId of competitionIds) {
+    const competitionRef = poolDoc.ref.collection('competitions').doc(competitionId);
     const [bets, podium, leaderboard] = await Promise.all([
-      competitionDoc.ref.collection('bets').get(),
-      competitionDoc.ref.collection('podiumPredictions').get(),
-      competitionDoc.ref.collection('leaderboard').get(),
+      competitionRef.collection('bets').get(),
+      competitionRef.collection('podiumPredictions').get(),
+      competitionRef.collection('leaderboard').get(),
     ]);
 
     for (const entry of leaderboard.docs) {
@@ -71,7 +79,7 @@ for (const poolDoc of poolsSnapshot.docs) {
       const summary = userSummary(bet.userId);
       summary.gameBets += 1;
       summary.pools.add(poolDoc.data().name || poolDoc.id);
-      summary.competitions.add(competitionDoc.id);
+      summary.competitions.add(competitionId);
     }
 
     for (const predictionDoc of podium.docs) {
@@ -80,7 +88,7 @@ for (const poolDoc of poolsSnapshot.docs) {
       const summary = userSummary(uid);
       summary.podiumPredictions += 1;
       summary.pools.add(poolDoc.data().name || poolDoc.id);
-      summary.competitions.add(competitionDoc.id);
+      summary.competitions.add(competitionId);
     }
   }
 }
