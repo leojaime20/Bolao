@@ -1,0 +1,45 @@
+name: Consolidar contas duplicadas
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_uid:
+        description: "UID da conta Google que sera mantida"
+        required: true
+      source_uids:
+        description: "UIDs a consolidar, separados por virgula"
+        required: true
+      confirmation:
+        description: "Deixe vazio para simular; use MERGE_DUPLICATES para executar"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  merge:
+    name: Auditar e consolidar contas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Auditar ou consolidar
+        run: node scripts/merge-duplicate-accounts.mjs "${{ inputs.target_uid }}" "${{ inputs.source_uids }}" "${{ inputs.confirmation }}"
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      - name: Salvar backup da consolidacao
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: duplicate-account-merge-${{ github.run_id }}
+          path: duplicate-account-merge-backup.json
+          if-no-files-found: ignore
+          retention-days: 90
