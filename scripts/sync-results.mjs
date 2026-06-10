@@ -171,11 +171,15 @@ async function scoreCompetitionPools(competitionId, config) {
   const canScorePodium = config.podiumPredictionEnabled === true && Boolean(config.officialPodium);
   let scoredBets = 0;
   let scoredPredictions = 0;
+  let prunedLeaderboardEntries = 0;
 
   for (const pool of poolsSnapshot.docs) {
     const root = poolCompetitionRef(pool.id, competitionId);
     const bets = await root.collection('bets').get();
     const userTotals = new Map();
+    const activeUserIds = new Set(
+      bets.docs.map((betDoc) => betDoc.data().userId).filter(Boolean)
+    );
     let batch = db.batch();
     let batchCount = 0;
 
@@ -218,6 +222,7 @@ async function scoreCompetitionPools(competitionId, config) {
     const predictions = await root.collection('podiumPredictions').get();
     for (const predictionDoc of predictions.docs) {
       const prediction = predictionDoc.data();
+      activeUserIds.add(prediction.userId || predictionDoc.id);
       const bonusPoints = canScorePodium
         ? calculatePodiumPoints(prediction, config.officialPodium)
         : 0;
@@ -229,6 +234,17 @@ async function scoreCompetitionPools(competitionId, config) {
         scoredPredictions += 1;
       }
     }
+
+    const leaderboardSnapshot = await root.collection('leaderboard').get();
+    const staleEntries = leaderboardSnapshot.docs.filter((entry) => !activeUserIds.has(entry.id));
+    for (let index = 0; index < staleEntries.length; index += 400) {
+      const cleanupBatch = db.batch();
+      for (const entry of staleEntries.slice(index, index + 400)) {
+        cleanupBatch.delete(entry.ref);
+      }
+      await cleanupBatch.commit();
+    }
+    prunedLeaderboardEntries += staleEntries.length;
 
     for (const [uid, totals] of userTotals.entries()) {
       const leaderboard = root.collection('leaderboard').doc(uid);
@@ -245,7 +261,7 @@ async function scoreCompetitionPools(competitionId, config) {
     }
   }
 
-  return { scoredBets, scoredPredictions };
+  return { scoredBets, scoredPredictions, prunedLeaderboardEntries };
 }
 
 async function runCompetition(competitionId) {
@@ -260,7 +276,11 @@ async function runCompetition(competitionId) {
   try {
     const importedMatches = await syncCompetitionMatches(competitionId, config);
     const scores = await scoreCompetitionPools(competitionId, (await ref.get()).data());
-    console.log(`${competitionId}: ${importedMatches} matches imported; ${scores.scoredBets} bets scored.`);
+    console.log(
+      `${competitionId}: ${importedMatches} matches imported; `
+      + `${scores.scoredBets} bets scored; `
+      + `${scores.prunedLeaderboardEntries} stale leaderboard entries removed.`
+    );
   } catch (error) {
     await ref.set({
       lastSyncAt: FieldValue.serverTimestamp(),

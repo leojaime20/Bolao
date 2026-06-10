@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getDocs } from 'firebase/firestore';
+import { onSnapshot } from 'firebase/firestore';
 import { useAuth } from '../hooks/useAuth';
 import { usePools } from '../hooks/usePools';
 import { poolSubcollection } from '../hooks/useBets';
@@ -14,20 +14,22 @@ export default function Leaderboard({ competitionId = null }) {
 
   useEffect(() => {
     if (!activePoolId) return;
-    let cancelled = false;
-    (async () => {
-      const snap = await getDocs(poolSubcollection(activePoolId, competitionId, 'leaderboard'));
-      if (cancelled) return;
-      const list = snap.docs
-        .map((d) => ({ uid: d.id, ...d.data() }))
-        .sort((a, b) => {
-          if (b.totalPoints !== a.totalPoints) return b.totalPoints - a.totalPoints;
-          return 0;
-        });
-      setEntries(list);
-      setLoading(false);
-    })();
-    return () => { cancelled = true; };
+    queueMicrotask(() => setLoading(true));
+    const unsubscribe = onSnapshot(
+      poolSubcollection(activePoolId, competitionId, 'leaderboard'),
+      (snap) => {
+        const list = snap.docs
+          .map((d) => ({ uid: d.id, ...d.data() }))
+          .sort((a, b) => {
+            if (b.totalPoints !== a.totalPoints) return b.totalPoints - a.totalPoints;
+            return 0;
+          });
+        setEntries(list);
+        setLoading(false);
+      },
+      () => setLoading(false)
+    );
+    return unsubscribe;
   }, [activePoolId, competitionId]);
 
   if (loading) {
