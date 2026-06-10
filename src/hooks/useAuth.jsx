@@ -188,13 +188,14 @@ export function AuthProvider({ children }) {
   const signInWithGoogle = useCallback(async () => {
     const currentUser = auth.currentUser;
     const wasAnonymous = currentUser?.isAnonymous;
+    const hasGuestProfile = Boolean(wasAnonymous && profile?.nickname);
 
     signInInProgress.current = true;
 
     try {
       let resultUser;
 
-      if (wasAnonymous) {
+      if (hasGuestProfile) {
         const result = await linkWithPopup(currentUser, googleProvider);
         resultUser = result.user;
       } else {
@@ -214,7 +215,7 @@ export function AuthProvider({ children }) {
     } finally {
       signInInProgress.current = false;
     }
-  }, []);
+  }, [profile]);
 
   const signInWithEmail = useCallback(async (email, password, isSignUp) => {
     const currentUser = auth.currentUser;
@@ -225,7 +226,7 @@ export function AuthProvider({ children }) {
     try {
       let resultUser;
 
-      if (wasAnonymous) {
+      if (wasAnonymous && isSignUp) {
         const credential = EmailAuthProvider.credential(email, password);
         const result = await linkWithCredential(currentUser, credential);
         resultUser = result.user;

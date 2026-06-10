@@ -13,7 +13,7 @@ export default function AuthScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [nickname, setNickname] = useState('');
-  const [isSignUp, setIsSignUp] = useState(true);
+  const [isSignUp, setIsSignUp] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
 
@@ -224,7 +224,11 @@ export default function AuthScreen() {
 
         <button
           className="auth-screen__email-btn"
-          onClick={() => { setStep('email'); setError(''); }}
+          onClick={() => {
+            setIsSignUp(false);
+            setStep('email');
+            setError('');
+          }}
           disabled={saving}
         >
           📧 {existingGuest ? t('authLinkEmail') : t('authEmail')}
