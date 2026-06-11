@@ -75,37 +75,13 @@ async function migrateGroupToPool(uid, groupCode, nickname) {
   const q = query(collection(db, 'pools'), where('inviteCode', '==', groupCode));
   const snap = await getDocs(q);
 
-  let poolId;
-  if (!snap.empty) {
-    poolId = snap.docs[0].id;
-    const poolData = snap.docs[0].data();
-    if (!poolData.members?.includes(uid)) {
-      await updateDoc(doc(db, 'pools', poolId), {
-        members: arrayUnion(uid),
-      });
-    }
-  } else {
-    const poolRef = doc(collection(db, 'pools'));
-    poolId = poolRef.id;
+  // Legacy clients may join an already migrated pool, but only the
+  // administrative workflow is allowed to create a new pool.
+  if (snap.empty) return null;
 
-    const groupSnap = await getDoc(doc(db, 'groups', groupCode));
-    const groupData = groupSnap.exists() ? groupSnap.data() : {};
-
-    await setDoc(poolRef, {
-      name: groupCode,
-      createdBy: groupData.createdBy || uid,
-      createdAt: groupData.createdAt || serverTimestamp(),
-      inviteCode: groupCode,
-      members: [uid],
-    });
-
-    for (const sub of ['bets', 'leaderboard', 'matches']) {
-      const subSnap = await getDocs(collection(db, 'groups', groupCode, sub));
-      for (const d of subSnap.docs) {
-        await setDoc(doc(db, 'pools', poolId, sub, d.id), d.data());
-      }
-    }
-  }
+  const poolId = snap.docs[0].id;
+  const poolData = snap.docs[0].data();
+  if (!poolData.isPublic && !poolData.members?.includes(uid)) return null;
 
   const lbRef = doc(db, 'pools', poolId, 'leaderboard', uid);
   const lbSnap = await getDoc(lbRef);
