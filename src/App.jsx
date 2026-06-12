@@ -20,6 +20,7 @@ import logo from './assets/logo.png';
 import headerBanner from './assets/header-banner.jpg';
 import splashNoComplaints from './assets/splash-intro.jpg';
 import splashForbiddenNe from './assets/splash-proibido-ne.jpg';
+import splashChampionsDayOne from './assets/splash-campeoes-dia-1.jpg';
 import './App.css';
 
 const ADMIN_UID = import.meta.env.VITE_ADMIN_UID;
@@ -32,6 +33,10 @@ const SPLASH_INTROS = [
   {
     src: splashForbiddenNe,
     alt: 'Sabe que é proibido, né',
+  },
+  {
+    src: splashChampionsDayOne,
+    alt: 'Campeões do dia 1',
   },
 ];
 
