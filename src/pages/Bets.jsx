@@ -115,6 +115,16 @@ export default function Bets({ onTeamClick }) {
                           status: match.status,
                           scoreHome: match.scoreHome,
                           scoreAway: match.scoreAway,
+                          scoreDuration: match.scoreDuration,
+                          scoreSource: match.scoreSource,
+                          regularTimeScoreHome: match.regularTimeScoreHome,
+                          regularTimeScoreAway: match.regularTimeScoreAway,
+                          fullTimeScoreHome: match.fullTimeScoreHome,
+                          fullTimeScoreAway: match.fullTimeScoreAway,
+                          extraTimeScoreHome: match.extraTimeScoreHome,
+                          extraTimeScoreAway: match.extraTimeScoreAway,
+                          penaltiesScoreHome: match.penaltiesScoreHome,
+                          penaltiesScoreAway: match.penaltiesScoreAway,
                         }}
                         onSave={handleSave}
                         onTeamClick={onTeamClick}
