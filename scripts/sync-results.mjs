@@ -88,6 +88,7 @@ function normalizeApiMatch(match) {
     stage: match.stage || '',
     status: mapApiStatus(match.status),
     apiStatus: match.status,
+    scoreDuration: score.duration || null,
     scoreHome: hasScore ? scoringScore.home : null,
     scoreAway: hasScore ? scoringScore.away : null,
     scoreSource: scoringScore.source,

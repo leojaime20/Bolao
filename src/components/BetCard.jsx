@@ -5,6 +5,56 @@ function getFlagUrl(iso) {
   return `https://flagcdn.com/w80/${iso}.png`;
 }
 
+function hasScorePair(score, homeKey, awayKey) {
+  return score?.[homeKey] != null && score?.[awayKey] != null;
+}
+
+function formatScore(home, away) {
+  return `${home} - ${away}`;
+}
+
+function buildResultBreakdown(score, t) {
+  if (!score) return [];
+
+  const lines = [];
+  const hasSeparateScore = hasScorePair(score, 'regularTimeScoreHome', 'regularTimeScoreAway')
+    || hasScorePair(score, 'extraTimeScoreHome', 'extraTimeScoreAway')
+    || hasScorePair(score, 'penaltiesScoreHome', 'penaltiesScoreAway');
+
+  if (hasSeparateScore && hasScorePair(score, 'regularTimeScoreHome', 'regularTimeScoreAway')) {
+    lines.push({
+      label: t('regularTimeResult'),
+      value: formatScore(score.regularTimeScoreHome, score.regularTimeScoreAway),
+    });
+  }
+
+  if (hasScorePair(score, 'extraTimeScoreHome', 'extraTimeScoreAway')) {
+    lines.push({
+      label: t('extraTimeResult'),
+      value: formatScore(score.extraTimeScoreHome, score.extraTimeScoreAway),
+    });
+  }
+
+  if (hasScorePair(score, 'penaltiesScoreHome', 'penaltiesScoreAway')) {
+    lines.push({
+      label: t('penaltyShootoutResult'),
+      value: formatScore(score.penaltiesScoreHome, score.penaltiesScoreAway),
+    });
+  }
+
+  const hasFullTime = hasScorePair(score, 'fullTimeScoreHome', 'fullTimeScoreAway');
+  const fullTimeDiffersFromScored = hasFullTime
+    && (score.fullTimeScoreHome !== score.scoreHome || score.fullTimeScoreAway !== score.scoreAway);
+  if (hasSeparateScore && fullTimeDiffersFromScored) {
+    lines.push({
+      label: t('officialFinalResult'),
+      value: formatScore(score.fullTimeScoreHome, score.fullTimeScoreAway),
+    });
+  }
+
+  return lines;
+}
+
 export default function BetCard({ match, bet, onSave, matchScore, onTeamClick }) {
   const { t } = useLanguage();
   const hasTeams = Boolean(match.home_iso || match.home_crest || match.away_iso || match.away_crest);
@@ -19,6 +69,8 @@ export default function BetCard({ match, bet, onSave, matchScore, onTeamClick })
   const isStarted = kickoffAt ? new Date() >= kickoffAt : false;
   const isLocked = isFinished || isLive || isStarted;
   const isBettingClosed = isLocked;
+  const resultBreakdown = buildResultBreakdown(matchScore, t);
+  const resultLabel = resultBreakdown.length > 0 ? t('poolScoringResult') : t('finalResult');
 
   const [scoreA, setScoreA] = useState(bet?.predictedScoreA ?? '');
   const [scoreB, setScoreB] = useState(bet?.predictedScoreB ?? '');
@@ -147,9 +199,16 @@ export default function BetCard({ match, bet, onSave, matchScore, onTeamClick })
 
       {isFinished && matchScore?.scoreHome != null && (
         <div className="bet-card__result">
-          <span className="bet-card__actual">
-            {t('finalResult')}: {matchScore.scoreHome} - {matchScore.scoreAway}
-          </span>
+          <div className="bet-card__actual">
+            <span>{resultLabel}: {formatScore(matchScore.scoreHome, matchScore.scoreAway)}</span>
+            {resultBreakdown.length > 0 && (
+              <div className="bet-card__result-breakdown">
+                {resultBreakdown.map(({ label, value }) => (
+                  <span key={label}>{label}: {value}</span>
+                ))}
+              </div>
+            )}
+          </div>
           {bet?.pointsAwarded != null && (
             <span className={`bet-card__points bet-card__points--${bet.pointsAwarded}`}>
               +{bet.pointsAwarded} {t('pts')}
