@@ -22,7 +22,7 @@ import splashBolaoPbChina from './assets/splash-bolao-pb-china.jpg';
 import './App.css';
 
 const ADMIN_UID = import.meta.env.VITE_ADMIN_UID;
-const SPLASH_DURATION_MS = 6000;
+const SPLASH_DURATION_MS = 8000;
 const SPLASH_INTROS = [
   {
     src: splashBolaoPbChina,
